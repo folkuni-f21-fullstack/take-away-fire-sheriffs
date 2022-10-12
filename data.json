@@ -1,0 +1,34 @@
+{
+  "users": 
+    [
+      {
+        "username": "",
+        "password": "",
+        "orders": [ ],
+        "customer": true,
+        "id": 0
+      }
+    ],
+  "orders": 
+    [
+      {
+        "date": "YYYY-MM-DD HH:mm:ss",
+        "items": [ ],
+        "orderId": 0,
+        "status": "",
+        "userComment": "",
+        "adminComment": "",
+        "id": 0
+      }
+    ],
+  "menu": 
+    [
+      {
+        "title": "",
+        "price": 0,
+        "description": "",
+        "allergies": "",
+        "id": 0
+      }
+    ]
+}
