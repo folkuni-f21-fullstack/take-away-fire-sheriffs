@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Marcellus&display=swap');
+/* font-family: 'Berkshire Swash', cursive; */
+/* font-family: 'Marcellus', serif; */
+
 #root {
   width: 100vw;
   min-height: 100vh;
@@ -5,5 +9,23 @@
   /* margin: 0 auto;
   padding: 2rem;
   text-align: center; */
+  background-color: #FFF2C7;
+  color: #333333;
+  font-family: 'Marcellus', serif;
+  font-size: 16px;
+  letter-spacing: 8%;
+  line-height: 150%;
 }
 
+h1 {
+  font-family: 'Berkshire Swash', cursive;
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 22px;
+}
