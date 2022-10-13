@@ -1,0 +1,34 @@
+$green-bgr: #86C86B;
+$red-bgr: #CF4242;
+$orange-bgr: #FC8845;
+$black: #333333;
+$light-yellow-bgr: #FFF2C7;
+$yellow-bgr: #FFE99F;
+$white: #EEEEEE;
+
+@mixin button($bgr: $green-bgr, $txt: $black) {
+    background-color: $bgr;
+    padding: 0.8rem 1.2rem;
+    color: $txt;
+    border-radius: 5px;
+    appearance: none;
+    border: 1px solid $black;
+    box-shadow: 0 4px 4px #00000050;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:active {
+       opacity: 0.5; 
+       box-shadow: none;
+    }
+}
+
+// button {
+//     @include button ($bgr: $black, $txt: $white);
+// }
+
+// button {
+//     @include button;
+// }
