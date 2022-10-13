@@ -6,7 +6,7 @@
         "password": "",
         "orders": [ ],
         "customer": true,
-        "id": 0
+        "id": "0"
       }
     ],
   "orders": 
@@ -18,7 +18,7 @@
         "status": "",
         "userComment": "",
         "adminComment": "",
-        "id": 0
+        "id": "0"
       }
     ],
   "menu": 
@@ -26,9 +26,9 @@
       {
         "title": "",
         "price": 0,
-        "description": "",
+        "ingredients": "",
         "allergies": "",
-        "id": 0
+        "id": "0"
       }
     ]
 }
