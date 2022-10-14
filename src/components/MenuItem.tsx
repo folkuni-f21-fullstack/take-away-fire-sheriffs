@@ -1,5 +1,13 @@
 import './MenuItem.scss';
 
+interface Menu {
+    title: string;
+    price: number;
+    ingredients: string;
+    allergies: string;
+    id: number;
+}
+
 function MenuItem() {
     return (
         <div className="menuItemWrapper">
