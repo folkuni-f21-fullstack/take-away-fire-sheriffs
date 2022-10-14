@@ -24,11 +24,53 @@
   "menu": 
     [
       {
-        "title": "",
+        "title": "Ratatouille",
+        "price": 90,
+        "ingredients": "aubergine, zucchini, tomatoe, red peppers, garlic, beef",
+        "allergies": "egg, almond",
+        "id": "1"
+      },
+      {
+        "title": "Ratatouille (veg)",
+        "price": 80,
+        "ingredients": "aubergine, zucchini, tomatoe, red peppers, garlic",
+        "allergies": "egg, almond",
+        "id": "2"
+      },
+      {
+        "title": "Ratatouille (spicy)",
+        "price": 95,
+        "ingredients": "aubergine, zucchini, tomatoe, red peppers, garlic, chili, beef",
+        "allergies": "egg, almond",
+        "id": "3"
+      },
+      {
+        "title": "Ratatouille (spicy, veg)",
         "price": 0,
-        "ingredients": "",
+        "ingredients": "aubergine, zucchini, tomatoe, red peppers, garlic, chili",
+        "allergies": "egg, almond",
+        "id": "4"
+      },
+      {
+        "title": "Kids Ratatouille",
+        "price": 60,
+        "ingredients": "aubergine, zucchini, tomatoe, red peppers, chicken",
+        "allergies": "egg, almond",
+        "id": "5"
+      },
+      {
+        "title": "Coca-cola",
+        "price": 20,
+        "ingredients": "A cold refreshing drink for your meal",
         "allergies": "",
-        "id": "0"
+        "id": "6"
+      },
+      {
+        "title": "Fanta",
+        "price": 20,
+        "ingredients": "A cold refreshing drink for your meal",
+        "allergies": "",
+        "id": "7"
       }
     ]
 }
