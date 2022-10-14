@@ -27,6 +27,12 @@ function AdminEditOrder( {closeOverlay}: Prop) {
                     <p>90:-</p>
                     <button className='delete-dish-btn'>Delete</button>
                 </div>
+                <div className='card-dish'>
+                    <p>Dish 1</p>
+                    <p>90:-</p>
+                    <button className='delete-dish-btn'>Delete</button>
+                </div>
+                
                 <h2 className='admin-edit-total'>Total: 180:-</h2>
 
                 <div className='admin-edit-inputs'>

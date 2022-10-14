@@ -24,7 +24,7 @@ $white: #EEEEEE;
        box-shadow: none;
     }
 }
-
+// default css för wrapper till overlay med position och svart bakgrund
 @mixin default-overlay-wrapper {
     display: flex;
     justify-content: center;
@@ -36,6 +36,16 @@ $white: #EEEEEE;
     top: 0px;
     left: 0px;
     background-color: #000000af;
+}
+// default css för en overlay så den är centrerad på sidan och färgad correkt osv
+@mixin default-overlay {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 25px;
+    background-color: #FFE99F;
+    border-radius: 15px;
+    width: 80%;
 }
 // button {
 //     @include button ($bgr: $black, $txt: $white);
