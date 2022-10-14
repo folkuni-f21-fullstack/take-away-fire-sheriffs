@@ -6,7 +6,7 @@ $light-yellow-bgr: #FFF2C7;
 $yellow-bgr: #FFE99F;
 $white: #EEEEEE;
 
-@mixin button($bgr: $green-bgr, $txt: $black, $padding: 0.5rem 1rem) {
+@mixin button($bgr: $green-bgr, $txt: $black, $padding: 0.5em 1em) {
     background-color: $bgr;
     padding: $padding;
     color: $txt;

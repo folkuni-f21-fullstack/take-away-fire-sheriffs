@@ -1,4 +1,5 @@
 import Header from '../components/Header';
+import Signup from '../components/overlays/Signup';
 import logo from '../assets/logo.svg';
 import './Landing.scss';
 
@@ -14,6 +15,7 @@ function Landing() {
                 <button>Log in</button>
             </section>
             <button className="buttonMember">Become a Memeber</button>
+            <Signup />
         </section>
     )
 }
