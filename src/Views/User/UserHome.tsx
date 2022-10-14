@@ -11,6 +11,7 @@ interface Menu {
     price: number;
     ingredients: string;
     allergies: string;
+    imgUrl: string;
     id: number;
 };
 

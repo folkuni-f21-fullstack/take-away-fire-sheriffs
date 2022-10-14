@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './MenuItem.scss';
 
 import DishInfo from './overlays/DishInfo';
@@ -7,6 +8,7 @@ interface Menu {
     price: number;
     ingredients: string;
     allergies: string;
+    imgUrl: string;
     id: number;
 };
 
@@ -16,8 +18,11 @@ interface Props {
 
 function MenuItem({menuItem}: Props) {
 
+    const [openInfo, setOpenInfo] = useState<boolean>(false);
+
     function handleClick() {
         console.log(menuItem.title);
+        setOpenInfo(true);
     }
     
     return (
@@ -35,7 +40,7 @@ function MenuItem({menuItem}: Props) {
                     <button className='menuItem-btn-add'>Add to cart</button>
                 </section>
             </div>
-            <DishInfo menuItem={menuItem}/>
+            { openInfo && <DishInfo menuItem={ menuItem } setOpenInfo={ setOpenInfo }/> }
         </>
     )
 }

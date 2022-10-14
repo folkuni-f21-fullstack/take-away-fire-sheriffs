@@ -5,6 +5,7 @@ $black: #333333;
 $light-yellow-bgr: #FFF2C7;
 $yellow-bgr: #FFE99F;
 $white: #EEEEEE;
+$overlay-bgr: #000000af;
 
 @mixin button($bgr: $green-bgr, $txt: $black) {
     background-color: $bgr;
@@ -25,7 +26,7 @@ $white: #EEEEEE;
     }
 }
 // default css för wrapper till overlay med position och svart bakgrund
-@mixin default-overlay-wrapper {
+@mixin default-overlay-wrapper($bgr: $overlay-bgr) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,7 +36,7 @@ $white: #EEEEEE;
     position: fixed;
     top: 0px;
     left: 0px;
-    background-color: #000000af;
+    background-color: $bgr;
 }
 // default css för en overlay så den är centrerad på sidan och färgad correkt osv
 @mixin default-overlay {
@@ -43,7 +44,7 @@ $white: #EEEEEE;
     justify-content: center;
     flex-direction: column;
     padding: 25px;
-    background-color: #FFE99F;
+    background-color: $yellow-bgr;
     border-radius: 15px;
     width: 80%;
 }

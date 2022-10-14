@@ -1,33 +1,59 @@
 @use '../../base';
 
-.dishInfoWrapper {
-    background-color: white;
-    width: 50%;
-    min-width: 20rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    padding: 1.5em;
-    border-radius: 15px;
-    border: 5px solid base.$black;
+.dishInfoMainWrapper {
+    @include base.default-overlay-wrapper;
+    
+    .dishInfoOverlay {
+        @include base.default-overlay;
+        background-color: white;
+        width: 70%;
+        min-width: 22rem;
+        height: 34rem;
+        // display: flex;
+        // flex-direction: column;
+        gap: 2em;
+        padding: 0;
+        // border-radius: 15px;
+        border: 5px solid base.$black;
+        overflow: hidden;
 
-    .dishInfo-img {
-        display: flex;
-        justify-content: flex-end;
-        
-    }
-
-    .dishInfo-title-container {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .dishInfo-info-container {
-        display: flex;
-        flex-direction: column;
-
-        button {
-            align-self: center;
+    
+        .dishInfo-img-container {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            
+            .dishInfo-closeBtn {
+                align-self: flex-end;
+                position: absolute;
+                top: 5%;
+                right: 3%;
+                z-index: 2;
+            }
+    
+            .dishInfo-img {
+                transform: scale(300%);
+            }
+        }
+    
+        .dishInfo-title-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1.5em 0 1.5em;
+        }
+    
+        .dishInfo-info-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            padding: 0 1.5em 1.5em 1.5em;
+    
+            button {
+                align-self: center;
+            }
         }
     }
+
 }
+
