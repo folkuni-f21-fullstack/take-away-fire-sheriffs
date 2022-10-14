@@ -1,0 +1,32 @@
+@use '../../_base.scss';
+
+
+
+.about-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: #333333;
+    padding: 1rem;
+    margin: 2rem;
+    min-height: 522px;
+    min-width: 275px;
+    border-radius: 15px;
+    
+}
+
+.about-headline {
+    display: flex;
+    flex-direction: center;
+}
+
+.info-h3 {
+    padding: 2rem;
+    color: #ffff;
+}
