@@ -1,0 +1,57 @@
+@use '../base';
+
+.admin-order-card{
+    background-color:  #FFE99F ;
+    width: 340px;
+    height: auto;
+    padding: 15px;
+    border-radius: 15px;
+    border: 5px solid #fff2c7;
+    .card-upper-section{
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem;
+
+        .status{
+            width: 20px;
+            height: 20px;
+            background-color: green;
+            border-radius: 50%;
+        }
+        .status-text{
+            margin-right: 70px;
+        }
+    }
+    .order-date{
+        display: flex;
+        justify-content: right;
+    }
+    .card-dish{
+        display: flex;
+        justify-content: space-between;
+        padding: 5px;
+    }
+    .admin-card-total-price{
+        display: flex;
+        justify-content: flex-end;
+        
+    }
+    .admin-card-input{
+        display: flex;
+        margin: auto;
+    }
+    .card-buttons{
+        display: flex;
+        justify-content: center;
+        margin: 15px;
+        
+        .edit-btn{
+            margin-right: 15px;
+            @include base.button ($bgr: base.$black, $txt: base.$white)
+        }
+        .status-btn{
+            @include base.button ($bgr: base.$black, $txt: base.$white)
+        }
+
+    }
+}
