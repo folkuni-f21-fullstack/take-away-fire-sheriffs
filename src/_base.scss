@@ -25,6 +25,23 @@ $overlay-bgr: #000000af;
        box-shadow: none;
     }
 }
+
+@mixin close-button {
+    align-self: flex-end;
+    position: absolute;
+    top: 5%;
+    right: 3%;
+    z-index: 2;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:active {
+        opacity: 0.5;
+    }
+}
+
 // default css för wrapper till overlay med position och svart bakgrund
 @mixin default-overlay-wrapper($bgr: $overlay-bgr) {
     display: flex;
