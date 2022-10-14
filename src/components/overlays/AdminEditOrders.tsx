@@ -1,6 +1,6 @@
 import React from 'react'
 
-function UserOrderItem() {
+function AdminEditOrders() {
   return (
     <div>
       
@@ -8,4 +8,4 @@ function UserOrderItem() {
   )
 }
 
-export default UserOrderItem
+export default AdminEditOrders
