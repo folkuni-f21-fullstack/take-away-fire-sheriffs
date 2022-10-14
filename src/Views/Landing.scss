@@ -1,7 +1,7 @@
 @use '../base';
 
 .landingPage {
-  gap: 2em;
+  gap: 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,30 +9,35 @@
   img {
     margin: 15% 0;
   }
+  button {
+    border:none;
+  }
 }
 .buttonGuest {
-  @include base.button($bgr: base.$white, $txt: base.$black, $padding: 0.3rem 1.5rem);
+  @include base.button($bgr: base.$white, $txt: base.$black, $padding: 0.3em 3em);
 }
 .buttonMember {
-  @include base.button($bgr: base.$black, $txt: base.$white, $padding: 0.3rem 1.5rem);
+  @include base.button($bgr: base.$black, $txt: base.$white, $padding: 0.3em 3em);
   opacity: 0.9;
 }
 
 .loginSignup {
-  padding: 3em;
+  padding: 4em 2em;
   border: 5px solid base.$light-yellow-bgr;
   border-radius: 15px;
   background-color: base.$yellow-bgr;
 
   display: flex;
-  gap: 2em;
+  gap: 4em;
   flex-direction: column;
   align-items: center;
   button {
     @include base.button($bgr: base.$black, $txt: base.$white);
   }
   input {
+    width: 16em;
     border-radius: 3px;
-    border: 1px solid base.$black;
+    border: none;
+    text-align: center;
   }
 }
