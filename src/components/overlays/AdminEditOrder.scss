@@ -14,9 +14,27 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: center;
+    padding: 25px;
     background-color: #FFE99F;
     border-radius: 15px;
-    width: 85%;
-    height: 50%;
+    width: 80%;
+    height: auto;
+    .admin-edit-title{
+        display: flex;
+        justify-content: center;
+        
+    }
+    .admin-edit-total{
+        display: flex;
+        justify-content: center;
+    }
+    .card-dish{
+        display: flex;
+        justify-content: space-between;
+        .delete-dish-btn{
+            padding: 2.5px 5px;
+            background-color: rgb(219, 55, 55);
+            color: white;
+        }
+    }
 }
