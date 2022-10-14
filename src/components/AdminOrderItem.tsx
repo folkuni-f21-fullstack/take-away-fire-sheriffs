@@ -26,7 +26,7 @@ function AdminOrderItem() {
                 </div>
                 
                 <h4 className='admin-card-total-price'>Totalt: 180:-</h4>
-                <input className='admin-card-input' type="text" />
+                <input className='admin-card-input' type="text" placeholder='user comment field' />
                 <div className='card-buttons'>
                     <button className='edit-btn' onClick={editPressed}>Edit</button>
                     <button className='status-btn'>Preparing</button>

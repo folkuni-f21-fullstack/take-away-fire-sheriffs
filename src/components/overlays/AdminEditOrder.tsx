@@ -21,16 +21,24 @@ function AdminEditOrder( {closeOverlay}: Prop) {
                     <p>90:-</p>
                     <button className='delete-dish-btn'>Delete</button>
                 </div>
+
                 <div className='card-dish'>
                     <p>Dish 1</p>
                     <p>90:-</p>
                     <button className='delete-dish-btn'>Delete</button>
                 </div>
                 <h2 className='admin-edit-total'>Total: 180:-</h2>
-                <input type="text" />
-                <input type="text" />
-                <button>Change Order</button>
-                <button onClick={closeBtn}>Close</button>
+
+                <div className='admin-edit-inputs'>
+                    <input className='user-comment-input' type="text" placeholder='user comment field' />
+                    <input className='admin-comment-input' type="text" placeholder='admin comment field' />
+                </div>
+                
+                <div className='admin-edit-buttons'>
+                   <button className='admin-change-order-btn'>Change Order</button>
+                   <button className='admin-close-edit-overlay-btn' onClick={closeBtn}>Close</button> 
+                </div>
+                
             </div>
             
 
