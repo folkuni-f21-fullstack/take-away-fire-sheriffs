@@ -19,12 +19,12 @@ function UserHome() {
     const menu: Menu[] = data.menu;
 
     const menuItems = menu.map((menuItem, index) => {
-        return <MenuItem menu={menuItem} key={index}/>
+        return <MenuItem menuItem={menuItem} key={index}/>
     });
 
     return (
         <div className='userHomeWrapper'>
-            <img className='menuTitle' src={ MenuTitle } alt="" />
+            <img className='menuTitle' src={ MenuTitle } alt="title-logo" />
             { menuItems }
         </div>
     )

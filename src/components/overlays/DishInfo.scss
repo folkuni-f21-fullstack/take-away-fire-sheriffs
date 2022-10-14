@@ -1,0 +1,33 @@
+@use '../../base';
+
+.dishInfoWrapper {
+    background-color: white;
+    width: 50%;
+    min-width: 20rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1.5em;
+    border-radius: 15px;
+    border: 5px solid base.$black;
+
+    .dishInfo-img {
+        display: flex;
+        justify-content: flex-end;
+        
+    }
+
+    .dishInfo-title-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .dishInfo-info-container {
+        display: flex;
+        flex-direction: column;
+
+        button {
+            align-self: center;
+        }
+    }
+}
