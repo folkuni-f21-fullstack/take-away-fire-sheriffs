@@ -1,22 +1,34 @@
 import './MenuItem.scss';
 
+import data from '../../data.json';
+
 interface Menu {
     title: string;
     price: number;
     ingredients: string;
     allergies: string;
     id: number;
-}
+};
 
-function MenuItem() {
+interface Props {
+    menu: Menu;
+};
+
+function MenuItem({menu}: Props) {
+
+    // const { title, price, ingredients, allergies, id, key } = props
+
+    // const menu: Menu[] = data.menu;
+    // console.log(menu);
+    
     return (
         <div className="menuItemWrapper">
             <section className="menuItem-title-container">
-                <h2>Ratatouille</h2>
-                <h2>90:-</h2>
+                <h2>{menu.title}</h2>
+                <h2>{menu.price}:-</h2>
             </section>
             <section className="menuItem-ingredients-container">
-                <p>aubergine, zucchini, tomatoe, red peppers, garlic, beef</p>
+                <p>{menu.ingredients}</p>
             </section>
             <section className="menuItem-buttons-container">
                 <button className='menuItem-btn-info'>More info</button>
