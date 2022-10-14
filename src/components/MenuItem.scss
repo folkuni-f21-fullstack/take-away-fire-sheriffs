@@ -1,0 +1,25 @@
+@use '../base';
+
+.menuItemWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background-color: base.$yellow-bgr;
+    padding: 1.5em;
+    border-radius: 15px;
+    border: 5px solid base.$black;
+
+    .menuItem-title-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .menuItem-buttons-container {
+        display: flex;
+        justify-content: space-between;
+
+        .menuItem-btn-info {
+            background-color: base.$yellow-bgr;
+        }
+    }
+}
