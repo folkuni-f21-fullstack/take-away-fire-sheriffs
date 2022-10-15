@@ -16,13 +16,15 @@
         // border-radius: 15px;
         border: 5px solid base.$black;
         overflow: hidden;
-
     
         .dishInfo-img-container {
+            background-color: base.$black;
             display: flex;
             flex-direction: column;
             position: relative;
             overflow: hidden;
+            margin-bottom: auto;
+            height: 50%;
             
             .dishInfo-closeBtn {
                 @include base.close-button;

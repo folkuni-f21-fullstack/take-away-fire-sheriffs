@@ -27,7 +27,7 @@ function DishInfo({menuItem, setOpenInfo}: Props) {
             <div className="dishInfoOverlay">
                 <figure className="dishInfo-img-container">
                     <img className='dishInfo-closeBtn' src={ closeBtn } onClick={ handleClick } alt="" />
-                    <img className='dishInfo-img' src={menuItem.imgUrl} alt="" />
+                    <img className='dishInfo-img' src={menuItem.imgUrl} alt="background-image" />
                 </figure>
                 <section className='dishInfo-title-container'>
                     <h2>{menuItem.title}</h2>
