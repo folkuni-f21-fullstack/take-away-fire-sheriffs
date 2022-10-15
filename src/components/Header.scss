@@ -1,0 +1,139 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    padding: 15px;
+    margin-bottom: 2.5rem;
+    background-color: #86C86B;
+    box-shadow: 0px 0px 10px rgb(95, 95, 95);
+    
+    .nav__toggle{
+      position: absolute;
+      cursor: pointer;
+      width: 35px;
+      margin: 1rem 2.5rem;
+      top: 0;
+      left: 0;
+      background-color: #86C86B;
+      svg {
+        width: 1.5rem;
+/*         fill: base.$clr-gray600;
+ */      }
+  
+      .close {
+        display: none;
+      }
+  
+      .menu {
+        margin-top: 0.2rem;
+        fill: #333333;
+      }
+    }
+   
+  
+    &__checkbox {
+      display: none;
+    }
+  
+    &__menu {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+      margin: 1rem;
+  
+      li {
+        height: 2vh;
+        list-style: none;
+        display: none;
+        cursor: pointer;
+        &:first-child {
+          margin-left: -35px;
+          display: block;  
+        }
+         
+        
+      }
+  
+      a {
+        text-decoration: none;
+        color: inherit;
+        padding: 5px;
+  
+        
+        &:hover{
+          transition: 200ms all;
+          border-bottom: 5px solid #333333;
+        }
+      }
+  
+      svg {
+        width: 1.5rem;
+/*         fill: base.$clr-gray600;
+ */      }
+    }
+  }
+  
+  // Toggle the hamburger menu in mobile view
+  #nav__checkbox:checked ~ ul.nav__menu li {
+    display: block;
+    
+  }
+  
+  //Change from menu to close icon on tap
+  #nav__checkbox:checked ~ label.nav__toggle .close {
+    display: block;
+  }
+  
+  #nav__checkbox:checked ~ label.nav__toggle .menu {
+    display: none;
+  }
+  
+  // Desktop view
+  @media only screen and (min-width: 560px) {
+    .nav {
+      &__toggle {
+        display: none;
+      }
+  
+      &__menu {
+        flex-direction: row;
+        justify-content: space-around;
+        
+        
+        li {
+          display: block;
+          float: right;
+        }
+      }
+    }
+
+    
+}
+.menu-logo{
+    margin-top: -25px;
+    margin-left: 35px;
+    height: 7vh;
+}
+.cart-container{
+    .cart-number{
+        width: 1.3rem;
+        height: 1.3rem;
+        background-color: #CF4242;
+        border-radius: 15px;
+        position: absolute;
+        margin-left: 24px;
+        margin-top: -7px;
+        padding: 0%;
+        text-align: center;
+        p{
+            color: white;
+        }
+    }
+    .menu-cart-logo{
+      display: flex;
+      flex-direction: row;
+      height: 4vh;
+    }  
+}
