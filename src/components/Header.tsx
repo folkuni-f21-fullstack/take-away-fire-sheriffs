@@ -22,7 +22,7 @@ function Header() {
              <li onClick={() => navigate('/LogOut')}><a>Log out</a></li>
           
         </ul>
-        <section className='cart-container'>
+        <section className='cart-container' onClick={() => navigate('/LogOut')}>
             <div className='cart-number'><p>2</p></div>
             <img className='menu-cart-logo' src="src\assets\cart-logo.svg" alt="" />
         </section>
