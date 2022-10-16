@@ -1,5 +1,8 @@
 @use "src/base";
 
+.dark-bg {
+  @include base.default-overlay-wrapper;
+}
 
 /* Popup Countiner */
 .edit-popup {
@@ -12,10 +15,10 @@
   width: 30%;
 }
 
-.user-close-btn{
-margin-left: 90%;
+.user-close-btn {
+  margin-left: 90%;
 }
-.cart-title{
+.cart-title {
   margin-top: 1rem;
 }
 /* Order Details, Dishes and Prices */
@@ -34,41 +37,36 @@ margin-left: 90%;
       font-size: 20px;
     }
   }
-
 }
 
 /* Total price, Place an order btn, Comment field*/
-.edit-card-footer{
-
-display: flex;
-flex-direction: column;
-align-items: center;
+.edit-card-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   /* Total cost*/
   .card-cost {
-    font-size: 36px;    ;
+    font-size: 36px;
     margin-top: 2rem;
   }
 
   /* User comment*/
-  .cart-comment{
-  width:80%;
-  height:3rem;
-  background: base.$white;
-  border: 1px solid base.$black;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-  margin-top: 1rem;
-  padding-left: 1rem; padding-right: 1rem;
+  .cart-comment {
+    width: 80%;
+    height: 3rem;
+    background: base.$white;
+    border: 1px solid base.$black;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    margin-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   /* Order btn*/
   .popup-btn-placeorder {
-    background-color: base.$green-bgr; margin-top: 1rem;
+    background-color: base.$green-bgr;
+    margin-top: 1rem;
   }
-
 }
-
-
-
-
