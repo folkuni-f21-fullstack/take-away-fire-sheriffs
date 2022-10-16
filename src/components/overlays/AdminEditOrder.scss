@@ -1,0 +1,61 @@
+@use '../../_base.scss';
+.admin-edit-overlay-container{
+    @include base.default-overlay-wrapper;
+
+    h2 {
+        font-weight: normal;
+    }
+}
+.admin-edit-overlay{
+    @include base.default-overlay;
+    gap: 1em;
+    padding: 25px;
+    background-color: #FFE99F;
+
+    .admin-edit-title{
+        display: flex;
+        justify-content: center;
+    }
+    .admin-edit-total{
+        display: flex;
+        justify-content: center;
+    }
+    .card-dish{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .delete-dish-btn{
+            @include base.button($bgr: base.$red-bgr, $txt: base.$white);
+        }
+    }
+    .admin-edit-inputs{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+        .user-comment-input{
+           margin-bottom: 15px;
+           border-style: none; 
+           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+           height: 50px;
+        }
+        .admin-comment-input{
+           margin-bottom: 15px;
+           border-style: none;
+           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
+           height: 50px;
+        }
+    }
+    .admin-edit-buttons{
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+        .admin-change-order-btn{
+            @include base.button ($bgr: base.$black, $txt: base.$white);
+            margin-right: 15px;
+        }
+        .admin-close-edit-overlay-btn{
+            @include base.button ($bgr: base.$black, $txt: base.$white)
+        }
+    }
+}
