@@ -5,6 +5,7 @@
     
     .dishInfoOverlay {
         @include base.default-overlay;
+        @extend %cardSize;
         background-color: white;
         width: 70%;
         min-width: 22rem;
