@@ -13,8 +13,21 @@ function Cart( {closeOverlay}: Prop) {
         <section className='cart-overlay-container'>
 
             <div className='cart-container'>
-                <h1 className='cart-title'>Cart</h1>
-
+                <div className='cart-upper-container'>
+                    <h1 className='cart-title'>Cart</h1>
+                    <img src="src\assets\close-overlay-button.svg" alt="" onClick={closeBtn} className='close-overlay-btn'/>
+                </div>
+                
+                <div className='card-dish'>
+                    <p>Dish 1</p>
+                    <p>90:-</p>
+                    <button className='delete-dish-btn'>Delete</button>
+                </div>
+                <div className='card-dish'>
+                    <p>Dish 1</p>
+                    <p>90:-</p>
+                    <button className='delete-dish-btn'>Delete</button>
+                </div>
                 <div className='card-dish'>
                     <p>Dish 1</p>
                     <p>90:-</p>
@@ -29,8 +42,8 @@ function Cart( {closeOverlay}: Prop) {
 
                 <div className='cart-buttons'>
                     <button className='cart-porder-btn'>Place Order</button>
-                    <button className='cart-edit-overlay-btn' onClick={closeBtn}>Close</button> 
                 </div>
+                
             </div>
             
         </section>

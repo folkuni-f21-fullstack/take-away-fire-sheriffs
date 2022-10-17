@@ -15,7 +15,11 @@ function AdminEditOrder( {closeOverlay}: Prop) {
     return (
         <section className="admin-edit-overlay-container">
             <div className='admin-edit-overlay'>
-                <h1 className='admin-edit-title'>Edit Order</h1>
+                <div className='edit-upper-container'>
+                    <h1 className='admin-edit-title'>Edit Order</h1>
+                    <img src="src\assets\close-overlay-button.svg" alt="" onClick={closeBtn} className='admin-close-edit-overlay-btn'/>
+                </div>
+                
                 <div className='card-dish'>
                     <p>Dish 1</p>
                     <p>90:-</p>
@@ -42,8 +46,8 @@ function AdminEditOrder( {closeOverlay}: Prop) {
                 
                 <div className='admin-edit-buttons'>
                    <button className='admin-change-order-btn'>Change Order</button>
-                   <button className='admin-close-edit-overlay-btn' onClick={closeBtn}>Close</button> 
                 </div>
+                
                 
             </div>
             

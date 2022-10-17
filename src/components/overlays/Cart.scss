@@ -16,7 +16,7 @@
     .card-dish{
         display: flex;
         justify-content: space-between;
-
+        margin-bottom: 15px;
         .delete-dish-btn{
             padding: 2.5px 5px;
             background-color: #CF4242;
@@ -41,7 +41,17 @@
       } 
     }
     
-
+    .cart-upper-container{
+        position: relative;
+        margin-bottom: 2.5vh;
+       .close-overlay-btn{
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        height: 2.5rem;
+        }
+    }
+    
     .cart-buttons{
         display: flex;
         justify-content: center;
