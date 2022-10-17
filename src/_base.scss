@@ -9,11 +9,7 @@ $overlay-bgr: #000000af;
 
 @mixin button($bgr: $green-bgr, $txt: $black, $padding: 0.5em 1em) {
     background-color: $bgr;
-<<<<<<< HEAD
     padding: $padding;
-=======
-    padding: 0.5rem 1rem;
->>>>>>> dev
     color: $txt;
     border-radius: 5px;
     appearance: none;
@@ -31,9 +27,8 @@ $overlay-bgr: #000000af;
 }
 
 @mixin close-button {
-    align-self: flex-end;
     position: absolute;
-    top: 5%;
+    top: 3%;
     right: 3%;
     z-index: 2;
 
