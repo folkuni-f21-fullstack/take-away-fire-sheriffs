@@ -15,19 +15,19 @@ const About = () => {
                 <article className="about-headline">
                     <img src={aboutpic} alt="about us" />
                 </article>
-                <article className="card">
+                <article className="history-card">
                     <img src={history} alt="history" />
                     <div>
                         <h3 className="info-h3">The story began 1956 when a man met a curious little mouse with a taste for fine dining food</h3>
                     </div>
                 </article>
-                <article className="card">
+                <article className="employees-card">
                     <img src={employees} alt="employees" />
                     <div>
                         <h3 className="info-h3">Our amazing chef and mouse works close to the staff to provide the best food in town  </h3>
                     </div>
                 </article>
-                <article className="card">
+                <article className="contact-card">
                     <img src={contact} alt="contact" />
                     <div>
                         <h3 className="info-h3">
