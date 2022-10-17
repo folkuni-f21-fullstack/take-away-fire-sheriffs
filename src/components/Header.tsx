@@ -1,8 +1,14 @@
 import './Header.scss';
+import { useState } from 'react'
 import { useNavigate } from 'react-router'
+import CartOverlay from './overlays/Cart'
+
 function Header() {
     const navigate = useNavigate();
-
+    const [openCart, setOpenCart] = useState(false);
+    const openCartBtn = () => {
+        {setOpenCart(true)}
+    }
     return (
         <nav className="nav">
         <input type="checkbox" id="nav__checkbox" className="nav__checkbox"/>
@@ -22,11 +28,12 @@ function Header() {
              <li onClick={() => navigate('/LogOut')}><a>Log out</a></li>
           
         </ul>
-        <section className='cart-container' onClick={() => navigate('/LogOut')}>
+        <section className='cart-container' onClick={openCartBtn}>
             <div className='cart-number'><p>2</p></div>
             <img className='menu-cart-logo' src="src\assets\cart-logo.svg" alt="" />
+            
         </section>
-        
+        {openCart && <CartOverlay closeOverlay={setOpenCart} />}
       </nav>
     )
 }
