@@ -1,0 +1,25 @@
+@use "src/base";
+
+/* Card Countiner */
+.msg-card {
+  background: base.$yellow-bgr;
+  border: 5px solid base.$light-yellow-bgr;
+  border-radius: 15px;
+  padding: 1rem;
+  margin: 2rem;
+  min-width: 20em;
+  width: 30%;
+}
+
+/* Ordernumber and Date */
+.msg-card-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.msg-text {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}

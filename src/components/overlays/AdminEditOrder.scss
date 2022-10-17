@@ -1,19 +1,20 @@
 @use '../../_base.scss';
 .admin-edit-overlay-container{
     @include base.default-overlay-wrapper;
+
+    h2 {
+        font-weight: normal;
+    }
 }
 .admin-edit-overlay{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    @include base.default-overlay;
+    gap: 1em;
     padding: 25px;
     background-color: #FFE99F;
-    border-radius: 15px;
-    width: 80%;
+
     .admin-edit-title{
         display: flex;
         justify-content: center;
-        
     }
     .admin-edit-total{
         display: flex;
@@ -22,10 +23,9 @@
     .card-dish{
         display: flex;
         justify-content: space-between;
+        align-items: center;
         .delete-dish-btn{
-            padding: 2.5px 5px;
-            background-color: #CF4242;
-            color: white;
+            @include base.button($bgr: base.$red-bgr, $txt: base.$white);
         }
     }
     .admin-edit-inputs{

@@ -17,19 +17,19 @@ function AdminEditOrder( {closeOverlay}: Prop) {
             <div className='admin-edit-overlay'>
                 <h1 className='admin-edit-title'>Edit Order</h1>
                 <div className='card-dish'>
-                    <p>Dish 1</p>
-                    <p>90:-</p>
+                    <h2>Dish 1</h2>
+                    <h2>90:-</h2>
                     <button className='delete-dish-btn'>Delete</button>
                 </div>
 
                 <div className='card-dish'>
-                    <p>Dish 1</p>
-                    <p>90:-</p>
+                    <h2>Dish 1</h2>
+                    <h2>90:-</h2>
                     <button className='delete-dish-btn'>Delete</button>
                 </div>
                 <div className='card-dish'>
-                    <p>Dish 1</p>
-                    <p>90:-</p>
+                    <h2>Dish 1</h2>
+                    <h2>90:-</h2>
                     <button className='delete-dish-btn'>Delete</button>
                 </div>
                 
