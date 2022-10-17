@@ -46,6 +46,19 @@
            height: 50px;
         }
     }
+    .edit-upper-container{
+        position: relative;
+        margin-bottom: 2.5vh;
+
+       .admin-close-edit-overlay-btn{
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            height: 2.5rem;
+            cursor: pointer;
+        }
+    }
+   
     .admin-edit-buttons{
         display: flex;
         justify-content: center;
@@ -54,8 +67,6 @@
             @include base.button ($bgr: base.$black, $txt: base.$white);
             margin-right: 15px;
         }
-        .admin-close-edit-overlay-btn{
-            @include base.button ($bgr: base.$black, $txt: base.$white)
-        }
+        
     }
 }

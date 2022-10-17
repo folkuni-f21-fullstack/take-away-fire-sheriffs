@@ -1,0 +1,45 @@
+@use '../base';
+
+.landingPage {
+  gap: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .logo {
+    margin: 5% 0;
+  }
+  button {
+    border:none;
+  }
+}
+.buttonGuest {
+  @include base.button($bgr: base.$white, $txt: base.$black, $padding: 0.3em 3em);
+}
+.buttonMember {
+  @include base.button($bgr: base.$black, $txt: base.$white, $padding: 0.3em 3em);
+  opacity: 0.9;
+}
+
+.loginSignup {
+  padding: 2em 2em;
+  border: 5px solid base.$light-yellow-bgr;
+  border-radius: 15px;
+  background-color: base.$yellow-bgr;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  button {
+    @include base.button($bgr: base.$black, $txt: base.$white);
+    margin: 1.5em 0;
+  }
+  input {
+    width: 16em;
+    margin: 1.5em 0;
+    border-radius: 3px;
+    border: none;
+    text-align: center;
+  }
+}
