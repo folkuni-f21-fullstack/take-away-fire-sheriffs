@@ -11,10 +11,10 @@ const About = () => {
     return (
         <>
             <Header />
-            <section className="about-container content-wrapper">
                 <article className="about-headline">
                     <img src={aboutpic} alt="about us" />
                 </article>
+            <section className="about-container content-wrapper">
                 <article className="history-card">
                     <img src={history} alt="history" />
                     <div>

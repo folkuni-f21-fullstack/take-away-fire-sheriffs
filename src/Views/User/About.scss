@@ -5,9 +5,8 @@
     flex-direction: column;
     text-align: center;
     background-color: #333333;
-    padding: 1rem;
-    margin: 1rem;
-    max-height: 522px;
+    padding: 1.8rem;
+    margin: 2rem;
     max-width: 275px;
     border-radius: 15px;
     color: #ffff;
@@ -16,7 +15,8 @@
 
 .about-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
@@ -39,6 +39,7 @@
 .about-headline {
     display: flex;
     flex-direction: center;
+    justify-content: center;
     padding-top: 2rem;
 }
 
