@@ -2,6 +2,7 @@ import './AdminOrderItem.scss';
 import AdminEditOverlay from './overlays/AdminEditOrder'
 import { useState } from 'react'
 
+
 function AdminOrderItem() {
     const [openEdit, setOpenEdit] = useState(false);
     const editPressed = () => {
@@ -34,6 +35,7 @@ function AdminOrderItem() {
                 {openEdit && <AdminEditOverlay closeOverlay={setOpenEdit} />}
             </div>
         </div>
+        
     )
 }
 
