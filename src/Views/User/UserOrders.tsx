@@ -1,7 +1,5 @@
 import React from "react";
 import OrderItem from "../../components/UserOrderItem";
-import EditOrder from "../../components/overlays/UserEditOrder";
-import OrderMsg from "../../components/overlays/PlacedOrderMsg";
 import "./UserOrders.scss";
 import Header from "../../components/Header";
 
