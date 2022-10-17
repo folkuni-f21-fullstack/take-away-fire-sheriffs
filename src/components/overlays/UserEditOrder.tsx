@@ -29,22 +29,31 @@ function EditOrder({ closeOverlay }: Prop) {
         <h1 className="cart-title">Cart</h1>
 
         <section className="edit-card-info">
-          <section className="edit-details">
+
+          <section className="edit-element"> 
+          <div className="edit-details">
             <p className="card-text">Ratatouille</p>
             <p className="card-text">90:-</p>
+          </div>
             <button className="card-btn-delete">Delete</button>
           </section>
+          
 
-          <section className="edit-details">
+          <section className="edit-element"> 
+          <div className="edit-details">
             <p className="card-text">Ratatouille Veg.</p>
             <p className="card-text">75:-</p>
+          </div>
             <button className="card-btn-delete">Delete</button>
-          </section>
+            </section>
+          
 
-          <section className="edit-details">
+          <section className="edit-element"> 
+          <div className="edit-details">
             <p className="card-text">Coca Cola</p>
             <p className="card-text">25:-</p>
-            <button className="card-btn-delete">Delete</button>
+          </div>
+          <button className="card-btn-delete">Delete</button>
           </section>
         </section>
 

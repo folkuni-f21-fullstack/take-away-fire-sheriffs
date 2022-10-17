@@ -1,4 +1,4 @@
-@use "src/base";
+@use "../../_base.scss";
 
 .dark-bg {
   @include base.default-overlay-wrapper;
@@ -19,24 +19,34 @@
   margin-left: 90%;
 }
 .cart-title {
-  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 /* Order Details, Dishes and Prices */
 .edit-card-info {
   display: flex;
   flex-direction: column;
 
-  .edit-details {
+  .edit-element {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: 1rem;
 
-    .card-text {
-      font-size: 20px;
+    .edit-details {
+      display: flex;
+      flex-direction: row;
+      width: 70%;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+      margin-right: 1rem;
+  
+      .card-text {
+        font-size: 20px;
+      }
     }
   }
+ 
 }
 
 /* Total price, Place an order btn, Comment field*/

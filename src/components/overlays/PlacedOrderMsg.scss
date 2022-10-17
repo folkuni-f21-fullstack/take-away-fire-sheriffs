@@ -1,4 +1,8 @@
-@use "src/base";
+@use "../../_base.scss";
+
+.dark-msg-bg{
+  @include base.default-overlay-wrapper;
+}
 
 /* Card Countiner */
 .msg-card {
