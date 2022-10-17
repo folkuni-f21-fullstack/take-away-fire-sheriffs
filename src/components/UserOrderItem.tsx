@@ -1,17 +1,12 @@
-import { useState } from 'react';
+import { useState } from "react";
 import "./UserOrderItem.scss";
 import EditOrder from "./overlays/UserEditOrder";
 
-
-
 function UserOrderItem() {
-
-  const [openEdit, setOpenEdit] = useState(false);
-  const editPressed = () => {
-      {setOpenEdit(true)}}
-
-
-
+  const [openEdit, setOpenEdit] = useState<boolean>(false);
+  function showOverlay() {
+    setOpenEdit(true);
+  }
 
   return (
     <section className="card">
@@ -43,7 +38,9 @@ function UserOrderItem() {
 
       <p className="card-cost">Totalt: 190:-</p>
       <section className="card-btns">
-        <button className="card-btn-edit" onClick={editPressed}>Edit</button>
+        <button className="card-btn-edit" onClick={showOverlay}>
+          Edit
+        </button>
         <button className="card-btn-delete">Delete</button>
       </section>
       {openEdit && <EditOrder closeOverlay={setOpenEdit} />}
