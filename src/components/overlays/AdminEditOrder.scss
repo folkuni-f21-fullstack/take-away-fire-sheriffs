@@ -7,6 +7,7 @@
     }
 }
 .admin-edit-overlay{
+    @extend %cardSize;
     @include base.default-overlay;
     gap: 1em;
     padding: 25px;

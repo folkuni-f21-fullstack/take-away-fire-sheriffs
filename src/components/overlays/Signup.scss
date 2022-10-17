@@ -8,6 +8,7 @@
   @include base.default-overlay-wrapper;
   
   .loginSignup {
+    @extend %cardSize;
     @include base.default-overlay;
     position: relative;
     

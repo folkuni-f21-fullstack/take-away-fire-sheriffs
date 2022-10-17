@@ -2,13 +2,12 @@
 
 /* Card Countiner */
 .card {
+  @extend %cardSize;
   background: base.$yellow-bgr;
   border: 5px solid base.$black;
   border-radius: 15px;
   padding: 1rem;
   margin: 2rem;
-  min-width: 22em;
-  width: 50%;
 }
 
 /* Status color, Status test, Ordernumber */

@@ -1,6 +1,7 @@
 @use '../base';
 
 .admin-order-card{
+    @extend %cardSize;
     background-color:  #FFE99F ;
     width: auto;
     height: auto;

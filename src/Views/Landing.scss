@@ -22,6 +22,7 @@
 }
 
 .loginSignup {
+  @extend %cardSize;
   padding: 2em 2em;
   border: 5px solid base.$light-yellow-bgr;
   border-radius: 15px;
