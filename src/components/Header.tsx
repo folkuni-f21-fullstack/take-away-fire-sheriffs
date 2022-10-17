@@ -21,11 +21,11 @@ function Header() {
              </svg>
         </label>
         <ul className="nav__menu">
-             <li onClick={() => navigate('/Menu')}> <img className='menu-logo' src="src\assets\logo.svg" alt="" /> </li>
-             <li onClick={() => navigate('/Menu')}><a>Menu</a></li>
-             <li onClick={() => navigate('/Orders')}><a>My orders</a></li>
-             <li onClick={() => navigate('/About')}><a>About us</a></li>
-             <li onClick={() => navigate('/LogOut')}><a>Log out</a></li>
+             <li onClick={() => navigate('/menu')}> <img className='menu-logo' src="src\assets\logo.svg" alt="" /> </li>
+             <li onClick={() => navigate('/menu')}><a>Menu</a></li>
+             <li onClick={() => navigate('/orders')}><a>My orders</a></li>
+             <li onClick={() => navigate('/about')}><a>About us</a></li>
+             <li onClick={() => navigate('/')}><a>Log out</a></li>
           
         </ul>
         <section className='cart-container' onClick={openCartBtn}>

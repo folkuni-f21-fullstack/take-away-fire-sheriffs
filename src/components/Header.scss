@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     position: sticky;
+    width: 100vw;
     padding: 15px;
     margin-bottom: 2.5rem;
     background-color: #86C86B;
@@ -15,13 +16,13 @@
       top: 0;
       left: 0;
       background-color: #86C86B;
-      svg {
-        width: 1.5rem;
-/*         fill: base.$clr-gray600;
- */      }
+        svg {
+          width: 1.5rem;
+        }
   
       .close {
         display: none;
+        fill: #333333;
       }
   
       .menu {
