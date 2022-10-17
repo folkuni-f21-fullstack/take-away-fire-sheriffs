@@ -16,8 +16,7 @@ function Landing() {
     }
 
     return (
-        <section className="landingPage">
-            <Header />
+        <section className="landingPage content-wrapper">
             <img className="logo" src={logo} />
             <button className="buttonGuest" onClick={guestUser}>Continue as Guest</button>
             <section className="loginSignup">

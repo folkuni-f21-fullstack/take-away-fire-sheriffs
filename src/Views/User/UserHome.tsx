@@ -5,6 +5,7 @@ import MenuTitle from '../../assets/menu-title.svg';
 import MenuItem from '../../components/MenuItem';
 
 import data from '../../../data.json';
+import Header from '../../components/Header';
 
 interface Menu {
     title: string;
@@ -24,10 +25,13 @@ function UserHome() {
     });
 
     return (
-        <div className='userHomeWrapper'>
-            <img className='menuTitle' src={ MenuTitle } alt="title-logo" />
-            { menuItems }
-        </div>
+        <>
+            <Header />
+            <div className='userHomeWrapper content-wrapper'>
+                <img className='menuTitle' src={ MenuTitle } alt="title-logo" />
+                { menuItems }
+            </div>
+        </>
     )
 }
 

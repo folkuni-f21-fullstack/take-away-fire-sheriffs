@@ -6,6 +6,8 @@
 
     .cart-container{
         @include base.default-overlay;
+        background-color:  base.$yellow-bgr;
+        padding: 2em;
     }
     .cart-title{
         display: flex;
@@ -44,11 +46,12 @@
     .cart-upper-container{
         position: relative;
         margin-bottom: 2.5vh;
+
        .close-overlay-btn{
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        height: 2.5rem;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            height: 2.5rem;
         }
     }
     

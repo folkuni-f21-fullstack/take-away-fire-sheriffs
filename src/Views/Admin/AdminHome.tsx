@@ -5,9 +5,9 @@ function AdminHome() {
     return (
         <div className="admin-view">
             <Header />
-            <h1 className="admin-view-title">Orders</h1>
-            <section className="admin-view-orders">
-                
+            
+            <section className="content-wrapper">
+               <h1 className="admin-view-title">Orders</h1> 
                <AdminOrderItem /> 
             </section>
             
