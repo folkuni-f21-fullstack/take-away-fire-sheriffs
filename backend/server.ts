@@ -15,50 +15,89 @@ const staticPath = join( __dirname, '../../dist' )
 app.use( express.json() )
 
 
-// app.use ( (req, res next) => {
-//     console.log(`${req.method}  ${req.url} `, req.body)
-// 	next()
-// })
+app.use ( (req, res next) => {
+    console.log(`${req.method}  ${req.url} `, req.body)
+	next()
+})
 
 app.use( express.static(staticPath) )
 
+
+
+// Routes / endpoints
+// Exempel: frontend skickar "GET /api/data", backend tar emot och servar ett svar
+// HTTP methods: GET, POST, PUT, DELETE -> motsvarar CRUD = Create, Read, Update, Delete
+// Dessa fyra används när vi bygger ett RESTful API
+// GET    - hämta data
+// POST   - lägga till ny data
+// PUT    - uppdatera data
+// DELETE - ta bort data
+
 // GET 
 
-app.get('/', (req,res) => {
+
+// Landing page
+app.get('/', (req, res) => {
     res.send()
 })
 
 
-app.get('/about', (req,res) => {
+// About page
+app.get('/about', (req, res) => {
     res.send()
 })
 
-app.get('/menu', (req,res) => {
+// Menu page
+
+app.get('/menu', (req, res) => {
     res.send()
 })
 
-app.get('/orders', (req,res) => {
+// Orders page
+
+app.get('/orders', (req, res) => {
     res.send()
 })
 
-app.get('/admin', (req,res) => {
+// Admin page
+
+app.get('/admin', (req, res) => {
     res.send()
 })
 
 
 
-// POST  add new order  
+// POST  
 
-app.post('/api/?', (req,res) => {
+// Add new order  
 
+app.post('/api/.....', (req, res) => {
+     let newOrder = ??? = req.body
 })
 
+// Add new customer
 
+app.post('/api/...', (req, res) => {
+    let newCustomer = ???  = req.body
+})
 
 // PUT
 
+// Update order to kitchen
+
+app.put('/api/', (req,res) => {
+
+})
+
 
 // DELETE 
+
+// Delete order or product
+
+app.delete('/api/:id', (req, res) => {
+
+})
+
 
 
 app.listen(PORT, () => {
