@@ -1,0 +1,72 @@
+@use "src/base";
+
+.dark-bg {
+  @include base.default-overlay-wrapper;
+}
+
+/* Popup Countiner */
+.edit-popup {
+  background: base.$yellow-bgr;
+  border: 5px solid base.$light-yellow-bgr;
+  border-radius: 15px;
+  padding: 1rem;
+  margin: 2rem;
+  min-width: 20rem;
+  width: 30%;
+}
+
+.user-close-btn {
+  margin-left: 90%;
+}
+.cart-title {
+  margin-top: 1rem;
+}
+/* Order Details, Dishes and Prices */
+.edit-card-info {
+  display: flex;
+  flex-direction: column;
+
+  .edit-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+
+    .card-text {
+      font-size: 20px;
+    }
+  }
+}
+
+/* Total price, Place an order btn, Comment field*/
+.edit-card-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* Total cost*/
+  .card-cost {
+    font-size: 36px;
+    margin-top: 2rem;
+  }
+
+  /* User comment*/
+  .cart-comment {
+    width: 80%;
+    height: 3rem;
+    background: base.$white;
+    border: 1px solid base.$black;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    margin-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Order btn*/
+  .popup-btn-placeorder {
+    background-color: base.$green-bgr;
+    margin-top: 1rem;
+  }
+}

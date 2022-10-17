@@ -9,7 +9,10 @@
   min-height: 100vh;
   // padding: 2rem;
   // text-align: center;
-  background-color: base.$light-yellow-bgr;
+  background: rgb(255,242,199);
+  background: linear-gradient(125deg, rgba(255,242,199,1) 0%, rgba(255,242,199,1) 50%, rgba(252,136,69,1) 50.1%, rgba(252,136,69,1) 70%, rgba(207,66,66,1) 70.1%, rgba(207,66,66,1) 100%);
+  background-attachment: fixed;
+  padding: 2em;
 }
 
 * {

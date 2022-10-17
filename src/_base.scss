@@ -5,10 +5,11 @@ $black: #333333;
 $light-yellow-bgr: #FFF2C7;
 $yellow-bgr: #FFE99F;
 $white: #EEEEEE;
+$overlay-bgr: #000000af;
 
-@mixin button($bgr: $green-bgr, $txt: $black) {
+@mixin button($bgr: $green-bgr, $txt: $black, $padding: 0.5em 1em) {
     background-color: $bgr;
-    padding: 0.8rem 1.2rem;
+    padding: $padding;
     color: $txt;
     border-radius: 5px;
     appearance: none;
@@ -25,6 +26,42 @@ $white: #EEEEEE;
     }
 }
 
+@mixin close-button {
+    position: absolute;
+    top: 3%;
+    right: 3%;
+    z-index: 2;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:active {
+        opacity: 0.5;
+    }
+}
+
+// default css för wrapper till overlay med position och svart bakgrund
+@mixin default-overlay-wrapper($bgr: $overlay-bgr) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: $bgr;
+}
+// default css för en overlay så den är centrerad på sidan och färgad correkt osv
+@mixin default-overlay {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 30rem;
+}
 // button {
 //     @include button ($bgr: $black, $txt: $white);
 // }
