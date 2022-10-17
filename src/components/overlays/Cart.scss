@@ -1,0 +1,66 @@
+@use '../../_base.scss';
+
+.cart-overlay-container{
+
+    @include base.default-overlay-wrapper;
+
+    .cart-container{
+        @include base.default-overlay;
+    }
+    .cart-title{
+        display: flex;
+        justify-content: center;
+        
+    }
+
+    .card-dish{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        .delete-dish-btn{
+            padding: 2.5px 5px;
+            background-color: #CF4242;
+            color: white;
+        }
+    }
+
+    .cart-total{
+        display: flex;
+        justify-content: center;
+    }
+
+    .cart-inputs{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+       .user-comment-input{
+        margin-bottom: 15px;
+        border-style: none; 
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        height: 50px;
+      } 
+    }
+    
+    .cart-upper-container{
+        position: relative;
+        margin-bottom: 2.5vh;
+       .close-overlay-btn{
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        height: 2.5rem;
+        }
+    }
+    
+    .cart-buttons{
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+        .cart-porder-btn{
+            margin-right: 15px;
+        }
+        .cart-edit-overlay-btn{
+            @include base.button ($bgr: base.$black, $txt: base.$white)
+        }
+    }
+}
