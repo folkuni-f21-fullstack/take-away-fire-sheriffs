@@ -15,7 +15,7 @@ const staticPath = join( __dirname, '../../dist' )
 app.use( express.json() )
 
 
-app.use ( (req, res next) => {
+app.use ( (req, res ,next) => {
     console.log(`${req.method}  ${req.url} `, req.body)
 	next()
 })
