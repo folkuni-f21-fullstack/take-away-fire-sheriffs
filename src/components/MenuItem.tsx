@@ -1,22 +1,13 @@
-import { useState } from 'react';
 import './MenuItem.scss';
 
 import DishInfo from './overlays/DishInfo';
 
 import { Menu } from '../models/models';
 
-// interface Menu {
-//     title: string;
-//     price: number;
-//     ingredients: string;
-//     allergies: string;
-//     imgUrl: string;
-//     id: number;
-// };
+import { useState } from 'react';
 
 interface Props {
     menuItem: Menu;
-    
 };
 
 function MenuItem({menuItem}: Props) {
