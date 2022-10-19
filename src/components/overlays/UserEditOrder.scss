@@ -12,13 +12,15 @@
   border-radius: 15px;
   padding: 1rem;
   margin: 2rem;
+  position: relative;
 }
 
 .user-close-btn {
-  margin-left: 90%;
+  @include base.close-button;
 }
 .cart-title {
   margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 /* Order Details, Dishes and Prices */
 .edit-card-info {
