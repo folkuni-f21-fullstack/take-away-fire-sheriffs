@@ -6,13 +6,12 @@
 
 /* Popup Countiner */
 .edit-popup {
+  @extend %cardSize;
   background: base.$yellow-bgr;
   border: 5px solid base.$light-yellow-bgr;
   border-radius: 15px;
   padding: 1rem;
   margin: 2rem;
-  min-width: 20rem;
-  width: 30%;
 }
 
 .user-close-btn {

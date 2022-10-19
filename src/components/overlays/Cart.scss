@@ -1,12 +1,13 @@
 @use '../../_base.scss';
 
 .cart-overlay-container{
-
     @include base.default-overlay-wrapper;
-
+    
     .cart-container{
+        @extend %cardSize;
         @include base.default-overlay;
         background-color:  base.$yellow-bgr;
+        border: 5px solid base.$black;
         padding: 2em;
     }
     .cart-title{

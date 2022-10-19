@@ -6,6 +6,7 @@
 
 /* Card Countiner */
 .msg-card {
+  @extend %cardSize;
   background: base.$yellow-bgr;
   border: 5px solid base.$light-yellow-bgr;
   border-radius: 15px;

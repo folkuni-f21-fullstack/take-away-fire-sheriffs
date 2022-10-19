@@ -1,8 +1,7 @@
 @use '../base';
 
 .menuItemWrapper {
-    width: 50%;
-    min-width: 20rem;
+    @extend %cardSizeWide;
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -10,7 +9,7 @@
     padding: 1.5em;
     border-radius: 15px;
     border: 5px solid base.$black;
-
+    
     .menuItem-title-container {
         display: flex;
         justify-content: space-between;
