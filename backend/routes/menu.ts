@@ -5,10 +5,13 @@ import db from '../db.js';
 import { data as defaultData } from '../defaultData.js';
 
 router.get('/', (req, res) => {
-
+    console.log('hejhej');
     if (db.data) {
-        res.send(db.data.menu);
+        console.log(db.data.menu);
+        
+        res.json(db.data.menu);
     } else {
+        console.log('hejhej');
         res.sendStatus(404);
     }
 })

@@ -12,6 +12,7 @@
     "restart-backend": "cd backend/ && tsc && cd .. && node backend/dist/server.js"
   },
   "dependencies": {
+    "@types/cors": "^2.8.12",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "lowdb": "^3.0.0",

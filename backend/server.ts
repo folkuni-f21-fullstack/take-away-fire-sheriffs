@@ -9,6 +9,7 @@ import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 const __dirname = dirname(fileURLToPath(import.meta.url));  // __dirname i äldre versioner av node
 const staticPath = join( __dirname, '../../dist' )
+import cors from 'cors';
 
 
 // Middleware
@@ -21,6 +22,7 @@ app.use( express.json() ) // hanterar JSON i request body
 
 // Obs! express.static bör ligga först, när man får många statiska filer
 app.use( express.static(staticPath) )
+app.use(cors({ origin: '*' }))
 
 
 // Routes / endpoints

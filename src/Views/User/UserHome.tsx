@@ -13,7 +13,7 @@ function UserHome() {
     const [menu, setMenu] = useState<Menu[] | null>(null);
 
     const fetchMenu = async () => {
-        const response = await fetch('/api/menu');
+        const response = await fetch('http://localhost:1337/api/menu', { mode: 'cors' });
         const data: Menu[] = await response.json();
         setMenu(data);
     }
