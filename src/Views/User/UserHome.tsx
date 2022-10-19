@@ -3,10 +3,11 @@ import './UserHome.scss';
 import MenuTitle from '../../assets/menu-title.svg';
 
 import { Menu } from '../../models/models';
+import MenuItem from '../../components/MenuItem';
 
 // import data from '../../../data.json';
 import Header from '../../components/Header';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function UserHome() {
 
@@ -20,9 +21,15 @@ function UserHome() {
 
     // const menu: Menu[] = data.menu;
 
-    // const menuItems = menu.map((menuItem, index) => {
-    //     return <MenuItem menuItem={menuItem} key={index}/>
-    // });
+    useEffect(() => { 
+        menu ? (
+            menu.map(item => (
+            <MenuItem key={item.id} title={item.title} price={item.price} ingredients={item.ingredients} allergies={item.allergies} imgUrl={item.imgUrl} id={item.id} />
+            ))
+        ) : 'Couldnt find any menuItems' 
+    , []}
+
+    
 
     return (
         <>

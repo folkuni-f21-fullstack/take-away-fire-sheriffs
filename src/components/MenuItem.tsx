@@ -3,17 +3,20 @@ import './MenuItem.scss';
 
 import DishInfo from './overlays/DishInfo';
 
-interface Menu {
-    title: string;
-    price: number;
-    ingredients: string;
-    allergies: string;
-    imgUrl: string;
-    id: number;
-};
+import { Menu } from '../models/models';
+
+// interface Menu {
+//     title: string;
+//     price: number;
+//     ingredients: string;
+//     allergies: string;
+//     imgUrl: string;
+//     id: number;
+// };
 
 interface Props {
     menuItem: Menu;
+    
 };
 
 function MenuItem({menuItem}: Props) {

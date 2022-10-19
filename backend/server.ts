@@ -22,7 +22,7 @@ app.use( express.json() ) // hanterar JSON i request body
 
 // Obs! express.static bör ligga först, när man får många statiska filer
 app.use( express.static(staticPath) )
-app.use(cors({ origin: '*' }))
+app.use(cors({ origin: '*' }));
 
 
 // Routes / endpoints
