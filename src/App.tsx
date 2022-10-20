@@ -8,16 +8,16 @@ import UserHome from './Views/User/UserHome';
 import UserOrders from './Views/User/UserOrders';
 import AdminHome from './Views/Admin/AdminHome';
 import { useState } from 'react';
-import { Users } from './models/models';
+import { User } from './models/models';
 import data from '../backend/dist/data.json';
 
 function App() {
-  const [activeUser, setActiveUser] = useState<Users[]>(data.users);
+  const [activeUser, setActiveUser] = useState<User | null>(null);
 
   return (
     <div className="App">
       <Routes>
-        <Route element={ <Landing setActiveUser={setActiveUser} /> } path='/' />
+        <Route element={ <Landing activeUser={activeUser} setActiveUser={setActiveUser} /> } path='/' />
         <Route element={ <About /> } path='/about' />
         <Route element={ <UserHome activeUser={activeUser} /> } path='/menu' />
         <Route element={ <UserOrders activeUser={activeUser} /> } path='/orders' />

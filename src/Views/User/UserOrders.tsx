@@ -1,11 +1,10 @@
-import React from "react";
 import OrderItem from "../../components/UserOrderItem";
 import "./UserOrders.scss";
 import Header from "../../components/Header";
-import { Users } from "../../models/models";
+import { User } from "../../models/models";
 
 interface Props {
-  activeUser: Users[];
+  activeUser: User | null;
 }
 
 const UserOrders = ({activeUser}: Props) => {

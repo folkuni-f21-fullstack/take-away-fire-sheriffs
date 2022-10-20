@@ -1,11 +1,11 @@
 import AdminOrderItem from "../../components/AdminOrderItem";
 import './AdminHome.scss';
 import Header from '../../components/Header';
-import { Users } from '../../models/models';
+import { User } from '../../models/models';
 
 
 interface Props {
-    activeUser: Users[];
+    activeUser: User | null;
 }
 
 function AdminHome({activeUser}: Props) {

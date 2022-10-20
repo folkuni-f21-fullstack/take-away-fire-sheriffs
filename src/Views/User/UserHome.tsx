@@ -5,12 +5,12 @@ import MenuTitle from '../../assets/menu-title.svg';
 import MenuItem from '../../components/MenuItem';
 import Header from '../../components/Header';
 
-import { Menu, Users } from '../../models/models';
+import { Menu, User } from '../../models/models';
 
 import { useState, useEffect } from 'react';
 
 interface Props {
-    activeUser: Users[];
+    activeUser: User | null;
 }
 
 

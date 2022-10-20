@@ -7,15 +7,15 @@ export type Menu = {
     id: number;
 }
 
-export type Users = {
+export type User = {
     username: string;
     password: string;
-    orders: Orders[];
+    orders: Order[];
     customer: boolean;
     id: number;
 }
 
-export type Orders = {
+export type Order = {
     date: string;
     items: Menu[];
     orderId: number;
@@ -27,7 +27,7 @@ export type Orders = {
 
 export type Schema = {
     menu: Menu[];
-    users: Users[];
+    users: User[];
     // Lägg till mer data eftersom
     //users: User[]; exempel på så det skulle kunna se ut för oss!!
     //menu: Menu[]; exempel på så det skulle kunna se ut för oss!!
