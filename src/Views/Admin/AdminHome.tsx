@@ -1,7 +1,16 @@
 import AdminOrderItem from "../../components/AdminOrderItem";
 import './AdminHome.scss';
-import Header from '../../components/Header'
-function AdminHome() {
+import Header from '../../components/Header';
+import { Users } from '../../models/models';
+
+
+interface Props {
+    activeUser: Users[];
+}
+
+function AdminHome({activeUser}: Props) {
+    console.log("AdminHome - activeUser: ", activeUser);
+
     return (
         <div className="admin-view">
             <Header />

@@ -5,11 +5,17 @@ import MenuTitle from '../../assets/menu-title.svg';
 import MenuItem from '../../components/MenuItem';
 import Header from '../../components/Header';
 
-import { Menu } from '../../models/models';
+import { Menu, Users } from '../../models/models';
 
 import { useState, useEffect } from 'react';
 
-function UserHome() {
+interface Props {
+    activeUser: Users[];
+}
+
+
+function UserHome({activeUser}: Props) {
+    console.log("UserHome - activeUser: ", activeUser);
 
     const [menu, setMenu] = useState<Menu[] | null>(null);
 

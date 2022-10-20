@@ -2,10 +2,15 @@ import React from "react";
 import OrderItem from "../../components/UserOrderItem";
 import "./UserOrders.scss";
 import Header from "../../components/Header";
+import { Users } from "../../models/models";
 
-type Props = {};
+interface Props {
+  activeUser: Users[];
+}
 
-const UserOrders = (props: Props) => {
+const UserOrders = ({activeUser}: Props) => {
+  console.log("UserOrders - activeUser: ", activeUser);
+
   return (
   <>
     <Header />

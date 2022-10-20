@@ -4,8 +4,17 @@ import Signup from '../components/overlays/Signup';
 import logo from '../assets/logo.svg';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
+import { Users } from '../models/models';
 
-function Landing() {
+interface Props {
+    setActiveUser: (activeUser: Users[]) => void;
+}
+
+
+function Landing({setActiveUser}: Props) {
+    console.log("Landing - setActiveUser: ", setActiveUser);
+
+
     const navigate = useNavigate();
     const [openSignin, setOpenSignin] = useState(false);
     const signinClick = () => {

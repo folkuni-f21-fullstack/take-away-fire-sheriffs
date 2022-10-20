@@ -9,9 +9,10 @@ import UserOrders from './Views/User/UserOrders';
 import AdminHome from './Views/Admin/AdminHome';
 import { useState } from 'react';
 import { Users } from './models/models';
+import data from '../backend/dist/data.json';
 
 function App() {
-  const [activeUser, setActiveUser] = useState<Users[] | null>(null);
+  const [activeUser, setActiveUser] = useState<Users[]>(data.users);
 
   return (
     <div className="App">
