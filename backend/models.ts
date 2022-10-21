@@ -25,6 +25,11 @@ export type Orders = {
     id: number;
 }
 
+export type Credentials = {
+    username: string;
+    password: string;
+}
+
 export type Schema = {
     users: Users[];
     menu: Menu[];

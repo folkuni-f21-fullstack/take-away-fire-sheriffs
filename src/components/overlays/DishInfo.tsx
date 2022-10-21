@@ -2,14 +2,7 @@ import './DishInfo.scss';
 
 import closeBtn from '../../assets/close-overlay-button.svg';
 
-interface Menu {
-    title: string;
-    price: number;
-    ingredients: string;
-    allergies: string;
-    imgUrl: string;
-    id: number;
-};
+import { Menu } from '../../models/models';
 
 interface Props {
     menuItem: Menu;

@@ -1,7 +1,7 @@
 import OrderItem from "../../components/UserOrderItem";
 import "./UserOrders.scss";
 import Header from "../../components/Header";
-import { User } from "../../models/models";
+import { User, Order } from "../../models/models";
 
 interface Props {
   activeUser: User | null;
@@ -10,6 +10,14 @@ interface Props {
 const UserOrders = ({activeUser}: Props) => {
   console.log("UserOrders - activeUser: ", activeUser);
 
+  let orders: Order[] | null = [];
+
+  if (activeUser) {
+    orders = activeUser.orders;
+  }
+
+  console.log(orders);
+
   return (
   <>
     <Header />
@@ -17,7 +25,10 @@ const UserOrders = ({activeUser}: Props) => {
       <img src="../src/assets/orders-title.svg" alt="My Order" />
 
       <section className="wrapper">
-        <OrderItem />
+        { orders ? (
+            orders.map(item => (
+                <OrderItem key={item.id} orderItem={item} />
+            ))) : 'Couldnt find any orders' }        
       </section>
     </section>
   </>

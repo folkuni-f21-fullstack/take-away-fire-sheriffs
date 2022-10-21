@@ -17,15 +17,20 @@ router.post('/login', (req, res) => {
   
   if(credentials.hasOwnProperty('username') && credentials.hasOwnProperty('password')) {
     const result = compareCredentials(credentials);
+    console.log(result);
+    
     if(result){
       res.send(result);
     } else {
-      res.sendStatus(404); // Finns en bättre att använda, kolla upp det!
+      res.json('404');
+      // res.headersSent()
+      // res.sendStatus(404); // VI FÅR INTE DETTA ATT FUNKA, FÅR TA DETTA MED DAVID
     }
-  } else {
-    res.sendStatus(400);
+  } 
+  else {
+    res.json('400');
   }
-  // TODO Gör en type av credentials! 
+  
   function compareCredentials(credentials: { username: string; password: string; }) {
     if(db.data) {
       const result = db.data.users.find((user) => user.username == credentials.username && user.password == credentials.password);
@@ -34,6 +39,13 @@ router.post('/login', (req, res) => {
       return false;
     }
   } 
+
+  // async function checkIfAccountExist(credentials) {
+  //   const  result = await database.find({$or: [{ username: credentials.username}, 
+  //       { email: credentials.email}]})
+  //       return result;
+  // }
+
 });
 
 

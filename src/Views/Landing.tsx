@@ -3,7 +3,7 @@ import Signup from '../components/overlays/Signup';
 import logo from '../assets/logo.svg';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
-import { User } from '../models/models';
+import { User, Credentials } from '../models/models';
 
 interface Props {
     setActiveUser: (activeUser: User | null) => void;
@@ -15,7 +15,7 @@ function Landing({activeUser, setActiveUser}: Props) {
     const [openSignup, setOpenSignup] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     console.log("Landing - activeUser: ", activeUser);
     console.log("Landing - setActiveUser: ", setActiveUser);
 
@@ -28,18 +28,69 @@ function Landing({activeUser, setActiveUser}: Props) {
         // Set user?
     }
 
-    function signIn() {
+    
+
+    async function signIn() {
+        let newData: User | any = await userLogin()
+        // userLogin();
+        // navigate('/menu');
+        // fetchUsers();
+        console.log(newData);
         
-        navigate('/menu');
+        if (newData == '404') {
+            console.log('wrong username/password');
+            
+        } else if (newData == '400') {
+            console.log('bad input'); 
+        } 
+        else {
+            setActiveUser(newData);
+            navigate('/menu');
+        }  
     }
 
     // TODO get userobject from database
     // Do something with this
-    const fetchUsers = async () => {
-        const response = await fetch('/api/users/login', { mode: 'cors' });
-        const data: User = await response.json();
-        console.log("fetchUsers: ", data);
+    // const fetchUsers = async (req: Request, res: Response) => {
+
+    //     let credentials: Credentials = {
+    //             "username": username,
+    //             "password": password
+    //         }
+    //     console.log(credentials);
+    //     credentials = req.body;
+    //     const response = await fetch('/api/users/login', { mode: 'cors' });
+    //     const data: User[] = await response.json();
+    //     console.log("fetchUsers: ", data);
+    // }
+
+    async function userLogin() {
+        const credentials: Credentials = {
+            username: username,
+            password: password
+        }
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(credentials)
+        }
+
+        const response = await fetch('api/users/login', requestOptions);
+
+        const data: User | string = await response.json();
+
+        console.log(data);
+        // setActiveUser(data);
+
+        return data; 
     }
+
+    // async function userLogin() {
+    //     const response = await fetch('/api/users/login');
+    //     const data: User = await response.json();
+    //     console.log(data);
+    // }
 
     return (
         <section className="landingPage content-wrapper">
