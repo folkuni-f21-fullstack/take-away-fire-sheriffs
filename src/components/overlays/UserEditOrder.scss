@@ -7,16 +7,18 @@
 /* Popup Countiner */
 .edit-popup {
   @extend %cardSize;
+  @include base.default-overlay;
   background: base.$yellow-bgr;
   border: 5px solid base.$light-yellow-bgr;
-  border-radius: 15px;
   padding: 1rem;
+  gap: 1em;
   margin: 2rem;
   position: relative;
 }
 
 .user-close-btn {
   @include base.close-button;
+
 }
 .cart-title {
   margin-bottom: 2rem;
@@ -29,18 +31,14 @@
 
   .edit-element {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 1em;
 
     .edit-details {
       display: flex;
-      flex-direction: row;
       width: 70%;
       justify-content: space-between;
-      align-items: center;
-      margin-top: 1rem;
-      margin-right: 1rem;
 
       .card-text {
         font-size: 20px;
@@ -57,26 +55,28 @@
 
   /* Total cost*/
   .card-cost {
-    font-size: 36px;
+    padding-bottom: 2em;
+    font-size: 24px;
     margin-top: 2rem;
+    // align-self: flex-end;
   }
 
   /* User comment*/
   .cart-comment {
+    text-align: start;
     width: 80%;
-    height: 3rem;
+    height: 5rem;
     background: base.$white;
     border: 1px solid base.$black;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     padding-left: 1rem;
     padding-right: 1rem;
   }
 
   /* Order btn*/
-  .popup-btn-placeorder {
-    background-color: base.$green-bgr;
+  .popup-btn-save {
     margin-top: 1rem;
   }
 }

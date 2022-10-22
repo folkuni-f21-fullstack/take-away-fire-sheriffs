@@ -2,12 +2,14 @@ import "./UserEditOrder.scss";
 import { useState } from "react";
 import OrderMsg from "../../components/overlays/PlacedOrderMsg";
 import closeBtn from "../../assets/close-overlay-button.svg";
+import { Order } from '../../models/models';
 
-interface Prop {
+interface Props {
   closeOverlay: (close: boolean) => void;
+  orderItem: Order;
 }
 
-function EditOrder({ closeOverlay }: Prop) {
+function EditOrder({ closeOverlay, orderItem }: Props) {
   const UserCloseBtn = () => {
     closeOverlay(false);
   };
@@ -15,6 +17,23 @@ function EditOrder({ closeOverlay }: Prop) {
   function placeOrderBtn() {
     setPlaceOrder(true);
   }
+
+  const orderItems = orderItem.items.map((item, index) => {
+    return (
+      <div key={index} className="edit-element ">
+        <section className="edit-details">
+          <p className="card-text">{item.title}</p>
+          <p className="card-text">{item.price}:-</p>
+        </section>
+        <button className="card-btn-delete">Delete</button>
+      </div>
+    );
+  });
+
+  let totalPrice = 0;
+  for (let item of orderItem.items) {
+    totalPrice = totalPrice + item.price;
+  }  
 
   return (
     <div className="dark-bg">
@@ -26,43 +45,20 @@ function EditOrder({ closeOverlay }: Prop) {
           alt=""
         />
 
-        <h1 className="cart-title">Cart</h1>
-
+        <h2 className="cart-title">Ordernr: </h2>
         <section className="edit-card-info">
-          <div className="edit-element ">
-            <section className="edit-details">
-              <p className="card-text">Ratatouille</p>
-              <p className="card-text">90:-</p>
-            </section>
-            <button className="card-btn-delete">Delete</button>
-          </div>
-
-          <div className="edit-element ">
-            <section className="edit-details">
-              <p className="card-text">Ratatouille Veg.</p>
-              <p className="card-text">75:-</p>
-            </section>
-            <button className="card-btn-delete">Delete</button>
-          </div>
-
-          <div className="edit-element ">
-            <section className="edit-details">
-              <p className="card-text">Coca Cola</p>
-              <p className="card-text">25:-</p>
-            </section>
-            <button className="card-btn-delete">Delete</button>
-          </div>
+          { orderItems }
         </section>
-
         <section className="edit-card-footer">
-          <p className="card-cost">Totalt: 190:-</p>
+          <h2 className="card-cost">Totalt: {totalPrice}:-</h2>
+          <p className="comment-title">Any extra info about the order?</p>
           <input className="cart-comment" type="textfield" />
-          <button className="popup-btn-placeorder" onClick={placeOrderBtn}>
-            Place an order
+          <button className="popup-btn-save" onClick={placeOrderBtn}>
+            Save changes
           </button>
         </section>
       </section>
-      {placeOrder && <OrderMsg />};
+      {/* {placeOrder && <OrderMsg />}; */}
     </div>
   );
 }
