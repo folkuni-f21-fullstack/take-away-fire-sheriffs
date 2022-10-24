@@ -35,7 +35,7 @@ function Landing({activeUser, setActiveUser}: Props) {
         // userLogin();
         // navigate('/menu');
         // fetchUsers();
-        console.log(newData);
+        // console.log(newData);
         
         if (newData == '404') {
             console.log('wrong username/password');
@@ -46,23 +46,11 @@ function Landing({activeUser, setActiveUser}: Props) {
         else {
             setActiveUser(newData);
             navigate('/menu');
+            if (newData.customer == false) {
+                navigate('/admin');
+            }
         }  
     }
-
-    // TODO get userobject from database
-    // Do something with this
-    // const fetchUsers = async (req: Request, res: Response) => {
-
-    //     let credentials: Credentials = {
-    //             "username": username,
-    //             "password": password
-    //         }
-    //     console.log(credentials);
-    //     credentials = req.body;
-    //     const response = await fetch('/api/users/login', { mode: 'cors' });
-    //     const data: User[] = await response.json();
-    //     console.log("fetchUsers: ", data);
-    // }
 
     async function userLogin() {
         const credentials: Credentials = {
