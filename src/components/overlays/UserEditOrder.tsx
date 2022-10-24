@@ -1,6 +1,5 @@
 import "./UserEditOrder.scss";
 import { useState } from "react";
-import OrderMsg from "../../components/overlays/PlacedOrderMsg";
 import closeBtn from "../../assets/close-overlay-button.svg";
 import { Order } from '../../models/models';
 
@@ -10,6 +9,7 @@ interface Props {
 }
 
 function EditOrder({ closeOverlay, orderItem }: Props) {
+
   const UserCloseBtn = () => {
     closeOverlay(false);
   };
@@ -58,7 +58,6 @@ function EditOrder({ closeOverlay, orderItem }: Props) {
           </button>
         </section>
       </section>
-      {/* {placeOrder && <OrderMsg />}; */}
     </div>
   );
 }

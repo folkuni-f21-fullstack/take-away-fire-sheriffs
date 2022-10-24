@@ -14,6 +14,8 @@ function UserOrderItem({orderItem}: Props) {
     setOpenEdit(true);
   }
 
+  const username: string = 'glenn';
+
   const orderItems = orderItem.items.map((item, index) => {
     return (
       <section key={index} className="card-order">
@@ -23,13 +25,31 @@ function UserOrderItem({orderItem}: Props) {
     );
   });
 
-  // const totalPrice: any = orderItem.items.reduce((accumulator, value) => {
-  //   accumulator.price + value;
-  // }, 0)
   let totalPrice = 0;
   for (let item of orderItem.items) {
     totalPrice = totalPrice + item.price;
-  }  
+  } 
+
+  async function deleteOrder() {
+    console.log(orderItem.orderId);
+
+    const query = {
+      username: username, 
+      id: orderItem.id
+    }
+
+    const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(query)
+    }
+
+    const response = await fetch('api/orders/delete', requestOptions);
+
+    const data = await response.json();
+
+    console.log(data);
+  }
 
   return (
     <section className="card">
@@ -51,7 +71,7 @@ function UserOrderItem({orderItem}: Props) {
         <button className="card-btn-edit" onClick={showOverlay}>
           Edit
         </button>
-        <button className="card-btn-delete">Delete</button>
+        <button className="card-btn-delete" onClick={ deleteOrder }>Delete</button>
       </section>
       {openEdit && <EditOrder closeOverlay={setOpenEdit} orderItem={orderItem}/>}
     </section>
