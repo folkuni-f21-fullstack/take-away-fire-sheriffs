@@ -12,7 +12,7 @@ import { User } from './models/models';
 import data from '../backend/dist/data.json';
 
 function App() {
-  const [activeUser, setActiveUser] = useState<User | null>(null);
+  const [activeUser, setActiveUser] = useState<string>("");
 
   return (
     <div className="App">
