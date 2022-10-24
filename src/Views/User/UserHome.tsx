@@ -10,7 +10,7 @@ import { Menu, User } from '../../models/models';
 import { useState, useEffect } from 'react';
 
 interface Props {
-    activeUser: string;
+    activeUser: User | null;
 }
 
 
