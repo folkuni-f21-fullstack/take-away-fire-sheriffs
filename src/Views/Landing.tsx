@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import { User, Credentials } from '../models/models';
 
 interface Props {
-    setActiveUser: (activeUser: User | null) => void;
-    activeUser: User | null;
+    setActiveUser: (activeUser: string) => void;
+    activeUser: string;
 }
 
 
@@ -44,25 +44,10 @@ function Landing({activeUser, setActiveUser}: Props) {
             console.log('bad input'); 
         } 
         else {
-            setActiveUser(newData);
+            setActiveUser(newData.username);
             navigate('/menu');
         }  
     }
-
-    // TODO get userobject from database
-    // Do something with this
-    // const fetchUsers = async (req: Request, res: Response) => {
-
-    //     let credentials: Credentials = {
-    //             "username": username,
-    //             "password": password
-    //         }
-    //     console.log(credentials);
-    //     credentials = req.body;
-    //     const response = await fetch('/api/users/login', { mode: 'cors' });
-    //     const data: User[] = await response.json();
-    //     console.log("fetchUsers: ", data);
-    // }
 
     async function userLogin() {
         const credentials: Credentials = {

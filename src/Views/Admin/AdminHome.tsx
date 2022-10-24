@@ -5,7 +5,7 @@ import { User } from '../../models/models';
 
 
 interface Props {
-    activeUser: User | null;
+    activeUser: string;
 }
 
 function AdminHome({activeUser}: Props) {
