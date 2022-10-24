@@ -1,7 +1,7 @@
 import OrderItem from "../../components/UserOrderItem";
 import "./UserOrders.scss";
 import Header from "../../components/Header";
-import { User, Order } from "../../models/models";
+import { User } from "../../models/models";
 import { useState, useEffect } from "react";
 
 interface Props {
@@ -17,11 +17,11 @@ const UserOrders = ({activeUser}: Props) => {
     const response = await fetch('/api/users', { mode: 'cors' });
     const data = await response.json();
     setUsers(data);
-}
+  }
 
-useEffect(() => {
-  getUsers()
-}, []);
+  useEffect(() => {
+    getUsers()
+  }, []);
 
   console.log(users);
 
