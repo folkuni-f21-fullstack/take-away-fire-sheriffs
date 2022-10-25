@@ -1,7 +1,7 @@
 import OrderItem from "../../components/UserOrderItem";
 import "./UserOrders.scss";
 import Header from "../../components/Header";
-import { User } from "../../models/models";
+import { Order, User } from "../../models/models";
 import { useState, useEffect } from "react";
 
 interface Props {
@@ -16,6 +16,7 @@ const UserOrders = ({activeUser}: Props) => {
   const getUsers = async () => {
     const response = await fetch('/api/users', { mode: 'cors' });
     const data = await response.json();
+
     setUsers(data);
   }
 
@@ -38,7 +39,7 @@ const UserOrders = ({activeUser}: Props) => {
         <section className="wrapper">
           { loggedInUser ? (
               loggedInUser.orders.map(item => (
-                  <OrderItem key={item.id} orderItem={item} />
+                  <OrderItem key={item.id} orderItem={item} activeUser={activeUser} getUsers={getUsers}/>
               ))) : 'Couldnt find any orders' }        
         </section>
       </section>

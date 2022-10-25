@@ -4,7 +4,7 @@ export type Menu = {
     ingredients: string;
     allergies: string;
     imgUrl: string;
-    id: string;
+    id: number;
 }
 
 export type User = {
@@ -12,7 +12,7 @@ export type User = {
     password: string;
     orders: Order[];
     customer: boolean;
-    id: string;
+    id: number;
 }
 
 export type Order = {
@@ -22,7 +22,7 @@ export type Order = {
     status: string;
     userComment: string;
     adminComment: string;
-    id: string;
+    id: number;
 }
 
 export type Credentials = {

@@ -6,9 +6,10 @@ import { Order } from '../../models/models';
 interface Props {
   closeOverlay: (close: boolean) => void;
   orderItem: Order;
+  activeUser: string;
 }
 
-function EditOrder({ closeOverlay, orderItem }: Props) {
+function EditOrder({ closeOverlay, orderItem, activeUser }: Props) {
 
   const UserCloseBtn = () => {
     closeOverlay(false);
@@ -18,6 +19,8 @@ function EditOrder({ closeOverlay, orderItem }: Props) {
     setPlaceOrder(true);
   }
 
+  
+
   const orderItems = orderItem.items.map((item, index) => {
     return (
       <div key={index} className="edit-element ">
@@ -25,9 +28,35 @@ function EditOrder({ closeOverlay, orderItem }: Props) {
           <p className="card-text">{item.title}</p>
           <p className="card-text">{item.price}:-</p>
         </section>
-        <button className="card-btn-delete">Delete</button>
+        <button className="card-btn-delete" onClick={deleteItem}>Delete</button>
       </div>
     );
+      
+    async function deleteItem() {
+      console.log(orderItem);
+      
+      const query = {
+        username: activeUser,
+        order: orderItem,
+        orderItemIndex: index
+      }
+
+      console.log(query);
+      
+  
+      const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(query)
+      }
+  
+      const response = await fetch('api/orders/deleteitem', requestOptions);
+  
+      const data: Order[] = await response.json();
+  
+      console.log(data);
+    }
+  
   });
 
   let totalPrice = 0;

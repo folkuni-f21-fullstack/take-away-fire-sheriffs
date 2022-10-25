@@ -7,6 +7,7 @@ router.get('/', (req, res) => {
   if (db.data) {
       console.log(db.data.users);
       res.json(db.data.users);
+      // res.sendStatus(200);
   } else {
       res.sendStatus(404);
   }
