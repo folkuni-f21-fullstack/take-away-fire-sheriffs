@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import { User, Credentials } from '../models/models';
 
 interface Props {
-    setActiveUser: (activeUser: string) => void;
-    activeUser: string;
+    setActiveUser: (activeUser: User | null) => void;
+    activeUser: User | null;
 }
 
 
@@ -35,7 +35,7 @@ function Landing({activeUser, setActiveUser}: Props) {
         // userLogin();
         // navigate('/menu');
         // fetchUsers();
-        console.log(newData);
+        // console.log(newData);
         
         if (newData == '404') {
             console.log('wrong username/password');
@@ -44,8 +44,11 @@ function Landing({activeUser, setActiveUser}: Props) {
             console.log('bad input'); 
         } 
         else {
-            setActiveUser(newData.username);
+            setActiveUser(newData);
             navigate('/menu');
+            if (newData.customer == false) {
+                navigate('/admin');
+            }
         }  
     }
 
