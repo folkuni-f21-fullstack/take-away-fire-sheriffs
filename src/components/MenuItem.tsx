@@ -14,6 +14,57 @@ function MenuItem({menuItem}: Props) {
 
     const [openInfo, setOpenInfo] = useState<boolean>(false);
 
+
+
+    class LocalCart{
+        static key = "cartItems"
+    
+        static getLocalCartItems(){
+            let cartMap = new Map()
+         const cart = localStorage.getItem(LocalCart.key)   
+         if(cart===null || cart.length===0)  return cartMap
+            return new Map(Object.entries(JSON.parse(cart)))
+            updateCartUI()
+        }
+    
+        static addItemToLocalCart(id:number, title:string){
+            let cart = LocalCart.getLocalCartItems()
+            if(cart.has(menuItem.id)){
+                cart.set(menuItem.id, menuItem.title)
+            }
+            else
+            cart.set(menuItem.id, menuItem.title)
+           localStorage.setItem(LocalCart.key,  JSON.stringify(Object.fromEntries(cart)))        
+        }
+    }
+    
+    function addItemFunction(){
+        LocalCart.addItemToLocalCart(menuItem.id, menuItem.title)
+    }
+    
+
+    function updateCartUI(){
+        console.log("updated");
+     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     function handleClick() {
         console.log(menuItem.title);
         setOpenInfo(true);
@@ -31,7 +82,7 @@ function MenuItem({menuItem}: Props) {
                 </section>
                 <section className="menuItem-buttons-container">
                     <button className='menuItem-btn-info' onClick={ handleClick }>More info</button>
-                    <button className='menuItem-btn-add'>Add to cart</button>
+                    <button className='menuItem-btn-add' onClick={addItemFunction}>Add to cart</button>
                 </section>
             </div>
             { openInfo && <DishInfo menuItem={ menuItem } setOpenInfo={ setOpenInfo }/> }
