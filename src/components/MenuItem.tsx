@@ -88,6 +88,7 @@ type ShoppingCartContext = {
     const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart } = useShoppingCart()
     const quantity = getItemQuantity(menuItem.id)
 
+  
     function handleClick() {
         console.log(menuItem.title);
         setOpenInfo(true);
@@ -106,6 +107,7 @@ type ShoppingCartContext = {
                 <section className="menuItem-buttons-container">
                     <button className='menuItem-btn-info' onClick={ handleClick }>More info</button>
                     <button className='menuItem-btn-add' onClick={() => increaseCartQuantity(menuItem.id)}>Add to cart</button>
+
                 </section>
             </div>
             { openInfo && <DishInfo menuItem={ menuItem } setOpenInfo={ setOpenInfo }/> }
