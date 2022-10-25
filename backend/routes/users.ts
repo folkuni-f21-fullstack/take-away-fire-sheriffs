@@ -10,25 +10,24 @@ router.get('/', (req, res) => {
   } else {
       res.sendStatus(404);
   }
-})
+});
+
 
 router.post('/login', (req, res) => {
   const credentials = req.body;
   
   if(credentials.hasOwnProperty('username') && credentials.hasOwnProperty('password')) {
     const result = compareCredentials(credentials);
-    console.log(result);
+    console.log("result",result);
     
     if(result){
       res.send(result);
     } else {
-      res.json('404');
-      // res.headersSent()
-      // res.sendStatus(404); // VI FÅR INTE DETTA ATT FUNKA, FÅR TA DETTA MED DAVID
+      res.sendStatus(404);
     }
   } 
   else {
-    res.json('400');
+    res.sendStatus(400);
   }
   
   function compareCredentials(credentials: { username: string; password: string; }) {
@@ -39,12 +38,10 @@ router.post('/login', (req, res) => {
       return false;
     }
   } 
+});
 
-  // async function checkIfAccountExist(credentials) {
-  //   const  result = await database.find({$or: [{ username: credentials.username}, 
-  //       { email: credentials.email}]})
-  //       return result;
-  // }
+
+router.post('/signup', (req, res) => {
 
 });
 

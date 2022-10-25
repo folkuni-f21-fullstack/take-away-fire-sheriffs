@@ -37,10 +37,9 @@ function Landing({activeUser, setActiveUser}: Props) {
         // fetchUsers();
         console.log(newData);
         
-        if (newData == '404') {
+        if (newData == 404) {
             console.log('wrong username/password');
-            
-        } else if (newData == '400') {
+        } else if (newData == 400) {
             console.log('bad input'); 
         } 
         else {
@@ -49,7 +48,7 @@ function Landing({activeUser, setActiveUser}: Props) {
         }  
     }
 
-    async function userLogin() {
+    async function userLogin(): Promise<User | number> {
         const credentials: Credentials = {
             username: username,
             password: password
@@ -63,19 +62,17 @@ function Landing({activeUser, setActiveUser}: Props) {
 
         const response = await fetch('api/users/login', requestOptions);
 
-        const data: User | string = await response.json();
+        // Kontrollera svaret 
+        if(response.status == 200) {
+            const data: User = await response.json();
+            console.log(data);
+            return data; 
+        } else {
+            return 404;
+        }
 
-        console.log(data);
         // setActiveUser(data);
-
-        return data; 
     }
-
-    // async function userLogin() {
-    //     const response = await fetch('/api/users/login');
-    //     const data: User = await response.json();
-    //     console.log(data);
-    // }
 
     return (
         <section className="landingPage content-wrapper">
