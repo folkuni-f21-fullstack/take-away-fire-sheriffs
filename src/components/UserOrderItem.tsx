@@ -31,6 +31,7 @@ function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
     totalPrice = totalPrice + item.price;
   } 
 
+
   async function deleteOrder() {
     console.log(orderItem.orderId);
 

@@ -4,6 +4,11 @@ interface Prop {
     closeOverlay: (close: boolean) => void;
 
 }
+
+// Fortsätta imorgon med att importera functioner för att addera samt att substract produkt som ligger i MenuItem..
+
+
+
 function Cart( {closeOverlay}: Prop) {
     const navigate = useNavigate();
     const closeBtn = () => {

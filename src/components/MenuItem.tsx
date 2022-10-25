@@ -1,70 +1,93 @@
 import './MenuItem.scss';
-
 import DishInfo from './overlays/DishInfo';
-
 import { Menu } from '../models/models';
-
-import { useState } from 'react';
+import { useContext, createContext, ReactNode, useState } from 'react';
 
 interface Props {
     menuItem: Menu;
 };
 
-function MenuItem({menuItem}: Props) {
+type ShoppingCartProviderProps = {
+    children: ReactNode   // The type that we give to the function below
+}
 
+type CartItem = {
+    id: number
+    quantity: number
+}
+
+type ShoppingCartContext = {
+    getItemQuantity: (id: number) => number
+    increaseCartQuantity: (id: number) => void
+    decreaseCartQuantity: (id: number) => void
+    removeFromCart: (id: number) => void
+}
+
+    const ShoppingCartContext = createContext({} as ShoppingCartContext)
+
+    export function useShoppingCart() {
+        return useContext(ShoppingCartContext)
+    }
+
+    export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
+        const [cartItems, setCartItems] = useState<CartItem[]>([])
+
+        // Om det finns ett värde returnera det annars returnera 0
+        function getItemQuantity(id: number) {
+            return cartItems.find(item => item.id === id)?.quantity || 0  
+        } 
+
+        // Function kollar om vi har en produkt i vår cart och kollar om vi inte har ngt i den och om vi inte har den lägg den i cart och öka antal
+        function increaseCartQuantity(id: number) {
+            setCartItems(currItems => {
+                if (currItems.find(item => item.id === id) == null ) {
+                    return [...currItems, { id, quantity: 1 }]
+                } else {
+                    return currItems.map(item => {
+                        if (item.id === id) {
+                            return { ...item, quantity: item.quantity + 1}
+                        } else {
+                            return item 
+                        }
+                    })
+                }
+            })
+        }
+
+        // Functionen går igenom id och för varje som blir lika med id man vill minska så decreasar man med -1
+        function decreaseCartQuantity(id: number) {
+            setCartItems(currItems => {
+                if (currItems.find(item => item.id === id)?.quantity === 1 ) {
+                    return currItems.filter(item => item.id !== id)
+                } else {
+                    return currItems.map(item => {
+                        if (item.id === id) {
+                            return { ...item, quantity: item.quantity - 1}
+                        } else {
+                            return item 
+                        }
+                    })
+                }
+            })
+        }
+
+        // Function som filtrerar ut alla som inte är lika med vårat nuvarande id
+        function removeFromCart(id: number) {
+            setCartItems(currItems => {
+                return currItems.filter(item => item.id !== id)
+            }) 
+        }
+
+        return <ShoppingCartContext.Provider value={({getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart})}>
+            { children }
+            </ShoppingCartContext.Provider>
+    }
+
+ export function MenuItem({menuItem}: Props) {
     const [openInfo, setOpenInfo] = useState<boolean>(false);
+    const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart } = useShoppingCart()
+    const quantity = getItemQuantity(menuItem.id)
 
-
-
-    class LocalCart{
-        static key = "cartItems"
-    
-        static getLocalCartItems(){
-            let cartMap = new Map()
-         const cart = localStorage.getItem(LocalCart.key)   
-         if(cart===null || cart.length===0)  return cartMap
-            return new Map(Object.entries(JSON.parse(cart)))
-            updateCartUI()
-        }
-    
-        static addItemToLocalCart(id:number, title:string){
-            let cart = LocalCart.getLocalCartItems()
-            if(cart.has(menuItem.id)){
-                cart.set(menuItem.id, menuItem.title)
-            }
-            else
-            cart.set(menuItem.id, menuItem.title)
-           localStorage.setItem(LocalCart.key,  JSON.stringify(Object.fromEntries(cart)))        
-        }
-    }
-    
-    function addItemFunction(){
-        LocalCart.addItemToLocalCart(menuItem.id, menuItem.title)
-    }
-    
-
-    function updateCartUI(){
-        console.log("updated");
-     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     function handleClick() {
         console.log(menuItem.title);
         setOpenInfo(true);
@@ -82,7 +105,7 @@ function MenuItem({menuItem}: Props) {
                 </section>
                 <section className="menuItem-buttons-container">
                     <button className='menuItem-btn-info' onClick={ handleClick }>More info</button>
-                    <button className='menuItem-btn-add' onClick={addItemFunction}>Add to cart</button>
+                    <button className='menuItem-btn-add' onClick={() => increaseCartQuantity(menuItem.id)}>Add to cart</button>
                 </section>
             </div>
             { openInfo && <DishInfo menuItem={ menuItem } setOpenInfo={ setOpenInfo }/> }
