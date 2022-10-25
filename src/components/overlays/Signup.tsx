@@ -3,7 +3,6 @@ import close from '../../assets/close-overlay-button.svg';
 
 interface Prop {
     closeOverlay: (close: boolean) => void;
-
 }
 
 function Signup( {closeOverlay}: Prop ) {
