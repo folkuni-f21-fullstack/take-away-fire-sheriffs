@@ -1,26 +1,33 @@
 import "./UserEditOrder.scss";
 import { useState } from "react";
 import closeBtn from "../../assets/close-overlay-button.svg";
-import { Order } from '../../models/models';
+import { Order, User } from '../../models/models';
 
 interface Props {
   closeOverlay: (close: boolean) => void;
   orderItem: Order;
   activeUser: string;
+  getUsers: () => void;
 }
 
-function EditOrder({ closeOverlay, orderItem, activeUser }: Props) {
+function EditOrder({ closeOverlay, orderItem, activeUser, getUsers }: Props) {
+
+  const [placeOrder, setPlaceOrder] = useState<boolean>(false);
+  const [test, setTest] = useState();
 
   const UserCloseBtn = () => {
     closeOverlay(false);
+    getUsers();
   };
-  const [placeOrder, setPlaceOrder] = useState<boolean>(false);
+
   function placeOrderBtn() {
     setPlaceOrder(true);
   }
 
-  
+  function testState() {
 
+  }
+  
   const orderItems = orderItem.items.map((item, index) => {
     return (
       <div key={index} className="edit-element ">
@@ -52,9 +59,11 @@ function EditOrder({ closeOverlay, orderItem, activeUser }: Props) {
   
       const response = await fetch('api/orders/deleteitem', requestOptions);
   
-      const data: Order[] = await response.json();
-  
+      const data: User = await response.json();
+      
       console.log(data);
+      
+      getUsers();
     }
   
   });

@@ -50,58 +50,24 @@ router.delete('/deleteitem', async (req, res) => {
         res.sendStatus(404);
         return;
     }
-
     const query = req.body;
-
-    // let clickedItem = {};
-    // let clickedOrder = {};
-    
-    // db.data.users.map(user => {
-    //     if (user.username === query.username) {
-    //         user.orders.map(order => {
-    //             console.log('order', order);
-    //             clickedOrder = order;
-    //             order.items.map(item => {
-    //                 // console.log('item', item);
-    
-    //                 if (item.id == query.orderItemIndex + 1) {
-    //                     console.log('bingo');
-    //                     clickedItem = item;
-    //                 }
-    //             });
-    //         }); 
-    //     }
-    // });
 
     const orderId = query.order.id;
     
     db.data.users.map(user => {
         if(user.username === query.username) {
             console.log('items before:', user.orders[orderId].items);
-            user.orders[orderId].items.splice(query.orderItemIndex, 1 );
+            const deletedItem = user.orders[orderId].items.splice(query.orderItemIndex, 1 );
             console.log('items after:', user.orders[orderId].items);
-        }
+            res.json(deletedItem);
+            db.write();
+        } 
+        // else {
+        //     res.sendStatus(404);
+        // }
     });
     
-    // console.log('clickedItem', clickedItem);
-
-    // const newOrderItems = clickedItem.filter(item => item.id !== query.orderItemIndex + 1)
-
-    const user = db.data.users.find(user => user.username === query.username);
-    
-    
-    if (user) {
-        console.log('user', user);
-    }
-    
-    res.json('hejhehj')
 });
 
 export default router;
-
-// SAKER VI MÅSTE TA REDA PÅ/FIXA:
-
-// Kolla upp varför vi inte kan använda oss av sendstatus vid POST för inlogg (Landing-sidan)
-
-// Behöver kanske överlag få en liten genomgång på hur type/Schema fungerar
             
