@@ -54,12 +54,14 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers }: Props) {
   
       const response = await fetch('api/orders/deleteitem', requestOptions);
   
-      const data: Menu | null = await response.json();
-      
-      console.log(data);
-
-      setItems(data);
-      getUsers();
+      if (response.status == 200) {
+        const data: Menu | null = await response.json();
+        setItems(data);
+        getUsers();
+        console.log(data);
+      } else {
+        return 404;
+      }  
     }
   });
 

@@ -57,15 +57,19 @@ router.delete('/deleteitem', async (req, res) => {
     db.data.users.map(user => {
         if(user.username === query.username) {
             console.log('items before:', user.orders[orderId].items);
-            const deletedItem = user.orders[orderId].items.splice(query.orderItemIndex, 1 );
+
+            user.orders[orderId].items.splice(query.orderItemIndex, 1 );
             const itemsAfter = user.orders[orderId].items;
             console.log(itemsAfter);
-            res.send(itemsAfter);
-            db.write();
+            
+            if (itemsAfter) {
+                res.send(itemsAfter);
+                db.write();
+                
+            } else {
+                res.sendStatus(404);
+            }  
         } 
-        // else {
-        //     res.sendStatus(404);
-        // }
     });
     
 });
