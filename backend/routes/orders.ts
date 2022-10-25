@@ -58,8 +58,9 @@ router.delete('/deleteitem', async (req, res) => {
         if(user.username === query.username) {
             console.log('items before:', user.orders[orderId].items);
             const deletedItem = user.orders[orderId].items.splice(query.orderItemIndex, 1 );
-            console.log('items after:', user.orders[orderId].items);
-            res.json(deletedItem);
+            const itemsAfter = user.orders[orderId].items;
+            console.log(itemsAfter);
+            res.send(itemsAfter);
             db.write();
         } 
         // else {
