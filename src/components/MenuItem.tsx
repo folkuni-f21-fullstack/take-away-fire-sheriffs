@@ -2,6 +2,7 @@ import './MenuItem.scss';
 import DishInfo from './overlays/DishInfo';
 import { Menu } from '../models/models';
 import { useContext, createContext, ReactNode, useState } from 'react';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 interface Props {
     menuItem: Menu;
@@ -21,6 +22,8 @@ type ShoppingCartContext = {
     increaseCartQuantity: (id: number) => void
     decreaseCartQuantity: (id: number) => void
     removeFromCart: (id: number) => void
+    cartQuantity: number
+    cartItems: CartItem[]
 }
 
     const ShoppingCartContext = createContext({} as ShoppingCartContext)
@@ -30,7 +33,12 @@ type ShoppingCartContext = {
     }
 
     export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
-        const [cartItems, setCartItems] = useState<CartItem[]>([])
+        const [cartItems, setCartItems] = useLocalStorage<CartItem[]>("shopping-cart",[])
+        
+        const cartQuantity = cartItems.reduce(
+            (quantity, item) => item.quantity + quantity,
+            0
+          )
 
         // Om det finns ett värde returnera det annars returnera 0
         function getItemQuantity(id: number) {
@@ -78,7 +86,7 @@ type ShoppingCartContext = {
             }) 
         }
 
-        return <ShoppingCartContext.Provider value={({getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart})}>
+        return <ShoppingCartContext.Provider value={({getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart, cartItems, cartQuantity})}>
             { children }
             </ShoppingCartContext.Provider>
     }
@@ -106,7 +114,9 @@ type ShoppingCartContext = {
                 </section>
                 <section className="menuItem-buttons-container">
                     <button className='menuItem-btn-info' onClick={ handleClick }>More info</button>
-                    <button className='menuItem-btn-add' onClick={() => increaseCartQuantity(menuItem.id)}>Add to cart</button>
+                    <button className='menuItem-btn-add' onClick={() => increaseCartQuantity(menuItem.id)}>Add</button>
+                    <button className='menuItem-btn-add' onClick={() => decreaseCartQuantity(menuItem.id)}>Remove</button>
+                    <button className='menuItem-btn-add' onClick={() => removeFromCart(menuItem.id)}>Delete</button>
 
                 </section>
             </div>
