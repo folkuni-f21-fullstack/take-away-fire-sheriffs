@@ -3,14 +3,25 @@ import db from "../db.js";
 import { Orders, Users } from "../models";
 const router = express.Router();
 
-// router.get('/', (req, res) => {
-//     if (db.data) {
-//         console.log(db.data.users);
-//         res.json(db.data.users);
-//     } else {
-//         res.sendStatus(404);
-//     }
-// });
+router.get('/', (req, res) => {
+    if (db.data) {
+        const allUsers = db.data.users
+
+        let allUsersArray: any = [];
+        
+        allUsers.map( user => {
+            
+            allUsersArray.push(user.orders)
+            // make so it adds
+            
+        })
+        console.log('allorders: ', allUsersArray);
+        res.json(allUsersArray)
+        
+    } else {
+        res.sendStatus(404);
+    }
+});
 
 router.delete('/delete', async (req, res) => {
     if (!db.data) {

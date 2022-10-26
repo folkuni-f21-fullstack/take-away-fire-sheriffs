@@ -1,7 +1,10 @@
 import AdminOrderItem from "../../components/AdminOrderItem";
 import './AdminHome.scss';
 import Header from '../../components/Header';
+import { Order } from '../../models/models';
 import { User } from '../../models/models';
+
+import { useState, useEffect } from 'react';
 
 
 interface Props {
@@ -10,7 +13,18 @@ interface Props {
 
 function AdminHome({activeUser}: Props) {
     console.log("AdminHome - activeUser: ", activeUser);
+    const [allOrders, setAllOrders] = useState<Order[] | null>(null);
 
+    const fetchOrders = async () => {
+        const response = await fetch('/api/orders', { mode: 'cors' });
+        const data: Order[] | any  = await response.json();
+        setAllOrders(data);
+    }
+    
+    console.log(allOrders);
+    useEffect(() => {
+        fetchOrders()
+    }, []);
     return (
         <div className="admin-view">
             <Header />
