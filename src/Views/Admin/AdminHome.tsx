@@ -1,6 +1,6 @@
 import AdminOrderItem from "../../components/AdminOrderItem";
 import './AdminHome.scss';
-import Header from '../../components/Header';
+import AdminHeader from '../../components/AdminHeader';
 import { User } from '../../models/models';
 
 
@@ -13,7 +13,7 @@ function AdminHome({activeUser}: Props) {
 
     return (
         <div className="admin-view">
-            <Header />
+            <AdminHeader />
             
             <section className="content-wrapper">
                <h1 className="admin-view-title">Orders</h1> 
