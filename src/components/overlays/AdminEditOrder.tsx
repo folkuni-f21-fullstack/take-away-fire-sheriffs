@@ -9,10 +9,27 @@ interface Prop {
 
 function AdminEditOrder( {closeOverlay, orderItem}: Prop) {
     const navigate = useNavigate();
+
     const closeBtn = () => {
         closeOverlay(false)
         navigate('/admin')
     }
+    const orderItems = orderItem.items.map((item, index) => {
+        return (
+          <div key={index} className="edit-element ">
+            <section className="edit-details">
+              <p className="card-text">{item.title}</p>
+              <p className="card-text">{item.price}:-</p>
+            </section>
+            <button className="card-btn-delete">Delete</button>
+          </div>
+        );
+    });
+
+    let totalPrice = 0;
+    for (let item of orderItem.items) {
+        totalPrice = totalPrice + item.price;
+    } 
     return (
         <section className="admin-edit-overlay-container">
             <div className='admin-edit-overlay'>
@@ -20,25 +37,15 @@ function AdminEditOrder( {closeOverlay, orderItem}: Prop) {
                     <h1 className='admin-edit-title'>Edit Order</h1>
                     <img src="src\assets\close-overlay-button.svg" alt="" onClick={closeBtn} className='admin-close-edit-overlay-btn'/>
                 </div>
+                <section className='edit-order-title-container'>
+                    <h2 className='edit-order-title'> {orderItem.orderId}</h2>
+                </section>
                 
-                <div className='card-dish'>
-                    <h2>Dish 1</h2>
-                    <h2>90:-</h2>
-                    <button className='delete-dish-btn'>Delete</button>
-                </div>
-
-                <div className='card-dish'>
-                    <h2>Dish 1</h2>
-                    <h2>90:-</h2>
-                    <button className='delete-dish-btn'>Delete</button>
-                </div>
-                <div className='card-dish'>
-                    <h2>Dish 1</h2>
-                    <h2>90:-</h2>
-                    <button className='delete-dish-btn'>Delete</button>
-                </div>
+                <section className='edit-card-info'>
+                    {orderItems}
+                </section>
                 
-                <h2 className='admin-edit-total'>Total: 180:-</h2>
+                <h2 className='admin-edit-total'>{'Total: ' + totalPrice + ':-'}</h2>
 
                 <div className='admin-edit-inputs'>
                     <input className='user-comment-input' type="text" placeholder='user comment field' />

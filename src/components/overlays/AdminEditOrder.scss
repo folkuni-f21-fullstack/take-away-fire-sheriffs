@@ -21,6 +21,15 @@
         display: flex;
         justify-content: center;
     }
+    .edit-order-title-container{
+        display: flex;
+        justify-content: end;
+        .edit-order-title{
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+        }
+        
+    }
     .card-dish{
         display: flex;
         justify-content: space-between;
