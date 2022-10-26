@@ -27,10 +27,22 @@
         display: flex;
         justify-content: right;
     }
-    .card-dish{
+    .card-info{
         display: flex;
-        justify-content: space-between;
-        padding: 5px;
+        flex-direction: column;
+        .card-order{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            
+            .card-text{
+                font-size: 16px;
+            }
+        }
+        
+        
     }
     .admin-card-total-price{
         display: flex;

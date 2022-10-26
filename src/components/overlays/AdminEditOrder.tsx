@@ -1,12 +1,13 @@
 import './AdminEditOrder.scss'
 import { useNavigate } from 'react-router-dom'
+import { Order } from '../../models/models';
 
 interface Prop {
     closeOverlay: (close: boolean) => void;
-
+    orderItem: Order;
 }
 
-function AdminEditOrder( {closeOverlay}: Prop) {
+function AdminEditOrder( {closeOverlay, orderItem}: Prop) {
     const navigate = useNavigate();
     const closeBtn = () => {
         closeOverlay(false)

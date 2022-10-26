@@ -37,18 +37,18 @@ function AdminOrderItem({orderItem}: Props) {
                     <h4 className='orderNr'>{orderItem.orderId}</h4>
                 </div>
                 <p className='order-date'>{orderItem.date}</p>
-                <div className='card-dish'>
+                <div className='card-info'>
                     {orderItems}
                 </div>
                 
                 
-                <h4 className='admin-card-total-price'>{totalPrice + ':-'}</h4>
+                <h4 className='admin-card-total-price'>{'Total: ' +totalPrice + ':-'}</h4>
                 <input className='admin-card-input' type="text" placeholder='user comment field' />
                 <div className='card-buttons'>
                     <button className='edit-btn' onClick={editPressed}>Edit</button>
                     <button className='status-btn'>Preparing</button>
                 </div>
-                {openEdit && <AdminEditOverlay closeOverlay={setOpenEdit} />}
+                {openEdit && <AdminEditOverlay closeOverlay={setOpenEdit}  orderItem={orderItem}/>}
             </div>
         </div>
         
