@@ -48,6 +48,8 @@ router.post('/signup', (req, res) => {
   const credentials = req.body;
   console.log("credentials",credentials);
   if(credentials.username.length >= minUsernameCharacters && credentials.password.length >= minPasswordCharacters) {
+    console.log("credentials.username.length", credentials.username.length);
+    console.log("credentials.password.length", credentials.password.length);
     if(db.data) {
       const checkUser = db.data.users.find(user => user.username === credentials.username);
       console.log("checkUser", checkUser);
@@ -61,10 +63,16 @@ router.post('/signup', (req, res) => {
         }
         console.log("newUserObject", newUserObject);
         db.data.users.push(newUserObject);
+        db.write();
+
         console.log("db.data.users", db.data.users);
+        res.status(201).send("created new user");
       }
+      res.status(302).send("username already exists");
     }
+    res.status(404).send("the database is on vacation");
   }
+  res.status(411).send("username or password is too short");
 });
 
 

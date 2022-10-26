@@ -70,9 +70,8 @@ function Landing({activeUser, setActiveUser}: Props) {
         } else {
             return 404;
         }
-
-        // setActiveUser(data);
     }
+
 
     return (
         <section className="landingPage content-wrapper">
