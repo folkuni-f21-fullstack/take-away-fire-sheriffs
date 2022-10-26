@@ -35,11 +35,10 @@ function AdminEditOrder( {closeOverlay, orderItem}: Prop) {
             <div className='admin-edit-overlay'>
                 <div className='edit-upper-container'>
                     <h1 className='admin-edit-title'>Edit Order</h1>
+                    <h2 className='edit-order-title'> {orderItem.orderId}</h2>
                     <img src="src\assets\close-overlay-button.svg" alt="" onClick={closeBtn} className='admin-close-edit-overlay-btn'/>
                 </div>
-                <section className='edit-order-title-container'>
-                    <h2 className='edit-order-title'> {orderItem.orderId}</h2>
-                </section>
+                
                 
                 <section className='edit-card-info'>
                     {orderItems}

@@ -8,11 +8,12 @@
     padding: 15px;
     border-radius: 15px;
     border: 5px solid #333333; // vit eller svart border?
+    margin-top: 1rem;
     .card-upper-section{
         display: flex;
         justify-content: space-between;
         padding: 1rem;
-
+        
         .status{
             width: 20px;
             height: 20px;
@@ -30,12 +31,12 @@
     .card-info{
         display: flex;
         flex-direction: column;
+        
         .card-order{
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
-            margin-top: 1rem;
             
             .card-text{
                 font-size: 16px;
