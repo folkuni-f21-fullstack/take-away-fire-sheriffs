@@ -8,19 +8,42 @@ interface Props {
   orderItem: Order;
   activeUser: string;
   getUsers: () => void;
+  deleteOrder: () => void;
 }
 
-function EditOrder({ closeOverlay, orderItem, activeUser, getUsers }: Props) {
+function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder }: Props) {
 
   const [placeOrder, setPlaceOrder] = useState<boolean>(false);
-  const [items, setItems] = useState<Menu | null>(null);
+  const [items, setItems] = useState<Menu[] | null>(null);
+  const [userComment, setUserComment] = useState<string>('');
 
   const UserCloseBtn = () => {
     closeOverlay(false);
   };
 
-  function placeOrderBtn() {
-    setPlaceOrder(true);
+  async function saveComment() {
+    
+    const query = {
+      username: activeUser,
+      comment: userComment
+    }
+
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(query)
+    }
+
+    const response = await fetch('api/orders/usercomment', requestOptions);
+
+    if(response.status == 200) {
+      const data: User = await response.json();
+      console.log(data);
+      return data; 
+    } else {
+        return 404;
+    }
+
   }
 
   const mappedOrderItems = orderItem.items.map((item, index) => {
@@ -55,17 +78,21 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers }: Props) {
       const response = await fetch('api/orders/deleteitem', requestOptions);
   
       if (response.status == 200) {
-        const data: Menu | null = await response.json();
-        setItems(data);
-        getUsers();
-        console.log(data);
+        const data: Menu[] | null = await response.json();
+
+        if (data && data.length == 0) {
+          deleteOrder();
+        } else {
+          setItems(data);
+          getUsers();
+          console.log(data);
+        }
+        
       } else {
         return 404;
       }  
     }
   });
-
-  console.log(mappedOrderItems);
 
   let totalPrice = 0;
   for (let item of orderItem.items) {
@@ -89,9 +116,9 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers }: Props) {
         <section className="edit-card-footer">
           <h2 className="card-cost">Totalt: {totalPrice}:-</h2>
           <p className="comment-title">Any extra info about the order?</p>
-          <input className="cart-comment" type="textfield" />
-          <button className="popup-btn-save" onClick={placeOrderBtn}>
-            Save changes
+          <input className="cart-comment" type="textfield" onChange={(event) => setUserComment(event.target.value)} />
+          <button className="popup-btn-save" onClick={saveComment}>
+            Save comment
           </button>
         </section>
       </section>

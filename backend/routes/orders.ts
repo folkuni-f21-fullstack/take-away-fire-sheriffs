@@ -65,13 +65,24 @@ router.delete('/deleteitem', async (req, res) => {
             if (itemsAfter) {
                 res.send(itemsAfter);
                 db.write();
-                
+
             } else {
                 res.sendStatus(404);
             }  
         } 
     });
     
+});
+
+router.post('/usercomment', (res, req) => {
+    if (!db.data) {
+        res.sendStatus(404);
+        return;
+    }
+
+    const query = req.body;
+
+    const user = db.data.users.find(user => user.username === query.username);
 });
 
 export default router;
