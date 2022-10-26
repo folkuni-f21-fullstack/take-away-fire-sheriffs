@@ -5,8 +5,18 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     if (db.data) {
-        console.log(db.data);
-        res.json(db.data);
+        const allUsers = db.data.users
+
+        let allUsersArray: any = [];
+        
+        allUsers.map( user => {
+            user.orders.map(order => {
+               allUsersArray.push(order) 
+            })
+             
+        })
+        res.json(allUsersArray)
+        
     } else {
         res.sendStatus(404);
     }
