@@ -73,9 +73,8 @@ function Landing({activeUser, setActiveUser}: Props) {
         } else {
             return 404;
         }
-
-        // setActiveUser(data);
     }
+
 
     return (
         <section className="landingPage content-wrapper">
@@ -87,7 +86,7 @@ function Landing({activeUser, setActiveUser}: Props) {
                 <button onClick={signIn}>Log in</button>
             </section>
             <button className="buttonMember" onClick={signupClick}>Become a Member</button>
-            {openSignup && <Signup closeOverlay={setOpenSignup} />}
+            {openSignup && <Signup closeOverlay={setOpenSignup} setActiveUser={setActiveUser} />}
         </section>
     )
 }
