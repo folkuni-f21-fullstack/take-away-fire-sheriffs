@@ -2,17 +2,21 @@ import './Signup.scss';
 import close from '../../assets/close-overlay-button.svg';
 import { Credentials, User } from '../../models/models';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Prop {
     closeOverlay: (close: boolean) => void;
+    setActiveUser: (activeUser: string) => void;
 }
 
-function Signup( {closeOverlay}: Prop ) {
+function Signup( {closeOverlay, setActiveUser}: Prop ) {
     const [feedback, setFeedback] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const minUsernameCharacters: number = 3;
     const minPasswordCharacters: number = 5;
+    const navigate = useNavigate();
+
     const closeBtn = () => {
         closeOverlay(false);
     }
@@ -69,9 +73,8 @@ function Signup( {closeOverlay}: Prop ) {
 
         // Kontrollera svaret 
         if(response.status == 200) {
-            const data: User = await response.json();
-            console.log(data);
-            return data; 
+            setActiveUser(credentials.username);
+            navigate('/menu');
         } else {
             return 404;
         }
