@@ -10,12 +10,11 @@ router.get('/', (req, res) => {
         let allUsersArray: any = [];
         
         allUsers.map( user => {
-            
-            allUsersArray.push(user.orders)
-            // make so it adds
-            
+            user.orders.map(order => {
+               allUsersArray.push(order) 
+            })
+             
         })
-        console.log('allorders: ', allUsersArray);
         res.json(allUsersArray)
         
     } else {

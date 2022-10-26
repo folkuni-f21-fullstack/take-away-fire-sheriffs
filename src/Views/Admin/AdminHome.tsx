@@ -18,10 +18,14 @@ function AdminHome({activeUser}: Props) {
     const fetchOrders = async () => {
         const response = await fetch('/api/orders', { mode: 'cors' });
         const data: Order[] | any  = await response.json();
-        setAllOrders(data);
+        setAllOrders(data);    
     }
     
-    console.log(allOrders);
+    
+   
+    
+    
+    
     useEffect(() => {
         fetchOrders()
     }, []);
@@ -30,8 +34,13 @@ function AdminHome({activeUser}: Props) {
             <Header />
             
             <section className="content-wrapper">
-               <h1 className="admin-view-title">Orders</h1> 
-               <AdminOrderItem /> 
+               <h1 className="admin-view-title">Orders</h1>
+               {allOrders ? (
+                allOrders.map(order => (
+                    <AdminOrderItem key={order.orderId} orderItem={order}/>            
+                ))): 'Couldnt find any orders'}
+                
+               
             </section>
             
         </div>
