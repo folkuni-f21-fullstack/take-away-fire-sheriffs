@@ -10,6 +10,15 @@ interface Props {
 function AdminOrderItem({orderItem}: Props) {
     const [openEdit, setOpenEdit] = useState(false);
 
+    const orderItems = orderItem.items.map((item, index) => {
+        return (
+          <section key={index} className="card-order">
+            <p className="card-text">{item.title}</p>
+            <p className="card-text">{item.price}:-</p>
+          </section>
+        );
+    });
+
     let totalPrice = 0;
     for (let item of orderItem.items) {
         totalPrice = totalPrice + item.price;
@@ -29,15 +38,11 @@ function AdminOrderItem({orderItem}: Props) {
                 </div>
                 <p className='order-date'>{orderItem.date}</p>
                 <div className='card-dish'>
-                    <p>Dish 1</p>
-                    <p>90:-</p>
-                </div>
-                <div className='card-dish'>
-                    <p>Dish 1</p>
-                    <p>90:-</p>
+                    {orderItems}
                 </div>
                 
-                <h4 className='admin-card-total-price'>{totalPrice}</h4>
+                
+                <h4 className='admin-card-total-price'>{totalPrice + ':-'}</h4>
                 <input className='admin-card-input' type="text" placeholder='user comment field' />
                 <div className='card-buttons'>
                     <button className='edit-btn' onClick={editPressed}>Edit</button>
