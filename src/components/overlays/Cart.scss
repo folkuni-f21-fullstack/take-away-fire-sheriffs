@@ -10,22 +10,7 @@
         border: 5px solid base.$black;
         padding: 2em;
     }
-    .cart-title{
-        display: flex;
-        justify-content: center;
-        
-    }
-
-    .card-dish{
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 15px;
-        .delete-dish-btn{
-            padding: 2.5px 5px;
-            background-color: #CF4242;
-            color: white;
-        }
-    }
+ 
 
     .cart-total{
         display: flex;

@@ -1,11 +1,14 @@
 import './Cart.scss'
 import { useNavigate } from 'react-router-dom'
+import CartItem from '../../components/CartItem';
+import { Menu } from '../../models/models';
+import MenuItem from '../MenuItem';
+
+
+
 interface Prop {
     closeOverlay: (close: boolean) => void;
-
 }
-
-// Fortsätta imorgon med att importera functioner för att addera samt att substract produkt som ligger i MenuItem..
 
 
 
@@ -23,22 +26,16 @@ function Cart( {closeOverlay}: Prop) {
                     <img src="src\assets\close-overlay-button.svg" alt="" onClick={closeBtn} className='close-overlay-btn'/>
                 </div>
                 
-                <div className='card-dish'>
-                    <p>Dish 1</p>
-                    <p>90:-</p>
-                    <button className='delete-dish-btn'>Delete</button>
-                </div>
-                <div className='card-dish'>
-                    <p>Dish 1</p>
-                    <p>90:-</p>
-                    <button className='delete-dish-btn'>Delete</button>
-                </div>
-                <div className='card-dish'>
-                    <p>Dish 1</p>
-                    <p>90:-</p>
-                    <button className='delete-dish-btn'>Delete</button>
-                </div>
+                <CartItem menuItem={{
+                    title: '',
+                    price: 0,
+                    ingredients: '',
+                    allergies: '',
+                    imgUrl: '',
+                    id: 0
+                }} />
 
+                
                 <h2 className='cart-total'>Total: 180:-</h2>
 
                 <div className='cart-inputs'>

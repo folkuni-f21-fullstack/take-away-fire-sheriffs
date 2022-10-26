@@ -1,0 +1,20 @@
+.cart-title {
+  display: flex;
+  justify-content: center;
+}
+
+.card-dish {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+
+  .delete-dish-btn {
+    background-color: #cf4242;
+    color: white;
+  }
+  .add-dish-btn,
+  .remove-dish-btn {
+    background-color: #82cf42;
+    color: white;
+  }
+}
