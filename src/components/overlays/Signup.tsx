@@ -88,7 +88,7 @@ function Signup( {closeOverlay, setActiveUser}: Prop ) {
                 <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                 <input type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <button onClick={userSignup} >Sign up</button>
-                <p className="signupInfo">{feedback}</p>
+                <p>{feedback}</p>
             </section>
         </section>
     )
