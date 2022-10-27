@@ -77,7 +77,7 @@ export const data: Schema = {
                 ],
               orderId: 1003,
               status: "ordered",
-              userComment: "",
+              userComment: "Hello! I am allergic to shrimp so please don't let any shrimps come in contact with my food. Thanks.",
               adminComment: "",
               id: 0
             }

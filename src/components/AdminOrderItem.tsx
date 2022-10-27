@@ -11,7 +11,7 @@ function AdminOrderItem({orderItem}: Props) {
     const [openEdit, setOpenEdit] = useState(false);
     const [orderStatus, setOrderStatus] = useState(orderItem.status);
     const [orderBtn, setOrderBtn] = useState('Start Order');
-
+    console.log("orderItem", orderItem);
 
     const orderItems = orderItem.items.map((item: { title: string; price: number; }, index: Key) => {
         return (
@@ -77,7 +77,7 @@ function AdminOrderItem({orderItem}: Props) {
                 
                 
                 <h4 className='admin-card-total-price'>{'Total: ' +totalPrice + ':-'}</h4>
-                <input className='admin-card-input' type="text" placeholder='user comment field' />
+                <p className="orderComment">{orderItem.userComment}</p>
                 <div className='card-buttons'>
                     <button className='edit-btn' onClick={editPressed}>Edit</button>
                     <button className='status-btn' onClick={StartOrderBtn}>{orderBtn}</button>

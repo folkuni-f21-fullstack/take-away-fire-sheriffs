@@ -1,10 +1,11 @@
 @use '../base';
 
-.admin-order-card{
+.admin-order-item {
     @extend %cardSize;
+}
+
+.admin-order-card{
     background-color:  #FFE99F ;
-    width: auto;
-    height: auto;
     padding: 15px;
     border-radius: 15px;
     border: 5px solid #333333; // vit eller svart border?
@@ -62,14 +63,13 @@
         justify-content: flex-end;
         
     }
-    .admin-card-input{
-        display: flex;
-        margin: auto;
-        margin-bottom: 15px;
-        border-style: none; 
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        height: 50px;
-        width: 80%;
+    .orderComment {
+        background-color: white;
+        min-height: 2em;
+        border-radius: 5px;
+        border: 1px solid base.$black;
+        margin: 5px 0;
+        padding: 3px;
     }
     .card-buttons{
         display: flex;
