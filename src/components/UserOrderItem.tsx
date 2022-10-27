@@ -12,6 +12,8 @@ interface Props {
 
 function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
   const [openEdit, setOpenEdit] = useState<boolean>(false);
+  const [orderStatus, setOrderStatus] = useState(orderItem.status);
+
   
   function showOverlay() {
     setOpenEdit(true);
@@ -31,6 +33,14 @@ function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
     totalPrice = totalPrice + item.price;
   } 
 
+  const changeOrderStatus = () => {
+    if (orderItem.status == 'started') {
+      setOrderStatus('started')
+    } else if (orderItem.status == 'finished') {
+      setOrderStatus('finished')
+    }
+  }
+  
   async function deleteOrder() {
     console.log(orderItem.orderId);
 
@@ -58,7 +68,7 @@ function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
     <section className="card">
       <section className="card-header">
         <section className="card-status">
-          <div className="status-color"></div>
+          <div className={'status-color-'+ orderStatus}></div>
           <p className="status-text">{orderItem.status}</p>
         </section>
         <p className="order-number">Ordernr: {orderItem.orderId}</p>
