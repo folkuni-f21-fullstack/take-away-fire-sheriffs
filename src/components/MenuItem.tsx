@@ -15,12 +15,14 @@ type ShoppingCartProviderProps = {
 type CartItem = {
     id: number
     quantity: number
+    title: string;
+    price: number;
 }
 
 type ShoppingCartContext = {
     getItemQuantity: (id: number) => number
-    increaseCartQuantity: (id: number) => void
-    decreaseCartQuantity: (id: number) => void
+    increaseCartQuantity: (id: number, title: string,
+        price: number) => void
     removeFromCart: (id: number) => void
     cartQuantity: number
     cartItems: CartItem[]
@@ -44,12 +46,14 @@ type ShoppingCartContext = {
         function getItemQuantity(id: number) {
             return cartItems.find(item => item.id === id)?.quantity || 0  
         } 
+console.log(cartItems);
 
         // Function kollar om vi har en produkt i vår cart och kollar om vi inte har ngt i den och om vi inte har den lägg den i cart och öka antal
-        function increaseCartQuantity(id: number) {
+        function increaseCartQuantity(id: number, title: string,price: number) {
             setCartItems(currItems => {
                 if (currItems.find(item => item.id === id) == null ) {
-                    return [...currItems, { id, quantity: 1 }]
+                    return [...currItems, { price, title, id, quantity: 1 }]
+                    
                 } else {
                     return currItems.map(item => {
                         if (item.id === id) {
@@ -59,7 +63,7 @@ type ShoppingCartContext = {
                         }})}})}
 
        
-
+                        console.log(cartItems);
         // Function som filtrerar ut alla som inte är lika med vårat nuvarande id
         function removeFromCart(id: number) {
             setCartItems(currItems => {
@@ -95,9 +99,7 @@ type ShoppingCartContext = {
                 </section>
                 <section className="menuItem-buttons-container">
                     <button className='menuItem-btn-info' onClick={ handleClick }>More info</button>
-                    <button className='menuItem-btn-add' onClick={() => increaseCartQuantity(menuItem.id)}>Add</button>
-                    <button className='menuItem-btn-add' onClick={() => removeFromCart(menuItem.id)}>Delete</button>
-
+                    <button className='menuItem-btn-add' onClick={() => increaseCartQuantity(menuItem.id, menuItem.title,menuItem.price)}>Add</button>
                 </section>
             </div>
             { openInfo && <DishInfo menuItem={ menuItem } setOpenInfo={ setOpenInfo }/> }
