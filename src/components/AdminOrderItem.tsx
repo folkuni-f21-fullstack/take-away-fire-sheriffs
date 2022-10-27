@@ -5,7 +5,7 @@ import {  Orders } from "../models/models";
 
 
 interface Props {
-    orderItem: Orders;
+    orderItem: Orders ;
 }
 function AdminOrderItem({orderItem}: Props) {
     const [openEdit, setOpenEdit] = useState(false);
