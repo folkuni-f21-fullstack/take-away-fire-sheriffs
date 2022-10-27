@@ -8,7 +8,7 @@ export const data: Schema = {
         orders: 
           [
             {
-              date: "YYYY-MM-DD HH:mm:ss",
+              date: "2022-10-19 16:34",
               items: 
                 [
                   {
@@ -27,7 +27,7 @@ export const data: Schema = {
               id: 0
             },
             {
-              date: "YYYY-MM-DD HH:mm:ss",
+              date: "2022-10-26 16:42",
               items: 
                 [
                   {
@@ -55,7 +55,7 @@ export const data: Schema = {
         orders: 
           [
             {
-              date: "YYYY-MM-DD HH:mm:ss",
+              date: "2022-10-27 16:41",
               items: 
                 [
                   {
