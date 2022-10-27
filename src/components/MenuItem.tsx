@@ -22,7 +22,7 @@ type CartItem = {
 type ShoppingCartContext = {
     getItemQuantity: (id: number) => number
     increaseCartQuantity: (id: number, title: string,
-        price: number) => void
+    price: number) => void
     removeFromCart: (id: number) => void
     cartQuantity: number
     cartItems: CartItem[]
@@ -46,24 +46,25 @@ type ShoppingCartContext = {
         function getItemQuantity(id: number) {
             return cartItems.find(item => item.id === id)?.quantity || 0  
         } 
-console.log(cartItems);
 
         // Function kollar om vi har en produkt i vår cart och kollar om vi inte har ngt i den och om vi inte har den lägg den i cart och öka antal
+
         function increaseCartQuantity(id: number, title: string,price: number) {
             setCartItems(currItems => {
                 if (currItems.find(item => item.id === id) == null ) {
-                    return [...currItems, { price, title, id, quantity: 1 }]
-                    
-                } else {
+                    return [...currItems, { price, title, id, quantity: 1 }]  
+                } 
+
+                else {
                     return currItems.map(item => {
                         if (item.id === id) {
                             return { ...item, quantity: item.quantity + 1}
-                        } else {
+                        }
+                        else {
                             return item 
                         }})}})}
 
        
-                        console.log(cartItems);
         // Function som filtrerar ut alla som inte är lika med vårat nuvarande id
         function removeFromCart(id: number) {
             setCartItems(currItems => {
@@ -78,7 +79,7 @@ console.log(cartItems);
 
  export function MenuItem({menuItem}: Props) {
     const [openInfo, setOpenInfo] = useState<boolean>(false);
-    const { getItemQuantity, increaseCartQuantity, removeFromCart } = useShoppingCart()
+    const { getItemQuantity, increaseCartQuantity } = useShoppingCart()
     const quantity = getItemQuantity(menuItem.id)
 
   

@@ -1,57 +1,58 @@
-import './Cart.scss'
-import { useNavigate } from 'react-router-dom'
-import CartItem from '../../components/CartItem';
-import { useShoppingCart } from "../MenuItem"
-import { Menu } from '../../models/models';
-import MenuItem from '../MenuItem';
+import "./Cart.scss";
+import { useNavigate } from "react-router-dom";
+import CartItem from "../../components/CartItem";
+import { useShoppingCart } from "../MenuItem";
+import { Menu } from "../../models/models";
 
 interface Props {
-    menuItem: Menu;
-};
+  menuItem: Menu;
+}
 interface Props {
-    closeOverlay: (close: boolean) => void;
+  closeOverlay: (close: boolean) => void;
 }
 
-export function Cart( {closeOverlay}: Props) {
-    const {cartItems } = useShoppingCart()
-    const navigate = useNavigate();
-    const closeBtn = () => {
-        closeOverlay(false)
+export function Cart({ closeOverlay }: Props) {
+  const { cartItems } = useShoppingCart();
+  const navigate = useNavigate();
+  const closeBtn = () => {
+    closeOverlay(false);
+  };
+  return (
+    <section className="cart-overlay-container">
+      <div className="cart-container">
+        <div className="cart-upper-container">
+          <h1 className="cart-title">Cart</h1>
+          <img
+            src="src\assets\close-overlay-button.svg"
+            alt=""
+            onClick={closeBtn}
+            className="close-overlay-btn"
+          />
+        </div>
 
-    }
-    return (
-        <section className='cart-overlay-container'>
+        {cartItems.map((item) => (
+          <CartItem key={item.id} menuItem={item} />
+        ))}
 
-            <div className='cart-container'>
-                <div className='cart-upper-container'>
-                    <h1 className='cart-title'>Cart</h1>
-                    <img src="src\assets\close-overlay-button.svg" alt="" onClick={closeBtn} className='close-overlay-btn'/>
-                </div>
-                
+        <h2 className="cart-total">
+          {cartItems.reduce((total, cartItem) => {
+            return total + (cartItem.price || 0) * cartItem.quantity;
+          }, 0)}
+          :-
+        </h2>
 
-                            
-                            {cartItems.map(item => (
-                                        <CartItem key={item.id} menuItem={item} />
-                                    ))}
-                                
-                                
+        <input
+          className="user-comment-input"
+          type="text"
+          placeholder="Any extra info about the order?"
+        />
 
-                        
-
-                <h2 className='cart-total'>Total: 180:-</h2>
-
-                <div className='cart-inputs'>
-                    <input className='user-comment-input' type="text" placeholder='comment' />
-                </div>
-
-                <div className='cart-buttons'>
-                    <button className='cart-porder-btn'>Place Order</button>
-                </div>
-                
-            </div>
-            
-        </section>
-    )
+        
+          <button className="cart-buttons">Place Order</button>
+        
+      </div>
+    </section>
+  );
 }
 
 export default Cart;
