@@ -6,22 +6,29 @@ interface Props {
     menuItem: Menu;
 };
 
+type CartItem = {
+    id: number
+    quantity: number
+    title: string
+    price: number
+}
 export function CartItem({menuItem}: Props) {
     const { removeFromCart } = useShoppingCart()
     
     return (
-        <section >
-                
-                <div className='card-dish'>
-                    <p> {menuItem.title} </p>
-                    <p> {menuItem.price} </p>
+        
+                <section className='card-dish'>
 
-                    <section className='cart-btns'>
-                    <button className='delete-dish-btn'onClick={() => removeFromCart(menuItem.id)}>Delete</button>
+                    <section className='card-dish-title'>
+                    <p> {menuItem.title} </p>
+                    <p> {menuItem.price}:-</p>
                     </section>
-                </div>
+                    
+                    <button className='delete-dish-btn'onClick={() => removeFromCart(menuItem.id)}>Delete</button>
+                    
+                </section>
             
-        </section>
+        
     )
 }
 
