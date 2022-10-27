@@ -14,10 +14,22 @@
         justify-content: space-between;
         padding: 1rem;
         
-        .status{
+        .ordered{
             width: 20px;
             height: 20px;
-            background-color: green;
+            background-color: #cc3232;
+            border-radius: 50%;
+        }
+        .started{
+            width: 20px;
+            height: 20px;
+            background-color: #db7b2b;
+            border-radius: 50%;
+        }
+        .finished{
+            width: 20px;
+            height: 20px;
+            background-color: #2dc937;
             border-radius: 50%;
         }
         .status-text{
