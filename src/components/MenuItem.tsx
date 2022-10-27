@@ -67,7 +67,7 @@ type ShoppingCartContext = {
             }) 
         }
 
-        return <ShoppingCartContext.Provider value={({getItemQuantity, increaseCartQuantity, removeFromCart, cartItem, cartQuantity})}>
+        return <ShoppingCartContext.Provider value={({getItemQuantity, increaseCartQuantity, removeFromCart, cartItems, cartQuantity})}>
             { children }
             </ShoppingCartContext.Provider>
     }
