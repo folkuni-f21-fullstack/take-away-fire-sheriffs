@@ -22,6 +22,31 @@ router.get('/', (req, res) => {
     }
 });
 
+router.post('/changestatus', async (req, res) => {
+    if (!db.data) {
+        res.sendStatus(404);
+        return;
+    }
+
+    const query = req.body;
+    console.log(query);
+    
+    db.data.users.map(user => {
+
+        user.orders.map(order => {
+
+            if (order.orderId == query.id) {
+                console.log(order.status);
+                order.status = query.status;
+                console.log(order.orderId, query.id);
+                
+                db.write();
+                console.log(order.status);
+            }
+        })
+    })
+
+})
 router.delete('/deleteorder', async (req, res) => {
     if (!db.data) {
         res.sendStatus(404);

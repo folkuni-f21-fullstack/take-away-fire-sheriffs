@@ -10,6 +10,8 @@ interface Props {
 function AdminOrderItem({orderItem}: Props) {
     const [openEdit, setOpenEdit] = useState(false);
     const [orderStatus, setOrderStatus] = useState(orderItem.status);
+    const [orderBtn, setOrderBtn] = useState('Start Order');
+
 
     const orderItems = orderItem.items.map((item, index) => {
         return (
@@ -31,12 +33,34 @@ function AdminOrderItem({orderItem}: Props) {
 
     const StartOrderBtn = () => {
         if (orderStatus == 'ordered') {
+            setOrderBtn('Finish Order')
             setOrderStatus('started')
+            changeDbStatus('started')
         } else if (orderStatus == 'started') {
             setOrderStatus('finished')
+            changeDbStatus('finished')
+
+        }
+    }
+
+    async function changeDbStatus(status: string) {
+
+        const query = {
+            id: orderItem.orderId,
+            status: status
         }
 
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(query)
+        }
+
+        const response = await fetch('api/orders/changestatus', requestOptions);
+        console.log(response);
+        
     }
+    
 
     return (
         <div className="admin-order-item">
@@ -56,7 +80,7 @@ function AdminOrderItem({orderItem}: Props) {
                 <input className='admin-card-input' type="text" placeholder='user comment field' />
                 <div className='card-buttons'>
                     <button className='edit-btn' onClick={editPressed}>Edit</button>
-                    <button className='status-btn' onClick={StartOrderBtn}>Start Order</button>
+                    <button className='status-btn' onClick={StartOrderBtn}>{orderBtn}</button>
                 </div>
                 {openEdit && <AdminEditOverlay closeOverlay={setOpenEdit}  orderItem={orderItem}/>}
             </div>
