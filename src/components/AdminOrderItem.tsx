@@ -9,6 +9,7 @@ interface Props {
 }
 function AdminOrderItem({orderItem}: Props) {
     const [openEdit, setOpenEdit] = useState(false);
+    const [orderStatus, setOrderStatus] = useState(orderItem.status);
 
     const orderItems = orderItem.items.map((item, index) => {
         return (
@@ -28,12 +29,21 @@ function AdminOrderItem({orderItem}: Props) {
         {setOpenEdit(true)}
     }
 
+    const StartOrderBtn = () => {
+        if (orderStatus == 'ordered') {
+            setOrderStatus('started')
+        } else if (orderStatus == 'started') {
+            setOrderStatus('finished')
+        }
+
+    }
+
     return (
         <div className="admin-order-item">
             <div className='admin-order-card'>
                 <div className='card-upper-section'>
-                    <div className='status'></div>
-                    <h4 className='status-text'>{orderItem.status}</h4>
+                    <div className={orderStatus}></div>
+                    <h4 className='status-text'>{orderStatus}</h4>
                     <h4 className='orderNr'>{orderItem.orderId}</h4>
                 </div>
                 <p className='order-date'>{orderItem.date}</p>
@@ -46,7 +56,7 @@ function AdminOrderItem({orderItem}: Props) {
                 <input className='admin-card-input' type="text" placeholder='user comment field' />
                 <div className='card-buttons'>
                     <button className='edit-btn' onClick={editPressed}>Edit</button>
-                    <button className='status-btn'>Preparing</button>
+                    <button className='status-btn' onClick={StartOrderBtn}>Start Order</button>
                 </div>
                 {openEdit && <AdminEditOverlay closeOverlay={setOpenEdit}  orderItem={orderItem}/>}
             </div>

@@ -47,7 +47,7 @@ function AdminEditOrder( {closeOverlay, orderItem}: Prop) {
                 <h2 className='admin-edit-total'>{'Total: ' + totalPrice + ':-'}</h2>
 
                 <div className='admin-edit-inputs'>
-                    <input className='user-comment-input' type="text" placeholder='user comment field' />
+                    <input className='user-comment-input' value={orderItem.userComment} type="text" placeholder='user comment field' />
                     <input className='admin-comment-input' type="text" placeholder='admin comment field' />
                 </div>
                 
