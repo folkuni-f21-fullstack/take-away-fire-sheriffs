@@ -56,28 +56,9 @@ type ShoppingCartContext = {
                             return { ...item, quantity: item.quantity + 1}
                         } else {
                             return item 
-                        }
-                    })
-                }
-            })
-        }
+                        }})}})}
 
-        // Functionen går igenom id och för varje som blir lika med id man vill minska så decreasar man med -1
-        function decreaseCartQuantity(id: number) {
-            setCartItems(currItems => {
-                if (currItems.find(item => item.id === id)?.quantity === 1 ) {
-                    return currItems.filter(item => item.id !== id)
-                } else {
-                    return currItems.map(item => {
-                        if (item.id === id) {
-                            return { ...item, quantity: item.quantity - 1}
-                        } else {
-                            return item 
-                        }
-                    })
-                }
-            })
-        }
+       
 
         // Function som filtrerar ut alla som inte är lika med vårat nuvarande id
         function removeFromCart(id: number) {
@@ -86,14 +67,14 @@ type ShoppingCartContext = {
             }) 
         }
 
-        return <ShoppingCartContext.Provider value={({getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart, cartItems, cartQuantity})}>
+        return <ShoppingCartContext.Provider value={({getItemQuantity, increaseCartQuantity, removeFromCart, cartItem, cartQuantity})}>
             { children }
             </ShoppingCartContext.Provider>
     }
 
  export function MenuItem({menuItem}: Props) {
     const [openInfo, setOpenInfo] = useState<boolean>(false);
-    const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart } = useShoppingCart()
+    const { getItemQuantity, increaseCartQuantity, removeFromCart } = useShoppingCart()
     const quantity = getItemQuantity(menuItem.id)
 
   
@@ -115,7 +96,6 @@ type ShoppingCartContext = {
                 <section className="menuItem-buttons-container">
                     <button className='menuItem-btn-info' onClick={ handleClick }>More info</button>
                     <button className='menuItem-btn-add' onClick={() => increaseCartQuantity(menuItem.id)}>Add</button>
-                    <button className='menuItem-btn-add' onClick={() => decreaseCartQuantity(menuItem.id)}>Remove</button>
                     <button className='menuItem-btn-add' onClick={() => removeFromCart(menuItem.id)}>Delete</button>
 
                 </section>

@@ -1,12 +1,13 @@
 import './CartItem.scss'
 import { Menu } from '../models/models';
+import { useShoppingCart } from './MenuItem';
 
 interface Props {
     menuItem: Menu;
 };
 
-function CartItem({menuItem}: Props) {
-
+export function CartItem({menuItem}: Props) {
+    const { removeFromCart } = useShoppingCart()
     
     return (
         <section >
@@ -16,9 +17,7 @@ function CartItem({menuItem}: Props) {
                     <p> {menuItem.price} </p>
 
                     <section className='cart-btns'>
-                    <button className='remove-dish-btn'>-</button>
-                    <button className='delete-dish-btn'>Delete</button>
-                    <button className='add-dish-btn'>+</button>
+                    <button className='delete-dish-btn'onClick={() => removeFromCart(menuItem.id)}>Delete</button>
                     </section>
                 </div>
             

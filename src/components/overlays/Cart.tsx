@@ -1,21 +1,23 @@
 import './Cart.scss'
 import { useNavigate } from 'react-router-dom'
 import CartItem from '../../components/CartItem';
+import { useShoppingCart } from "../MenuItem"
 import { Menu } from '../../models/models';
 import MenuItem from '../MenuItem';
 
-
-
-interface Prop {
+interface Props {
+    menuItem: Menu;
+};
+interface Props {
     closeOverlay: (close: boolean) => void;
 }
 
-
-
-function Cart( {closeOverlay}: Prop) {
+export function Cart( {closeOverlay}: Props) {
+    const {cartItems } = useShoppingCart()
     const navigate = useNavigate();
     const closeBtn = () => {
         closeOverlay(false)
+
     }
     return (
         <section className='cart-overlay-container'>
@@ -26,16 +28,16 @@ function Cart( {closeOverlay}: Prop) {
                     <img src="src\assets\close-overlay-button.svg" alt="" onClick={closeBtn} className='close-overlay-btn'/>
                 </div>
                 
-                <CartItem menuItem={{
-                    title: '',
-                    price: 0,
-                    ingredients: '',
-                    allergies: '',
-                    imgUrl: '',
-                    id: 0
-                }} />
 
-                
+                            
+                            {cartItems.map(item => (
+                                        <CartItem key={item.id} {...item} />
+                                    ))}
+                                
+                                
+
+                        
+
                 <h2 className='cart-total'>Total: 180:-</h2>
 
                 <div className='cart-inputs'>
