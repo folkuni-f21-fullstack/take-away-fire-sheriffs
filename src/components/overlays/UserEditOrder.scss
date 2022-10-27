@@ -75,6 +75,16 @@
     padding-right: 1rem;
   }
 
+  .feedback {
+    opacity: 0;
+    height: 0em;
+    transition: 0.5s;
+  }
+  .displayFeedback {
+    opacity: 1;
+    height: 1em;
+  }
+
   /* Order btn*/
   .popup-btn-save {
     margin-top: 1rem;

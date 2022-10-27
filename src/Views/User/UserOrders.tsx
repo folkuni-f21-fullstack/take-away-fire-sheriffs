@@ -16,7 +16,8 @@ const UserOrders = ({activeUser}: Props) => {
   const getUsers = async () => {
     const response = await fetch('/api/users', { mode: 'cors' });
     const data = await response.json();
-
+    console.log(data);
+    
     setUsers(data);
   }
 

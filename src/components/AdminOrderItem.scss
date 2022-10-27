@@ -8,15 +8,28 @@
     padding: 15px;
     border-radius: 15px;
     border: 5px solid #333333; // vit eller svart border?
+    margin-top: 1rem;
     .card-upper-section{
         display: flex;
         justify-content: space-between;
         padding: 1rem;
-
-        .status{
+        
+        .ordered{
             width: 20px;
             height: 20px;
-            background-color: green;
+            background-color: #cc3232;
+            border-radius: 50%;
+        }
+        .started{
+            width: 20px;
+            height: 20px;
+            background-color: #db7b2b;
+            border-radius: 50%;
+        }
+        .finished{
+            width: 20px;
+            height: 20px;
+            background-color: #2dc937;
             border-radius: 50%;
         }
         .status-text{
@@ -27,10 +40,22 @@
         display: flex;
         justify-content: right;
     }
-    .card-dish{
+    .card-info{
         display: flex;
-        justify-content: space-between;
-        padding: 5px;
+        flex-direction: column;
+        
+        .card-order{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            
+            .card-text{
+                font-size: 16px;
+            }
+        }
+        
+        
     }
     .admin-card-total-price{
         display: flex;
