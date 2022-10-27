@@ -1,30 +1,37 @@
 import "./UserEditOrder.scss";
 import { useState, useEffect } from "react";
 import closeBtn from "../../assets/close-overlay-button.svg";
-import { Order, User, Menu } from '../../models/models';
+import { Orders, User, Menu } from '../../models/models';
 
 interface Props {
   closeOverlay: (close: boolean) => void;
-  orderItem: Order;
+  orderItem: Orders;
   activeUser: string;
   getUsers: () => void;
   deleteOrder: () => void;
 }
 
+type Query = {
+  username: string;
+  order: Orders;
+  comment: string;
+}
+
 function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder }: Props) {
 
-  const [placeOrder, setPlaceOrder] = useState<boolean>(false);
   const [items, setItems] = useState<Menu[] | null>(null);
   const [userComment, setUserComment] = useState<string>('');
 
   const UserCloseBtn = () => {
     closeOverlay(false);
+    getUsers(); // Denna kanske hade mått bättre av att ligga nån annanstans... Kolla på detta när tid finns över /HE
   };
 
   async function saveComment() {
-    
-    const query = {
+
+    const query: Query = {
       username: activeUser,
+      order: orderItem,
       comment: userComment
     }
 
@@ -36,15 +43,11 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder 
 
     const response = await fetch('api/orders/usercomment', requestOptions);
 
-    if(response.status == 200) {
-      const data: User = await response.json();
-      console.log(data);
-      return data; 
-    } else {
-        return 404;
-    }
-
+    console.log('userCommentResponse:', response.status);
+    console.log(userComment);
+    
   }
+
 
   const mappedOrderItems = orderItem.items.map((item, index) => {
     return (
@@ -116,7 +119,7 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder 
         <section className="edit-card-footer">
           <h2 className="card-cost">Totalt: {totalPrice}:-</h2>
           <p className="comment-title">Any extra info about the order?</p>
-          <input className="cart-comment" type="textfield" onChange={(event) => setUserComment(event.target.value)} />
+          <input className="cart-comment" type="text" defaultValue={orderItem.userComment} onChange={(event) => setUserComment(event.target.value)} />
           <button className="popup-btn-save" onClick={saveComment}>
             Save comment
           </button>
