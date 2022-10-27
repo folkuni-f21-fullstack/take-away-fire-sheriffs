@@ -63,7 +63,8 @@ function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
 
     getUsers(); 
   }
-
+  
+  
   return (
     <section className="card">
       <section className="card-header">
@@ -80,8 +81,9 @@ function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
       </section>
 
       <p className="card-cost">Totalt: { totalPrice }:-</p>
-      <section className="card-btns">
-        <button className="card-btn-edit" onClick={showOverlay}>
+      <section className={"card-btns-" + orderStatus}>
+
+        <button className="card-btn-edit"  onClick={showOverlay}>
           Edit
         </button>
         <button className="card-btn-delete" onClick={ deleteOrder }>Delete</button>

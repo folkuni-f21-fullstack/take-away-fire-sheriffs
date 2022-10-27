@@ -84,16 +84,28 @@
 }
 
 /* Card btns*/
-.card-btns {
+.card-btns-ordered {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   margin-top: 2rem;
 }
-
+.card-btns-finished {
+  display: none;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 2rem;
+}
+.card-btns-started {
+  display: none;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 2rem;
+}
 .card-btn-edit {
   background-color: base.$yellow-bgr;
 }
+
 .card-btn-delete {
   background-color: base.$red-bgr;
   color: base.$white;
