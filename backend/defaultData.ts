@@ -40,7 +40,7 @@ export const data: Schema = {
                   }
                 ],
               orderId: 1002,
-              status: "ordered",
+              status: "started",
               userComment: "",
               adminComment: "",
               id: 1
@@ -76,8 +76,8 @@ export const data: Schema = {
                   }
                 ],
               orderId: 1003,
-              status: "started",
-              userComment: "test user text written here",
+              status: "ordered",
+              userComment: "",
               adminComment: "",
               id: 0
             }
