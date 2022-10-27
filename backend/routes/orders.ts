@@ -74,7 +74,7 @@ router.delete('/deleteitem', async (req, res) => {
     
 });
 
-router.post('/usercomment', (res, req) => {
+router.post('/usercomment', (req, res) => {
     if (!db.data) {
         res.sendStatus(404);
         return;
