@@ -1,20 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./UserOrderItem.scss";
 import EditOrder from "./overlays/UserEditOrder";
-import { Menu, Order } from "../models/models";
+import { Menu, Orders } from "../models/models";
 
 
 interface Props {
-  orderItem: Order;
+  orderItem: Orders;
+  activeUser: string;
+  getUsers: () => void;
 };
 
-function UserOrderItem({orderItem}: Props) {
+function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
   const [openEdit, setOpenEdit] = useState<boolean>(false);
+  
   function showOverlay() {
     setOpenEdit(true);
   }
-
-  const username: string = 'glenn';
 
   const orderItems = orderItem.items.map((item, index) => {
     return (
@@ -34,7 +35,7 @@ function UserOrderItem({orderItem}: Props) {
     console.log(orderItem.orderId);
 
     const query = {
-      username: username, 
+      username: activeUser, 
       id: orderItem.id
     }
 
@@ -44,11 +45,13 @@ function UserOrderItem({orderItem}: Props) {
       body: JSON.stringify(query)
     }
 
-    const response = await fetch('api/orders/delete', requestOptions);
+    const response = await fetch('api/orders/deleteorder', requestOptions);
 
-    const data = await response.json();
+    const data: Orders[] = await response.json();
 
     console.log(data);
+
+    getUsers(); 
   }
 
   return (
@@ -73,7 +76,7 @@ function UserOrderItem({orderItem}: Props) {
         </button>
         <button className="card-btn-delete" onClick={ deleteOrder }>Delete</button>
       </section>
-      {openEdit && <EditOrder closeOverlay={setOpenEdit} orderItem={orderItem}/>}
+      {openEdit && <EditOrder closeOverlay={setOpenEdit} orderItem={orderItem} activeUser={activeUser} getUsers={getUsers} deleteOrder={deleteOrder}/>}
     </section>
   );
 }

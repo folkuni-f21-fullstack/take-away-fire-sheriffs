@@ -1,18 +1,34 @@
 import express, { Request, Response } from "express";
 import db from "../db.js";
-import { Orders, Users } from "../models";
+import { Orders, Users, Menu } from "../models";
 const router = express.Router();
 
-// router.get('/', (req, res) => {
-//     if (db.data) {
-//         console.log(db.data.users);
-//         res.json(db.data.users);
-//     } else {
-//         res.sendStatus(404);
-//     }
-// });
+type Query = {
+    username: string;
+    order: Orders;
+    comment: string;
+  }
 
-router.delete('/delete', async (req, res) => {
+router.get('/', (req, res) => {
+    if (db.data) {
+        const allUsers = db.data.users
+
+        let allUsersArray: any = [];
+        
+        allUsers.map( user => {
+            user.orders.map(order => {
+               allUsersArray.push(order) 
+            })
+             
+        })
+        res.json(allUsersArray)
+        
+    } else {
+        res.sendStatus(404);
+    }
+});
+
+router.delete('/deleteorder', async (req, res) => {
     if (!db.data) {
         res.sendStatus(404);
         return;
@@ -24,9 +40,7 @@ router.delete('/delete', async (req, res) => {
     const user = db.data.users.find(user => user.username === query.username);
 
     if (user) {
-
         console.log('user:', user);
-    
         console.log('userOrders:', user.orders);
         
         const newUserOrders = user.orders.filter(order => order.id !== query.id); 
@@ -38,19 +52,77 @@ router.delete('/delete', async (req, res) => {
             db.data.users.map(user => {
                 if (user.username === query.username) {
                     user.orders = newUserOrders;
+                    res.json(newUserOrders);
                     db.write();
                     return;
+                } else {
+                    // statuscode
                 }
             });
+        } else {
+            // statuscode
         }
+    } else {
+        // statuscode
     } 
 });
 
+router.delete('/deleteitem', async (req, res) => {
+    if (!db.data) {
+        res.sendStatus(404);
+        return;
+    }
+    const query = req.body;
+
+    const orderId = query.order.id;
+    
+    db.data.users.map(user => {
+        if(user.username === query.username) {
+            console.log('items before:', user.orders[orderId].items);
+
+            user.orders[orderId].items.splice(query.orderItemIndex, 1 );
+            const itemsAfter = user.orders[orderId].items;
+            console.log(itemsAfter);
+            
+            if (itemsAfter) {
+                res.send(itemsAfter);
+                db.write();
+            } else {
+                res.sendStatus(404);
+            }  
+        } else {
+            // statuscode
+        } 
+    });
+    
+});
+
+router.post('/usercomment', (req, res) => {
+    if (!db.data) {
+        res.sendStatus(404);
+        return;
+    }
+
+    const query: Query = req.body;
+    
+    const user = db.data.users.find(user => user.username === query.username);
+
+    if (user) {
+        user.orders.map(order => {
+            if (order.id === query.order.id) {
+                order.userComment = query.comment;
+                console.log(order.userComment);
+                res.json(order.userComment);
+                db.write();  
+            } else {
+                res.sendStatus(404);
+            }
+        })
+    } else {
+        res.sendStatus(404);
+    }
+    
+});
+
 export default router;
-
-// SAKER VI MÅSTE TA REDA PÅ/FIXA:
-
-// Kolla upp varför vi inte kan använda oss av sendstatus vid POST för inlogg (Landing-sidan)
-
-// Behöver kanske överlag få en liten genomgång på hur type/Schema fungerar
             

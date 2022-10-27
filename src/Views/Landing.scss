@@ -31,7 +31,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  
+  .feedback {
+    opacity: 0;
+    transition: 0.5s;
+    height: 0em;
+  }
+  .displayFeedback {
+    opacity: 1;
+    height: 1em;
+  }
   button {
     @include base.button($bgr: base.$black, $txt: base.$white);
     margin: 1.5em 0;

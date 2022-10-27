@@ -4,25 +4,25 @@ export type Menu = {
     ingredients: string;
     allergies: string;
     imgUrl: string;
-    id: string;
+    id: number;
 }
 
 export type User = {
     username: string;
     password: string;
-    orders: Order[];
+    orders: Orders[];
     customer: boolean;
-    id: string;
+    id: number;
 }
 
-export type Order = {
+export type Orders = {
     date: string;
     items: Menu[];
     orderId: number;
     status: string;
     userComment: string;
     adminComment: string;
-    id: string;
+    id: number;
 }
 
 export type Credentials = {
@@ -33,7 +33,7 @@ export type Credentials = {
 export type Schema = {
     menu: Menu[];
     users: User[];
-    order: Order[];
+    order: Orders[];
     // Lägg till mer data eftersom
     //users: User[]; exempel på så det skulle kunna se ut för oss!!
     //menu: Menu[]; exempel på så det skulle kunna se ut för oss!!
