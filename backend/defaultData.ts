@@ -8,7 +8,7 @@ export const data: Schema = {
         orders: 
           [
             {
-              date: "YYYY-MM-DD HH:mm:ss",
+              date: "2022-10-19 16:34",
               items: 
                 [
                   {
@@ -21,13 +21,13 @@ export const data: Schema = {
                   }
                 ],
               orderId: 1001,
-              status: "",
+              status: "ordered",
               userComment: "",
               adminComment: "",
               id: 0
             },
             {
-              date: "YYYY-MM-DD HH:mm:ss",
+              date: "2022-10-26 16:42",
               items: 
                 [
                   {
@@ -40,7 +40,7 @@ export const data: Schema = {
                   }
                 ],
               orderId: 1002,
-              status: "",
+              status: "started",
               userComment: "",
               adminComment: "",
               id: 1
@@ -55,7 +55,7 @@ export const data: Schema = {
         orders: 
           [
             {
-              date: "YYYY-MM-DD HH:mm:ss",
+              date: "2022-10-27 16:41",
               items: 
                 [
                   {
@@ -76,7 +76,7 @@ export const data: Schema = {
                   }
                 ],
               orderId: 1003,
-              status: "",
+              status: "ordered",
               userComment: "",
               adminComment: "",
               id: 0
@@ -86,7 +86,7 @@ export const data: Schema = {
         id: 1
       },
       {
-        username: "Stina",
+        username: "stina",
         password: "work4life",
         orders: [],
         customer: false,

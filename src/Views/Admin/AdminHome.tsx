@@ -1,7 +1,7 @@
 import AdminOrderItem from "../../components/AdminOrderItem";
 import './AdminHome.scss';
 import AdminHeader from '../../components/AdminHeader';
-import { User, Order } from '../../models/models';
+import { User, Orders } from '../../models/models';
 
 import { useState, useEffect } from 'react';
 
@@ -12,11 +12,11 @@ interface Props {
 
 function AdminHome({activeUser}: Props) {
     console.log("AdminHome - activeUser: ", activeUser);
-    const [allOrders, setAllOrders] = useState<Order[] | null>(null);
+    const [allOrders, setAllOrders] = useState<Orders[] | null>(null);
 
     const fetchOrders = async () => {
         const response = await fetch('/api/orders', { mode: 'cors' });
-        const data: Order[] | any  = await response.json();
+        const data: Orders[] | any  = await response.json();
         setAllOrders(data);    
     }
     

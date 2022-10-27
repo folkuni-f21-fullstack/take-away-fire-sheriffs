@@ -1,10 +1,11 @@
 import './AdminEditOrder.scss'
 import { useNavigate } from 'react-router-dom'
-import { Order } from '../../models/models';
+import { Orders } from '../../models/models';
+import { Key } from 'react';
 
 interface Prop {
     closeOverlay: (close: boolean) => void;
-    orderItem: Order;
+    orderItem: Orders;
 }
 
 function AdminEditOrder( {closeOverlay, orderItem}: Prop) {
@@ -14,7 +15,7 @@ function AdminEditOrder( {closeOverlay, orderItem}: Prop) {
         closeOverlay(false)
         navigate('/admin')
     }
-    const orderItems = orderItem.items.map((item, index) => {
+    const orderItems = orderItem.items.map((item: { title: string; price: number; }, index: Key) => {
         return (
           <div key={index} className="edit-element ">
             <section className="edit-details">
@@ -47,7 +48,7 @@ function AdminEditOrder( {closeOverlay, orderItem}: Prop) {
                 <h2 className='admin-edit-total'>{'Total: ' + totalPrice + ':-'}</h2>
 
                 <div className='admin-edit-inputs'>
-                    <input className='user-comment-input' type="text" placeholder='user comment field' />
+                    <input className='user-comment-input' value={orderItem.userComment} type="text" placeholder='user comment field' />
                     <input className='admin-comment-input' type="text" placeholder='admin comment field' />
                 </div>
                 

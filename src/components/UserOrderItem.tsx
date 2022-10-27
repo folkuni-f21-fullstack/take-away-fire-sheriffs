@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
 import "./UserOrderItem.scss";
 import EditOrder from "./overlays/UserEditOrder";
-import { Menu, Order } from "../models/models";
+import { Menu, Orders } from "../models/models";
 
 
 interface Props {
-  orderItem: Order;
+  orderItem: Orders;
   activeUser: string;
   getUsers: () => void;
 };
 
 function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
   const [openEdit, setOpenEdit] = useState<boolean>(false);
+  const [orderStatus, setOrderStatus] = useState(orderItem.status);
+
   
   function showOverlay() {
     setOpenEdit(true);
@@ -31,7 +33,14 @@ function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
     totalPrice = totalPrice + item.price;
   } 
 
-
+  const changeOrderStatus = () => {
+    if (orderItem.status == 'started') {
+      setOrderStatus('started')
+    } else if (orderItem.status == 'finished') {
+      setOrderStatus('finished')
+    }
+  }
+  
   async function deleteOrder() {
     console.log(orderItem.orderId);
 
@@ -48,18 +57,19 @@ function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
 
     const response = await fetch('api/orders/deleteorder', requestOptions);
 
-    const data: Order[] = await response.json();
+    const data: Orders[] = await response.json();
 
     console.log(data);
 
     getUsers(); 
   }
-
+  
+  
   return (
     <section className="card">
       <section className="card-header">
         <section className="card-status">
-          <div className="status-color"></div>
+          <div className={'status-color-'+ orderStatus}></div>
           <p className="status-text">{orderItem.status}</p>
         </section>
         <p className="order-number">Ordernr: {orderItem.orderId}</p>
@@ -71,13 +81,14 @@ function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
       </section>
 
       <p className="card-cost">Totalt: { totalPrice }:-</p>
-      <section className="card-btns">
-        <button className="card-btn-edit" onClick={showOverlay}>
+      <section className={"card-btns-" + orderStatus}>
+
+        <button className="card-btn-edit"  onClick={showOverlay}>
           Edit
         </button>
         <button className="card-btn-delete" onClick={ deleteOrder }>Delete</button>
       </section>
-      {openEdit && <EditOrder closeOverlay={setOpenEdit} orderItem={orderItem} activeUser={activeUser} getUsers={getUsers}/>}
+      {openEdit && <EditOrder closeOverlay={setOpenEdit} orderItem={orderItem} activeUser={activeUser} getUsers={getUsers} deleteOrder={deleteOrder}/>}
     </section>
   );
 }

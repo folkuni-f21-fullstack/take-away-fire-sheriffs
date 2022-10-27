@@ -10,12 +10,12 @@ export type Menu = {
 export type User = {
     username: string;
     password: string;
-    orders: Order[];
+    orders: Orders[];
     customer: boolean;
     id: number;
 }
 
-export type Order = {
+export type Orders = {
     date: string;
     items: Menu[];
     orderId: number;
@@ -33,7 +33,7 @@ export type Credentials = {
 export type Schema = {
     menu: Menu[];
     users: User[];
-    order: Order[];
+    order: Orders[];
     // Lägg till mer data eftersom
     //users: User[]; exempel på så det skulle kunna se ut för oss!!
     //menu: Menu[]; exempel på så det skulle kunna se ut för oss!!
