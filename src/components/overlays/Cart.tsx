@@ -26,18 +26,10 @@ export function Cart( {closeOverlay}: Props) {
                 <div className='cart-upper-container'>
                     <h1 className='cart-title'>Cart</h1>
                     <img src="src\assets\close-overlay-button.svg" alt="" onClick={closeBtn} className='close-overlay-btn'/>
-                </div>
-                
-
-                            
-                            {cartItems.map(item => (
-                                        <CartItem key={item.id} menuItem={item} />
-                                    ))}
-                                
-                                
-
-                        
-
+                </div>     
+                    {cartItems.map(item => (
+                        <CartItem key={item.id} menuItem={item} />
+                    ))}
                 <h2 className='cart-total'>Total: 180:-</h2>
 
                 <div className='cart-inputs'>

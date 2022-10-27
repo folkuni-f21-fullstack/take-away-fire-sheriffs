@@ -1,8 +1,7 @@
 import './DishInfo.scss';
-
 import closeBtn from '../../assets/close-overlay-button.svg';
-
 import { Menu } from '../../models/models';
+import { useShoppingCart } from '../MenuItem';
 
 interface Props {
     menuItem: Menu;
@@ -10,6 +9,7 @@ interface Props {
 };
 
 function DishInfo({menuItem, setOpenInfo}: Props) {
+    const { increaseCartQuantity } = useShoppingCart()
 
     function handleClick() {
         setOpenInfo(false);
@@ -29,7 +29,7 @@ function DishInfo({menuItem, setOpenInfo}: Props) {
                 <section className="dishInfo-info-container">
                     <p>Ingredients: {menuItem.ingredients}</p>
                     <p>May contain: {menuItem.allergies}</p>
-                    <button>Add to cart</button>
+                    <button onClick={() => increaseCartQuantity(menuItem.id, menuItem.title,menuItem.price)}>Add to cart</button>
                 </section>
             </div>
         </div>
