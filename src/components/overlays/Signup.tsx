@@ -100,10 +100,6 @@ function Signup( {closeOverlay, setActiveUser}: Prop ) {
                 <input type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <p className={"feedback " + feedback}>{feedbackText}</p>
                 <button onClick={userSignup} >Sign up</button>
-<<<<<<< HEAD
-                <p>{feedback}</p>
-=======
->>>>>>> userOrderDetails
             </section>
         </section>
     )

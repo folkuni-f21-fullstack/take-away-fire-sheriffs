@@ -1,10 +1,11 @@
 import './AdminEditOrder.scss'
 import { useNavigate } from 'react-router-dom'
-import { Order } from '../../models/models';
+import { Orders } from '../../models/models';
+import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal, Key } from 'react';
 
 interface Prop {
     closeOverlay: (close: boolean) => void;
-    orderItem: Order;
+    orderItem: Orders;
 }
 
 function AdminEditOrder( {closeOverlay, orderItem}: Prop) {
@@ -14,7 +15,7 @@ function AdminEditOrder( {closeOverlay, orderItem}: Prop) {
         closeOverlay(false)
         navigate('/admin')
     }
-    const orderItems = orderItem.items.map((item, index) => {
+    const orderItems = orderItem.items.map((item: { title: string; price: number; }, index: Key) => {
         return (
           <div key={index} className="edit-element ">
             <section className="edit-details">
