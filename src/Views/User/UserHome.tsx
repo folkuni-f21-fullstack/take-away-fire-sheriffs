@@ -22,6 +22,7 @@ function UserHome({activeUser}: Props) {
     const fetchMenu = async () => {
         const response = await fetch('/api/menu', { mode: 'cors' });
         const data: Menu[] = await response.json();
+        
         setMenu(data);
     }
 
