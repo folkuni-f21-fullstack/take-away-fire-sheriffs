@@ -86,7 +86,7 @@ export const data: Schema = {
         id: "2"
       },
       {
-        username: "Stina",
+        username: "stina",
         password: "work4life",
         orders: [],
         customer: false,
