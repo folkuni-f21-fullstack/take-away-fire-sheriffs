@@ -1,7 +1,7 @@
 import './AdminEditOrder.scss'
 import { useNavigate } from 'react-router-dom'
 import { Orders } from '../../models/models';
-import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal, Key } from 'react';
+import { Key } from 'react';
 
 interface Prop {
     closeOverlay: (close: boolean) => void;
@@ -48,7 +48,7 @@ function AdminEditOrder( {closeOverlay, orderItem}: Prop) {
                 <h2 className='admin-edit-total'>{'Total: ' + totalPrice + ':-'}</h2>
 
                 <div className='admin-edit-inputs'>
-                    <input className='user-comment-input' type="text" placeholder='user comment field' />
+                    <input className='user-comment-input' value={orderItem.userComment} type="text" placeholder='user comment field' />
                     <input className='admin-comment-input' type="text" placeholder='admin comment field' />
                 </div>
                 
