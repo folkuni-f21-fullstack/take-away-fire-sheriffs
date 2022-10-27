@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import { User, Credentials } from '../models/models';
 
 interface Props {
-    setActiveUser: (activeUser: User | null) => void;
-    activeUser: User | null;
+    setActiveUser: (activeUser: string) => void;
+    activeUser: string;
 }
 
 
@@ -37,14 +37,13 @@ function Landing({activeUser, setActiveUser}: Props) {
         // fetchUsers();
         // console.log(newData);
         
-        if (newData == '404') {
+        if (newData == 404) {
             console.log('wrong username/password');
-            
-        } else if (newData == '400') {
+        } else if (newData == 400) {
             console.log('bad input'); 
         } 
         else {
-            setActiveUser(newData);
+            setActiveUser(newData.username);
             navigate('/menu');
             if (newData.customer == false) {
                 navigate('/admin');
@@ -52,7 +51,7 @@ function Landing({activeUser, setActiveUser}: Props) {
         }  
     }
 
-    async function userLogin() {
+    async function userLogin(): Promise<User | number> {
         const credentials: Credentials = {
             username: username,
             password: password
@@ -66,19 +65,16 @@ function Landing({activeUser, setActiveUser}: Props) {
 
         const response = await fetch('api/users/login', requestOptions);
 
-        const data: User | string = await response.json();
-
-        console.log(data);
-        // setActiveUser(data);
-
-        return data; 
+        // Kontrollera svaret 
+        if(response.status == 200) {
+            const data: User = await response.json();
+            console.log(data);
+            return data; 
+        } else {
+            return 404;
+        }
     }
 
-    // async function userLogin() {
-    //     const response = await fetch('/api/users/login');
-    //     const data: User = await response.json();
-    //     console.log(data);
-    // }
 
     return (
         <section className="landingPage content-wrapper">
@@ -90,7 +86,7 @@ function Landing({activeUser, setActiveUser}: Props) {
                 <button onClick={signIn}>Log in</button>
             </section>
             <button className="buttonMember" onClick={signupClick}>Become a Member</button>
-            {openSignup && <Signup closeOverlay={setOpenSignup} />}
+            {openSignup && <Signup closeOverlay={setOpenSignup} setActiveUser={setActiveUser} />}
         </section>
     )
 }

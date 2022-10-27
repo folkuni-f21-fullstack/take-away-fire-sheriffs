@@ -1,34 +1,69 @@
 import "./UserEditOrder.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import closeBtn from "../../assets/close-overlay-button.svg";
-import { Order } from '../../models/models';
+import { Order, User, Menu } from '../../models/models';
 
 interface Props {
   closeOverlay: (close: boolean) => void;
   orderItem: Order;
+  activeUser: string;
+  getUsers: () => void;
 }
 
-function EditOrder({ closeOverlay, orderItem }: Props) {
+function EditOrder({ closeOverlay, orderItem, activeUser, getUsers }: Props) {
+
+  const [placeOrder, setPlaceOrder] = useState<boolean>(false);
+  const [items, setItems] = useState<Menu | null>(null);
 
   const UserCloseBtn = () => {
     closeOverlay(false);
   };
-  const [placeOrder, setPlaceOrder] = useState<boolean>(false);
+
   function placeOrderBtn() {
     setPlaceOrder(true);
   }
 
-  const orderItems = orderItem.items.map((item, index) => {
+  const mappedOrderItems = orderItem.items.map((item, index) => {
     return (
       <div key={index} className="edit-element ">
         <section className="edit-details">
           <p className="card-text">{item.title}</p>
           <p className="card-text">{item.price}:-</p>
         </section>
-        <button className="card-btn-delete">Delete</button>
+        <button className="card-btn-delete" onClick={deleteItem}>Delete</button>
       </div>
     );
+
+    async function deleteItem() {
+      console.log(orderItem);
+      
+      const query = {
+        username: activeUser,
+        order: orderItem,
+        orderItemIndex: index
+      }
+  
+      console.log(query);
+      
+  
+      const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(query)
+      }
+  
+      const response = await fetch('api/orders/deleteitem', requestOptions);
+  
+      const data: Menu | null = await response.json();
+      
+      console.log(data);
+
+      setItems(data);
+      getUsers();
+    }
   });
+
+  console.log(mappedOrderItems);
 
   let totalPrice = 0;
   for (let item of orderItem.items) {
@@ -47,7 +82,7 @@ function EditOrder({ closeOverlay, orderItem }: Props) {
 
         <h2 className="cart-title">Ordernr: </h2>
         <section className="edit-card-info">
-          { orderItems }
+          { mappedOrderItems }
         </section>
         <section className="edit-card-footer">
           <h2 className="card-cost">Totalt: {totalPrice}:-</h2>

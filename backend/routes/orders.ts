@@ -1,18 +1,28 @@
 import express, { Request, Response } from "express";
 import db from "../db.js";
-import { Orders, Users } from "../models";
+import { Orders, Users, Menu } from "../models";
 const router = express.Router();
 
-// router.get('/', (req, res) => {
-//     if (db.data) {
-//         console.log(db.data.users);
-//         res.json(db.data.users);
-//     } else {
-//         res.sendStatus(404);
-//     }
-// });
+router.get('/', (req, res) => {
+    if (db.data) {
+        const allUsers = db.data.users
 
-router.delete('/delete', async (req, res) => {
+        let allUsersArray: any = [];
+        
+        allUsers.map( user => {
+            user.orders.map(order => {
+               allUsersArray.push(order) 
+            })
+             
+        })
+        res.json(allUsersArray)
+        
+    } else {
+        res.sendStatus(404);
+    }
+});
+
+router.delete('/deleteorder', async (req, res) => {
     if (!db.data) {
         res.sendStatus(404);
         return;
@@ -24,9 +34,7 @@ router.delete('/delete', async (req, res) => {
     const user = db.data.users.find(user => user.username === query.username);
 
     if (user) {
-
         console.log('user:', user);
-    
         console.log('userOrders:', user.orders);
         
         const newUserOrders = user.orders.filter(order => order.id !== query.id); 
@@ -38,6 +46,7 @@ router.delete('/delete', async (req, res) => {
             db.data.users.map(user => {
                 if (user.username === query.username) {
                     user.orders = newUserOrders;
+                    res.json(newUserOrders);
                     db.write();
                     return;
                 }
@@ -46,11 +55,30 @@ router.delete('/delete', async (req, res) => {
     } 
 });
 
+router.delete('/deleteitem', async (req, res) => {
+    if (!db.data) {
+        res.sendStatus(404);
+        return;
+    }
+    const query = req.body;
+
+    const orderId = query.order.id;
+    
+    db.data.users.map(user => {
+        if(user.username === query.username) {
+            console.log('items before:', user.orders[orderId].items);
+            const deletedItem = user.orders[orderId].items.splice(query.orderItemIndex, 1 );
+            const itemsAfter = user.orders[orderId].items;
+            console.log(itemsAfter);
+            res.send(itemsAfter);
+            db.write();
+        } 
+        // else {
+        //     res.sendStatus(404);
+        // }
+    });
+    
+});
+
 export default router;
-
-// SAKER VI MÅSTE TA REDA PÅ/FIXA:
-
-// Kolla upp varför vi inte kan använda oss av sendstatus vid POST för inlogg (Landing-sidan)
-
-// Behöver kanske överlag få en liten genomgång på hur type/Schema fungerar
             
