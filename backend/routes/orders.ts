@@ -105,11 +105,11 @@ router.post('/usercomment', (req, res) => {
                 res.json(order.userComment);
                 db.write();  
             } else {
-                // statuscode
+                res.sendStatus(404);
             }
         })
     } else {
-        // statuscode
+        res.sendStatus(404);
     }
     
 });
