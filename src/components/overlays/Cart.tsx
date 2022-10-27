@@ -31,7 +31,7 @@ export function Cart( {closeOverlay}: Props) {
 
                             
                             {cartItems.map(item => (
-                                        <CartItem key={item.id} {...item} />
+                                        <CartItem key={item.id} menuItem={item} />
                                     ))}
                                 
                                 
