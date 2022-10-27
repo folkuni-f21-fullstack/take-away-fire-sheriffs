@@ -35,7 +35,7 @@ export function Cart({ closeOverlay }: Props) {
         ))}
 
         <h2 className="cart-total">
-          {cartItems.reduce((total, cartItem) => {
+          Total: {cartItems.reduce((total, cartItem) => {
             return total + (cartItem.price || 0) * cartItem.quantity;
           }, 0)}
           :-
