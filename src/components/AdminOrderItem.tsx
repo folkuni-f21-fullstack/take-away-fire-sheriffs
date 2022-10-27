@@ -1,16 +1,16 @@
 import './AdminOrderItem.scss';
 import AdminEditOverlay from './overlays/AdminEditOrder'
-import { useState } from 'react'
-import {  Order } from "../models/models";
+import { Key, useState } from 'react'
+import {  Orders } from "../models/models";
 
 
 interface Props {
-    orderItem: Order;
+    orderItem: Orders;
 }
 function AdminOrderItem({orderItem}: Props) {
     const [openEdit, setOpenEdit] = useState(false);
 
-    const orderItems = orderItem.items.map((item, index) => {
+    const orderItems = orderItem.items.map((item: { title: string; price: number; }, index: Key) => {
         return (
           <section key={index} className="card-order">
             <p className="card-text">{item.title}</p>
