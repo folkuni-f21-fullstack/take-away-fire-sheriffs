@@ -11,8 +11,13 @@ interface Props {
 }
 
 
+<<<<<<< HEAD
 function Landing({activeUser, setActiveUser}: Props) {
     const [feedback, setFeedback] = useState('');
+=======
+function Landing({activeUser, setActiveUser}: Props) {  
+    const [feedback, setFeedback] = useState<string>('');
+>>>>>>> userOrderDetails
     const [openSignup, setOpenSignup] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -40,7 +45,14 @@ function Landing({activeUser, setActiveUser}: Props) {
         
         if (newData == 404) {
             console.log('wrong username/password');
+<<<<<<< HEAD
             setFeedback("Wrong username or password");
+=======
+            setFeedback('');
+            setTimeout(() => {
+              setFeedback('displayFeedback');
+            }, 500);
+>>>>>>> userOrderDetails
         } else if (newData == 400) {
             console.log('bad input'); 
             setFeedback("The database seems to be on vacation");
@@ -82,11 +94,14 @@ function Landing({activeUser, setActiveUser}: Props) {
     return (
         <section className="landingPage content-wrapper">
             <img className="logo" src={logo} />
-            <button className="buttonGuest" onClick={guestUser}>Continue as Guest</button>
             <section className="loginSignup">
                 <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                 <input type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+<<<<<<< HEAD
                 <p>{feedback}</p>
+=======
+                <p className={"feedback " + feedback}>Wrong username or password.</p>
+>>>>>>> userOrderDetails
                 <button onClick={signIn}>Log in</button>
             </section>
             <button className="buttonMember" onClick={signupClick}>Become a Member</button>

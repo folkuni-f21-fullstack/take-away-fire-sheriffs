@@ -11,6 +11,7 @@ interface Prop {
 
 function Signup( {closeOverlay, setActiveUser}: Prop ) {
     const [feedback, setFeedback] = useState('');
+    const [feedbackText, setFeedbackText] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const minUsernameCharacters: number = 3;
@@ -19,6 +20,13 @@ function Signup( {closeOverlay, setActiveUser}: Prop ) {
 
     const closeBtn = () => {
         closeOverlay(false);
+    }
+
+    function displayFeedbackMessage() {
+        setFeedback('');
+        setTimeout(() => {
+          setFeedback('displayFeedback');
+        }, 500);
     }
 
     async function userSignup() {
@@ -44,11 +52,12 @@ function Signup( {closeOverlay, setActiveUser}: Prop ) {
         if(response.status == 201) {
             instantSignIn(credentials);
         } else if(response.status == 302) {
-            setFeedback(`The username "${username}" already exists, please choose another one`);
+            setFeedbackText(`The username "${username}" already exists, please choose another one`);displayFeedbackMessage();
         } else if(response.status == 411) {
             checkCredidentialLength();
         } else if(response.status == 404) {
-            setFeedback(`The database is on vacation`);
+            setFeedbackText(`The database is on vacation`);
+            displayFeedbackMessage();
         } else {
             console.log("something is wrong, i don't know how I got here");
         } 
@@ -56,9 +65,11 @@ function Signup( {closeOverlay, setActiveUser}: Prop ) {
 
     function checkCredidentialLength() {
         if(username.length < minUsernameCharacters) {
-            setFeedback(`Your username needs to be longer than ${minUsernameCharacters} characters`);
+            setFeedbackText(`Your username needs to be longer than ${minUsernameCharacters} characters`);
+            displayFeedbackMessage();
         } else if(password.length < minPasswordCharacters) {
-            setFeedback(`Your password needs to be longer than ${minPasswordCharacters} characters`);
+            setFeedbackText(`Your password needs to be longer than ${minPasswordCharacters} characters`);
+            displayFeedbackMessage();
         }
     }
 
@@ -87,8 +98,12 @@ function Signup( {closeOverlay, setActiveUser}: Prop ) {
 
                 <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                 <input type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <p className={"feedback " + feedback}>{feedbackText}</p>
                 <button onClick={userSignup} >Sign up</button>
+<<<<<<< HEAD
                 <p>{feedback}</p>
+=======
+>>>>>>> userOrderDetails
             </section>
         </section>
     )

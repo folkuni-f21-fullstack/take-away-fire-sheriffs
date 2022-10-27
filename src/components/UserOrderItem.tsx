@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import "./UserOrderItem.scss";
 import EditOrder from "./overlays/UserEditOrder";
-import { Menu, Order } from "../models/models";
+import { Menu, Orders } from "../models/models";
 
 
 interface Props {
-  orderItem: Order;
+  orderItem: Orders;
   activeUser: string;
   getUsers: () => void;
 };
@@ -47,7 +47,7 @@ function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
 
     const response = await fetch('api/orders/deleteorder', requestOptions);
 
-    const data: Order[] = await response.json();
+    const data: Orders[] = await response.json();
 
     console.log(data);
 
@@ -76,7 +76,7 @@ function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
         </button>
         <button className="card-btn-delete" onClick={ deleteOrder }>Delete</button>
       </section>
-      {openEdit && <EditOrder closeOverlay={setOpenEdit} orderItem={orderItem} activeUser={activeUser} getUsers={getUsers}/>}
+      {openEdit && <EditOrder closeOverlay={setOpenEdit} orderItem={orderItem} activeUser={activeUser} getUsers={getUsers} deleteOrder={deleteOrder}/>}
     </section>
   );
 }

@@ -1,27 +1,56 @@
 import "./UserEditOrder.scss";
 import { useState, useEffect } from "react";
 import closeBtn from "../../assets/close-overlay-button.svg";
-import { Order, User, Menu } from '../../models/models';
+import { Orders, User, Menu } from '../../models/models';
 
 interface Props {
   closeOverlay: (close: boolean) => void;
-  orderItem: Order;
+  orderItem: Orders;
   activeUser: string;
   getUsers: () => void;
+  deleteOrder: () => void;
 }
 
-function EditOrder({ closeOverlay, orderItem, activeUser, getUsers }: Props) {
+type Query = {
+  username: string;
+  order: Orders;
+  comment: string;
+}
 
-  const [placeOrder, setPlaceOrder] = useState<boolean>(false);
-  const [items, setItems] = useState<Menu | null>(null);
+function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder }: Props) {
+  const [feedback, setFeedback] = useState<string>('');
+  const [items, setItems] = useState<Menu[] | null>(null);
+  const [userComment, setUserComment] = useState<string>('');
 
   const UserCloseBtn = () => {
     closeOverlay(false);
+    getUsers(); // Denna kanske hade mått bättre av att ligga nån annanstans... Kolla på detta när tid finns över /HE
   };
 
-  function placeOrderBtn() {
-    setPlaceOrder(true);
+  async function saveComment() {
+    setFeedback('');
+    setTimeout(() => {
+      setFeedback('displayFeedback');
+    }, 500);
+    
+    const query: Query = {
+      username: activeUser,
+      order: orderItem,
+      comment: userComment
+    }
+
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(query)
+    }
+
+    const response = await fetch('api/orders/usercomment', requestOptions);
+
+    console.log('userCommentResponse:', response.status);
+    console.log(userComment);
   }
+
 
   const mappedOrderItems = orderItem.items.map((item, index) => {
     return (
@@ -54,16 +83,22 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers }: Props) {
   
       const response = await fetch('api/orders/deleteitem', requestOptions);
   
-      const data: Menu | null = await response.json();
-      
-      console.log(data);
+      if (response.status == 200) {
+        const data: Menu[] | null = await response.json();
 
-      setItems(data);
-      getUsers();
+        if (data && data.length == 0) {
+          deleteOrder();
+        } else {
+          setItems(data);
+          getUsers();
+          console.log(data);
+        }
+        
+      } else {
+        return 404;
+      }  
     }
   });
-
-  console.log(mappedOrderItems);
 
   let totalPrice = 0;
   for (let item of orderItem.items) {
@@ -87,9 +122,10 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers }: Props) {
         <section className="edit-card-footer">
           <h2 className="card-cost">Totalt: {totalPrice}:-</h2>
           <p className="comment-title">Any extra info about the order?</p>
-          <input className="cart-comment" type="textfield" />
-          <button className="popup-btn-save" onClick={placeOrderBtn}>
-            Save changes
+          <input className="cart-comment" type="text" defaultValue={orderItem.userComment} onChange={(event) => setUserComment(event.target.value)} />
+          <p className={"feedback " + feedback}>Your comment is saved.</p>
+          <button className="popup-btn-save" onClick={saveComment}>
+            Save comment
           </button>
         </section>
       </section>
