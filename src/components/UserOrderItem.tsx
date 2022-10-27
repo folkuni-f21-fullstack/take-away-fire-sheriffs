@@ -77,7 +77,7 @@ function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
         </button>
         <button className="card-btn-delete" onClick={ deleteOrder }>Delete</button>
       </section>
-      {openEdit && <EditOrder closeOverlay={setOpenEdit} orderItem={orderItem} activeUser={activeUser}/>}
+      {openEdit && <EditOrder closeOverlay={setOpenEdit} orderItem={orderItem} activeUser={activeUser} getUsers={getUsers}/>}
     </section>
   );
 }
