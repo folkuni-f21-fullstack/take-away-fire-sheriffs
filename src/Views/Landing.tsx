@@ -11,7 +11,8 @@ interface Props {
 }
 
 
-function Landing({activeUser, setActiveUser}: Props) {
+function Landing({activeUser, setActiveUser}: Props) {  
+    const [feedback, setFeedback] = useState<string>('');
     const [openSignup, setOpenSignup] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -39,6 +40,10 @@ function Landing({activeUser, setActiveUser}: Props) {
         
         if (newData == 404) {
             console.log('wrong username/password');
+            setFeedback('');
+            setTimeout(() => {
+              setFeedback('displayFeedback');
+            }, 500);
         } else if (newData == 400) {
             console.log('bad input'); 
         } 
@@ -79,10 +84,10 @@ function Landing({activeUser, setActiveUser}: Props) {
     return (
         <section className="landingPage content-wrapper">
             <img className="logo" src={logo} />
-            <button className="buttonGuest" onClick={guestUser}>Continue as Guest</button>
             <section className="loginSignup">
                 <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                 <input type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <p className={"feedback " + feedback}>Wrong username or password.</p>
                 <button onClick={signIn}>Log in</button>
             </section>
             <button className="buttonMember" onClick={signupClick}>Become a Member</button>

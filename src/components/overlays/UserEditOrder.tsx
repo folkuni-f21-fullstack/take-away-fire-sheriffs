@@ -18,7 +18,7 @@ type Query = {
 }
 
 function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder }: Props) {
-
+  const [feedback, setFeedback] = useState<string>('');
   const [items, setItems] = useState<Menu[] | null>(null);
   const [userComment, setUserComment] = useState<string>('');
 
@@ -27,7 +27,11 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder 
   };
 
   async function saveComment() {
-
+    setFeedback('');
+    setTimeout(() => {
+      setFeedback('displayFeedback');
+    }, 500);
+    
     const query: Query = {
       username: activeUser,
       order: orderItem,
@@ -122,6 +126,7 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder 
           <h2 className="card-cost">Totalt: {totalPrice}:-</h2>
           <p className="comment-title">Any extra info about the order?</p>
           <input className="cart-comment" type="text" defaultValue={orderItem.userComment} onChange={(event) => setUserComment(event.target.value)} />
+          <p className={"feedback " + feedback}>Your comment is saved.</p>
           <button className="popup-btn-save" onClick={saveComment}>
             Save comment
           </button>
