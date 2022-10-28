@@ -24,7 +24,6 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder 
 
   const UserCloseBtn = () => {
     closeOverlay(false);
-    getUsers(); // Denna kanske hade mått bättre av att ligga nån annanstans... Kolla på detta när tid finns över /HE
   };
 
   async function saveComment() {
@@ -46,9 +45,13 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder 
     }
 
     const response = await fetch('api/orders/usercomment', requestOptions);
+    const data = await response.json();
 
-    console.log('userCommentResponse:', response.status);
+    console.log('userCommentResponse:', data);
     console.log(userComment);
+
+    getUsers();
+    
   }
 
 
