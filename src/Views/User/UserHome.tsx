@@ -11,10 +11,11 @@ import { useState, useEffect } from 'react';
 
 interface Props {
     activeUser: string;
+    menuItem: Menu;
 }
 
 
-function UserHome({activeUser}: Props) {
+function UserHome({activeUser, menuItem}: Props) {
     console.log("UserHome - activeUser: ", activeUser);
 
     const [menu, setMenu] = useState<Menu[] | null>(null);
@@ -31,7 +32,7 @@ function UserHome({activeUser}: Props) {
 
     return (
         <>
-            <Header />
+            <Header activeUser={activeUser} menuItem={menuItem} />
             <div className='userHomeWrapper content-wrapper'>
                 <img className='menuTitle' src={ MenuTitle } alt="title-logo" />
                 { menu ? (

@@ -3,20 +3,52 @@ import { useNavigate } from "react-router-dom";
 import CartItem from "../../components/CartItem";
 import { useShoppingCart } from "../MenuItem";
 import { Menu } from "../../models/models";
+import { useState } from "react";
+import e from "cors";
+import { clear } from "console";
+
 
 interface Props {
   menuItem: Menu;
+  activeUser: string;
 }
 interface Props {
   closeOverlay: (close: boolean) => void;
 }
 
-export function Cart({ closeOverlay }: Props) {
+export function Cart({ closeOverlay, activeUser }: Props) {
+  const [userComment, setUserComment] =  useState<string>('')
   const { cartItems } = useShoppingCart();
   const navigate = useNavigate();
+
   const closeBtn = () => {
     closeOverlay(false);
   };
+  console.log('cart User',activeUser);
+  
+  const placeOrderBtn  = async() => {
+    
+    const localOrder = localStorage.getItem('shopping-cart')
+    
+    const query = {
+      username: activeUser,
+      neworder: localOrder,
+      usercomment: userComment
+    }
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(query)
+    }
+    console.log(localOrder);
+    console.log(query);
+    
+    localStorage.clear()
+   const response = await fetch('api/orders/saveorder', requestOptions)
+
+  }
+
+  
   return (
     <section className="cart-overlay-container">
       <div className="cart-container">
@@ -45,9 +77,11 @@ export function Cart({ closeOverlay }: Props) {
           className="user-comment-input"
           type="text"
           placeholder="Any extra info about the order?"
+          value={userComment}
+          onChange={(e) => setUserComment(e.target.value)}
         />
 
-        <button className="cart-buttons">Place Order</button>
+        <button className="cart-buttons" onClick={placeOrderBtn}>Place Order</button>
       </div>
     </section>
   );

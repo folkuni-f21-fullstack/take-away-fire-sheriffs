@@ -9,6 +9,26 @@ type Query = {
     comment: string;
   }
 
+  function orderIdGenerator() {
+    if (!db.data) {
+        
+        return;
+    }
+    const allUsers = db.data.users
+
+        let allUsersArray: any = [];
+        
+        allUsers.map( user => {
+            user.orders.map(order => {
+               allUsersArray.push(order) 
+
+            })
+             
+        })
+        let startingOrder = 1000 ;
+        console.log('alluserArray length:',allUsersArray.length);
+        return allUsersArray.length + startingOrder + 1
+  }
 router.get('/', (req, res) => {
     if (db.data) {
         const allUsers = db.data.users
@@ -53,6 +73,38 @@ router.post('/changestatus', async (req, res) => {
     })
 
 })
+router.post('/saveorder', async (req,res) => {
+    if (!db.data) {
+        res.sendStatus(404);
+        return;
+    }
+    
+    const query = req.body;
+    console.log('user from cart: ',query.username);
+    console.log('query:', query);
+    const user = db.data.users.find(user => user.username === query.username);
+    let today = new Date()
+    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+' '+today.getHours()+':'+today.getMinutes();
+    
+    
+    if (user) {
+        console.log('user from cart: ',user);
+        const order = {
+            date: date,
+            items: JSON.parse(query.neworder),
+            orderId: orderIdGenerator(),
+            status: 'ordered',
+            userComment: query.usercomment,
+            adminComment: '',
+            id: user.orders.length + 1
+        }
+        console.log('newOrderAdded: ', order);
+        user.orders.push(order)
+        db.write()
+    }
+})
+
+
 router.delete('/deleteorder', async (req, res) => {
     if (!db.data) {
         res.sendStatus(404);
