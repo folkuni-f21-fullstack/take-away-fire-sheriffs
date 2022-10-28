@@ -1,16 +1,5 @@
 @use '../../_base.scss';
 
-.feedback {
-  margin: 0;
-  opacity: 0;
-  height: 0em;
-  transition: 0.5s;
-}
-.displayFeedback {
-  opacity: 1;
-  height: 2em;
-}
-
 .overlay {
   @include base.default-overlay-wrapper;
   
