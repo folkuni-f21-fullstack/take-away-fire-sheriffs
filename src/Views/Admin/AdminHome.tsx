@@ -20,14 +20,10 @@ function AdminHome({activeUser}: Props) {
         setAllOrders(data);    
     }
     
-    
-   
-    
-    
-    
     useEffect(() => {
         fetchOrders()
     }, []);
+
     return (
         <div className="admin-view">
             <AdminHeader />
@@ -36,7 +32,7 @@ function AdminHome({activeUser}: Props) {
                <h1 className="admin-view-title">Orders</h1>
                {allOrders ? (
                 allOrders.map(order => (
-                    <AdminOrderItem key={order.orderId} orderItem={order} fetchOrders={fetchOrders()} />            
+                    <AdminOrderItem key={order.orderId} orderItem={order} fetchOrders={fetchOrders} />            
                 ))): 'Couldnt find any orders'}
                 
                
