@@ -7,6 +7,7 @@ type Query = {
     username: string;
     order: Orders;
     comment: string;
+    from: string;
   }
 
 router.get('/', (req, res) => {
@@ -122,7 +123,7 @@ router.delete('/deleteitem', async (req, res) => {
     
 });
 
-router.post('/usercomment', (req, res) => {
+router.post('/comment', (req, res) => {
     if (!db.data) {
         res.sendStatus(404);
         return;
@@ -130,22 +131,24 @@ router.post('/usercomment', (req, res) => {
 
     const query: Query = req.body;
     
-    const user = db.data.users.find(user => user.username === query.username);
-
-    if (user) {
-        user.orders.map(order => {
-            if (order.id === query.order.id) {
-                order.userComment = query.comment;
-                console.log(order.userComment);
-                res.json(order.userComment);
-                db.write();  
-            } else {
-                res.sendStatus(404);
-            }
-        })
-    } else {
-        res.sendStatus(404);
-    }
+    db.data.users.map(user => {
+        if (user.username === query.username) {
+            user.orders.map(order => {
+                if (order.id === query.order.id) {
+                    if(query.from == "user") {
+                        order.userComment = query.comment;
+                        res.json(order.userComment);
+                    } else if(query.from == "admin") {
+                        order.adminComment = query.comment;
+                        res.json(order.adminComment);
+                    }
+                    db.write();  
+                } else {
+                    res.sendStatus(404);
+                }
+            })
+        }
+    });
 });
 
 router.post('/finduser', (req, res) => {
