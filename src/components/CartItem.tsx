@@ -12,27 +12,31 @@ type CartItem = {
   price: number;
   quantity: number;
 };
+export function CartItem({ menuItem }:Props) {
 
-export function CartItem({ menuItem }: Props) {
-  const { decreaseCartQuantity } = useShoppingCart();
-  const { increaseCartQuantity } = useShoppingCart();
-  const { cartQuantity } = useShoppingCart();
+  const {
+    decreaseCartQuantity,
+    increaseCartQuantity,
+    getItemQuantity,
+  } = useShoppingCart();
 
   return (
     <section className="card-dish">
       <section className="card-dish-title">
         <p> {menuItem.title} </p>
-        <p> {menuItem.price}:-</p>
+        <p className="cart-price"> {menuItem.price}:-</p>
+        
       </section>
 
       <section className="card-dish-add-remove">
+      <p className="item-quantity"> x{getItemQuantity(menuItem.id)}</p>
         <button
           className="remove-dish-btn"
           onClick={() => decreaseCartQuantity(menuItem.id)}
         >
           -
         </button>
-        <p> {cartQuantity}</p>
+        
         <button
           className="add-dish-btn"
           onClick={() =>
@@ -40,7 +44,7 @@ export function CartItem({ menuItem }: Props) {
               menuItem.id,
               menuItem.title,
               menuItem.price,
-              cartQuantity
+              getItemQuantity(menuItem.id)
             )
           }
         >

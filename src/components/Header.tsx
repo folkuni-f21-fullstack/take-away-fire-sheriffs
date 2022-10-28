@@ -37,7 +37,8 @@ function Header({activeUser, menuItem}: Props) {
           
         </ul>
         <section className='cart-container' onClick={openCartBtn}>
-            <div className='cart-number'><p>{cartQuantity}</p></div>
+            {cartQuantity>0? <div className='cart-number'><> {cartQuantity} </></div> : null }
+            
             <img className='menu-cart-logo' src="src\assets\cart-logo.svg" alt="" />
             
         </section>

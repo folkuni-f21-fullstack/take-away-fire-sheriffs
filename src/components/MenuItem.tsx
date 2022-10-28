@@ -49,18 +49,20 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     0
   );
 
+
+
   // Om det finns ett värde returnera det annars returnera 0
-  function getItemQuantity(id: number) {
+   function getItemQuantity(id: number) {
     return cartItems.find((item) => item.id === id)?.quantity || 0;
   }
+
 
   // Function kollar om vi har en produkt i vår cart och kollar om vi inte har ngt i den och om vi inte har den lägg den i cart och öka antal
 
   function increaseCartQuantity(
     id: number,
     title: string,
-    price: number,
-    quantity: number
+    price: number
   ) {
     setCartItems((currItems) => {
       if (currItems.find((item) => item.id === id) == null) {
@@ -112,6 +114,9 @@ export function MenuItem({ menuItem }: Props) {
   const [openInfo, setOpenInfo] = useState<boolean>(false);
   const { getItemQuantity, increaseCartQuantity } = useShoppingCart();
   const quantity = getItemQuantity(menuItem.id);
+
+  
+  
 
   function handleClick() {
     console.log(menuItem.title);
