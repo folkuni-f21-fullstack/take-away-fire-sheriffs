@@ -146,7 +146,24 @@ router.post('/usercomment', (req, res) => {
     } else {
         res.sendStatus(404);
     }
+});
+
+router.post('/finduser', (req, res) => {
+    if (!db.data) {
+        res.sendStatus(404);
+        return;
+    }
+
+    const orderToFind = req.body;
     
+    db.data.users.map(user => {
+        user.orders.map(order => {
+            if(order.orderId == orderToFind.orderId) {
+                res.json(user.username);
+                return;
+            }
+        });
+    });
 });
 
 export default router;

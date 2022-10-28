@@ -1,6 +1,6 @@
 import './AdminEditOrder.scss'
 import { useNavigate } from 'react-router-dom'
-import { Orders } from '../../models/models';
+import { Menu, Orders } from '../../models/models';
 import { Key } from 'react';
 
 interface Prop {
@@ -22,7 +22,7 @@ function AdminEditOrder( {closeOverlay, orderItem}: Prop) {
               <p className="card-text">{item.title}</p>
               <p className="card-text">{item.price}:-</p>
             </section>
-            <button className="card-btn-delete">Delete</button>
+            <button className="card-btn-delete" >Delete</button>
           </div>
         );
     });
@@ -48,8 +48,8 @@ function AdminEditOrder( {closeOverlay, orderItem}: Prop) {
                 <h2 className='admin-edit-total'>{'Total: ' + totalPrice + ':-'}</h2>
 
                 <div className='admin-edit-inputs'>
-                    <input className='user-comment-input' value={orderItem.userComment} type="text" placeholder='user comment field' />
-                    <input className='admin-comment-input' type="text" placeholder='admin comment field' />
+                    <input className='user-comment comment-input' defaultValue={orderItem.userComment} type="text" placeholder='Customer comment field' />
+                    <input className='admin-comment comment-input' defaultValue={orderItem.adminComment} type="text" placeholder='Worker comment field' />
                 </div>
                 
                 <div className='admin-edit-buttons'>

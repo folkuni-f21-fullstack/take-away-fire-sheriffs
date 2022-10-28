@@ -36,7 +36,7 @@ function AdminHome({activeUser}: Props) {
                <h1 className="admin-view-title">Orders</h1>
                {allOrders ? (
                 allOrders.map(order => (
-                    <AdminOrderItem key={order.orderId} orderItem={order}/>            
+                    <AdminOrderItem key={order.orderId} orderItem={order} fetchOrders={fetchOrders()} />            
                 ))): 'Couldnt find any orders'}
                 
                
