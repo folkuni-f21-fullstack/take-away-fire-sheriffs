@@ -74,15 +74,11 @@
     .card-buttons{
         display: flex;
         justify-content: center;
-        margin: 15px;
+        margin: 15px 0;
         
-        .edit-btn{
-            margin-right: 15px;
+        button {
+            margin: 0 5px;
             @include base.button ($bgr: base.$black, $txt: base.$white)
         }
-        .status-btn{
-            @include base.button ($bgr: base.$black, $txt: base.$white)
-        }
-
     }
 }
