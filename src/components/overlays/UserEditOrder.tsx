@@ -15,6 +15,7 @@ type Query = {
   username: string;
   order: Orders;
   comment: string;
+  from: string;
 }
 
 function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder }: Props) {
@@ -35,7 +36,8 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder 
     const query: Query = {
       username: activeUser,
       order: orderItem,
-      comment: userComment
+      comment: userComment,
+      from: "user"
     }
 
     const requestOptions = {
@@ -44,10 +46,9 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder 
       body: JSON.stringify(query)
     }
 
-    const response = await fetch('api/orders/usercomment', requestOptions);
-    const data = await response.json();
+    const response = await fetch('api/orders/comment', requestOptions);
 
-    console.log('userCommentResponse:', data);
+    console.log('userCommentResponse:', response);
     console.log(userComment);
 
     getUsers();
