@@ -82,14 +82,14 @@ router.delete('/deleteorder', async (req, res) => {
                     db.write();
                     return;
                 } else {
-                    res.sendStatus(404);
+                    // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
                 }
             });
         } else {
-            res.sendStatus(404);
+            // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
         }
     } else {
-        res.sendStatus(404);
+        // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
     } 
 });
 
@@ -114,10 +114,10 @@ router.delete('/deleteitem', async (req, res) => {
                 res.send(itemsAfter);
                 db.write();
             } else {
-                res.sendStatus(404);
+                // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
             }  
         } else {
-            res.sendStatus(404);
+            // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
         } 
     });
     
