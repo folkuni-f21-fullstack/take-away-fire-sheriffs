@@ -1,53 +1,58 @@
-import './Cart.scss'
-import { useNavigate } from 'react-router-dom'
-interface Prop {
-    closeOverlay: (close: boolean) => void;
+import "./Cart.scss";
+import { useNavigate } from "react-router-dom";
+import CartItem from "../../components/CartItem";
+import { useShoppingCart } from "../MenuItem";
+import { Menu } from "../../models/models";
 
+interface Props {
+  menuItem: Menu;
 }
-function Cart( {closeOverlay}: Prop) {
-    const navigate = useNavigate();
-    const closeBtn = () => {
-        closeOverlay(false)
-    }
-    return (
-        <section className='cart-overlay-container'>
+interface Props {
+  closeOverlay: (close: boolean) => void;
+}
 
-            <div className='cart-container'>
-                <div className='cart-upper-container'>
-                    <h1 className='cart-title'>Cart</h1>
-                    <img src="src\assets\close-overlay-button.svg" alt="" onClick={closeBtn} className='close-overlay-btn'/>
-                </div>
-                
-                <div className='card-dish'>
-                    <p>Dish 1</p>
-                    <p>90:-</p>
-                    <button className='delete-dish-btn'>Delete</button>
-                </div>
-                <div className='card-dish'>
-                    <p>Dish 1</p>
-                    <p>90:-</p>
-                    <button className='delete-dish-btn'>Delete</button>
-                </div>
-                <div className='card-dish'>
-                    <p>Dish 1</p>
-                    <p>90:-</p>
-                    <button className='delete-dish-btn'>Delete</button>
-                </div>
+export function Cart({ closeOverlay }: Props) {
+  const { cartItems } = useShoppingCart();
+  const navigate = useNavigate();
+  const closeBtn = () => {
+    closeOverlay(false);
+  };
+  return (
+    <section className="cart-overlay-container">
+      <div className="cart-container">
+        <div className="cart-upper-container">
+          <h1 className="cart-title">Cart</h1>
+          <img
+            src="src\assets\close-overlay-button.svg"
+            alt=""
+            onClick={closeBtn}
+            className="close-overlay-btn"
+          />
+        </div>
 
-                <h2 className='cart-total'>Total: 180:-</h2>
+        {cartItems.map((item) => (
+          <CartItem key={item.id} menuItem={item} />
+        ))}
 
-                <div className='cart-inputs'>
-                    <input className='user-comment-input' type="text" placeholder='comment' />
-                </div>
+        <h2 className="cart-total">
+          Total: {cartItems.reduce((total, cartItem) => {
+            return total + (cartItem.price || 0) * cartItem.quantity;
+          }, 0)}
+          :-
+        </h2>
 
-                <div className='cart-buttons'>
-                    <button className='cart-porder-btn'>Place Order</button>
-                </div>
-                
-            </div>
-            
-        </section>
-    )
+        <input
+          className="user-comment-input"
+          type="text"
+          placeholder="Any extra info about the order?"
+        />
+
+        
+          <button className="cart-buttons">Place Order</button>
+        
+      </div>
+    </section>
+  );
 }
 
 export default Cart;

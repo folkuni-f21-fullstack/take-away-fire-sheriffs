@@ -2,10 +2,12 @@ import './Header.scss';
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import CartOverlay from './overlays/Cart'
+import { useShoppingCart } from './MenuItem';
 
 function Header() {
     const navigate = useNavigate();
     const [openCart, setOpenCart] = useState(false);
+    const { cartQuantity } = useShoppingCart()
     const openCartBtn = () => {
         {setOpenCart(true)}
     }
@@ -29,7 +31,7 @@ function Header() {
           
         </ul>
         <section className='cart-container' onClick={openCartBtn}>
-            <div className='cart-number'><p>2</p></div>
+            <div className='cart-number'><p>{cartQuantity}</p></div>
             <img className='menu-cart-logo' src="src\assets\cart-logo.svg" alt="" />
             
         </section>

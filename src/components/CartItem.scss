@@ -1,0 +1,19 @@
+
+.card-dish {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
+  justify-content: space-between;
+}
+
+.card-dish-title{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 60%;
+}
+
+.delete-dish-btn {
+  background-color: #cf4242;
+  color: white;
+}
