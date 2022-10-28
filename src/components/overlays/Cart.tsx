@@ -35,7 +35,7 @@ export function Cart({ closeOverlay }: Props) {
         ))}
 
         <h2 className="cart-total">
-          Total: {cartItems.reduce((total, cartItem) => {
+          {cartItems.reduce((total, cartItem) => {
             return total + (cartItem.price || 0) * cartItem.quantity;
           }, 0)}
           :-
@@ -47,9 +47,7 @@ export function Cart({ closeOverlay }: Props) {
           placeholder="Any extra info about the order?"
         />
 
-        
-          <button className="cart-buttons">Place Order</button>
-        
+        <button className="cart-buttons">Place Order</button>
       </div>
     </section>
   );
