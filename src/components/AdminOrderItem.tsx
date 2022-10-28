@@ -110,7 +110,7 @@ function AdminOrderItem({orderItem, fetchOrders}: Props) {
                 <div className='card-buttons'>
                     <button className='edit-btn' onClick={editPressed}>Edit</button>
                     <button className='status-btn' onClick={StartOrderBtn}>{orderBtn}</button>
-                    <button className='edit-btn' onClick={deleteOrder}>Delete</button>
+                    <button className='delete-btn' onClick={deleteOrder}>Delete</button>
                 </div>
                 {openEdit && <AdminEditOverlay closeOverlay={setOpenEdit}  orderItem={orderItem}/>}
             </div>

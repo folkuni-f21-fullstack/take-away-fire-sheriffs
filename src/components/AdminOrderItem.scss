@@ -80,5 +80,8 @@
             margin: 0 5px;
             @include base.button ($bgr: base.$black, $txt: base.$white)
         }
+        .delete-btn {
+            @include base.button ($bgr: base.$red-bgr, $txt: base.$white)
+        }
     }
 }
