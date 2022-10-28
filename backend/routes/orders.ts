@@ -48,14 +48,14 @@ router.delete('/deleteorder', async (req, res) => {
                     db.write();
                     return;
                 } else {
-                    // statuscode
+                    res.sendStatus(404);
                 }
             });
         } else {
-            // statuscode
+            res.sendStatus(404);
         }
     } else {
-        // statuscode
+        res.sendStatus(404);
     } 
 });
 
@@ -83,7 +83,7 @@ router.delete('/deleteitem', async (req, res) => {
                 res.sendStatus(404);
             }  
         } else {
-            // statuscode
+            res.sendStatus(404);
         } 
     });
     
