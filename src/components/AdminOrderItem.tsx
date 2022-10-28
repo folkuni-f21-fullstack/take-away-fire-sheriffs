@@ -37,6 +37,7 @@ function AdminOrderItem({orderItem}: Props) {
             setOrderStatus('started')
             changeDbStatus('started')
         } else if (orderStatus == 'started') {
+            setOrderBtn('Finish Order')
             setOrderStatus('finished')
             changeDbStatus('finished')
 
@@ -77,7 +78,7 @@ function AdminOrderItem({orderItem}: Props) {
                 
                 
                 <h4 className='admin-card-total-price'>{'Total: ' +totalPrice + ':-'}</h4>
-                <input className='admin-card-input' type="text" placeholder='user comment field' />
+                <input className='admin-card-input' type="text" defaultValue={orderItem.userComment} placeholder='user comment field' />
                 <div className='card-buttons'>
                     <button className='edit-btn' onClick={editPressed}>Edit</button>
                     <button className='status-btn' onClick={StartOrderBtn}>{orderBtn}</button>

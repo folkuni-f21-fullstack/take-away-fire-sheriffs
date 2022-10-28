@@ -18,8 +18,6 @@ function Landing({activeUser, setActiveUser}: Props) {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     
-    // console.log("Landing - setActiveUser: ", setActiveUser); problemet var här då vi konsolloggar en set state
-    // console.log("Landing - activeUser: ", activeUser); 
   
         
     const signupClick = () => {

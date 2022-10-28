@@ -77,7 +77,7 @@ export const data: Schema = {
                 ],
               orderId: 1003,
               status: "ordered",
-              userComment: "",
+              userComment: "Ada was here",
               adminComment: "",
               id: 0
             }
