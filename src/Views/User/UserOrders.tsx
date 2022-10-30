@@ -37,11 +37,11 @@ const UserOrders = ({activeUser}: Props) => {
       <section className="order-title content-wrapper">
         <img src="../src/assets/orders-title.svg" alt="My Order" />
   
-        <section className="wrapper">
+        <section className="user-orders-wrapper">
           { loggedInUser ? (
               loggedInUser.orders.map(item => (
                   <OrderItem key={item.id} orderItem={item} activeUser={activeUser} getUsers={getUsers}/>
-              ))) : 'Couldnt find any orders' }        
+              ))) : 'Couldnt find any orders' }       
         </section>
       </section>
     </>

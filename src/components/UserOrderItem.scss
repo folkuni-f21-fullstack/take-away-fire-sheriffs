@@ -8,6 +8,9 @@
   border-radius: 15px;
   padding: 1rem;
   margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* Status color, Status test, Ordernumber */

@@ -35,10 +35,12 @@ function UserHome({activeUser}: Props) {
             <Header />
             <div className='userHomeWrapper content-wrapper'>
                 <img className='menuTitle' src={ MenuTitle } alt="title-logo" />
-                { menu ? (
-                    menu.map(item => (
-                        <MenuItem key={item.id} menuItem={item} />
-                    ))) : 'Couldnt find any menu' }        
+                    <div className="menu-items-wrapper">
+                    { menu ? (
+                        menu.map(item => (
+                            <MenuItem key={item.id} menuItem={item} />
+                        ))) : 'Couldnt find any menu' }   
+                    </div>     
             </div>
         </>
     )

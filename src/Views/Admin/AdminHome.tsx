@@ -30,11 +30,12 @@ function AdminHome({activeUser}: Props) {
             
             <section className="content-wrapper">
                <h1 className="admin-view-title">Orders</h1>
-               {allOrders ? (
-                allOrders.map(order => (
-                    <AdminOrderItem key={order.orderId} orderItem={order} fetchOrders={fetchOrders} />            
-                ))): 'Couldnt find any orders'}
-                
+               <div className="admin-order-items-wrapper">
+                {allOrders ? (
+                    allOrders.map(order => (
+                        <AdminOrderItem key={order.orderId} orderItem={order} fetchOrders={fetchOrders} />            
+                    ))): 'Couldnt find any orders'}
+                </div>
                
             </section>
             

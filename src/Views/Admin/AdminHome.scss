@@ -6,3 +6,9 @@
     margin-bottom: 5vh;
 }
 
+.admin-order-items-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 4rem;
+}
