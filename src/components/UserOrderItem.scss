@@ -3,6 +3,7 @@
 /* Card Countiner */
 .card {
   @extend %cardSize;
+  width: 80%;
   background: base.$yellow-bgr;
   border: 5px solid base.$black;
   border-radius: 15px;

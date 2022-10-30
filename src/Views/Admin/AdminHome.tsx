@@ -65,6 +65,19 @@ function AdminHome({activeUser}: Props) {
         setstarted(false);
     }
 
+    if (allOrders) {
+        allOrders.sort((a, b) => {
+            if (a.date < b.date) {
+                return 1;
+            } else if (a.date > b.date) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+    }
+    
+
     return (
         <div className="admin-view">
             <AdminHeader />

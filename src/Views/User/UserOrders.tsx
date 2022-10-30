@@ -29,7 +29,17 @@ const UserOrders = ({activeUser}: Props) => {
 
   const loggedInUser = users?.find(user => user.username === activeUser);
 
-  console.log(loggedInUser);
+  if (loggedInUser) {
+    loggedInUser.orders.sort((a, b) => {
+      if (a.date < b.date) {
+          return 1;
+      } else if (a.date > b.date) {
+          return -1;
+      } else {
+          return 0;
+      }
+    });
+  }
   
   return (
     <>
