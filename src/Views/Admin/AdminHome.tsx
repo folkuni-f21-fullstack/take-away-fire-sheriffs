@@ -1,8 +1,8 @@
-import AdminOrderItem from "../../components/AdminOrderItem";
 import './AdminHome.scss';
+import AdminOrderItem from "../../components/AdminOrderItem";
 import AdminHeader from '../../components/AdminHeader';
 import { User, Orders } from '../../models/models';
-
+import OrdersLogo from '../../assets/orders-title.svg';
 import { useState, useEffect } from 'react';
 
 
@@ -13,23 +13,70 @@ interface Props {
 function AdminHome({activeUser}: Props) {
     console.log("AdminHome - activeUser: ", activeUser);
     const [allOrders, setAllOrders] = useState<Orders[] | null>(null);
+    const [finished, setFinished] = useState<boolean>(false);
+    const [ordered, setordered] = useState<boolean>(false);
+    const [started, setstarted] = useState<boolean>(false);
 
     const fetchOrders = async () => {
         const response = await fetch('/api/orders', { mode: 'cors' });
-        const data: Orders[] | any  = await response.json();
-        setAllOrders(data);    
+        const data: Orders[] | null  = await response.json();
+        
+        if (data) {
+            if (finished) {
+                const finishedOrders = data.filter(data => data.status == 'finished');
+                setAllOrders(finishedOrders);
+            } else if (ordered) {
+                const orderedOrders = data.filter(order => order.status == 'ordered');
+                setAllOrders(orderedOrders);
+            } else if (started) {
+                const startedOrders = data.filter(order => order.status == 'started');
+                setAllOrders(startedOrders);
+            } else {
+                setAllOrders(data);
+            } 
+        }
     }
     
     useEffect(() => {
         fetchOrders()
-    }, []);
+    }, [finished, ordered, started]);
+
+    function showFinished() {
+        setFinished(true);
+        setordered(false);
+        setstarted(false);
+    }
+
+    function showOrdered() {
+        setordered(true);
+        setFinished(false);
+        setstarted(false);
+    }
+
+    function showStarted() {
+        setstarted(true);
+        setFinished(false);
+        setordered(false);
+    }
+
+    function showAll() {
+        setordered(false);
+        setFinished(false);
+        setstarted(false);
+    }
 
     return (
         <div className="admin-view">
             <AdminHeader />
             
             <section className="content-wrapper">
-               <h1 className="admin-view-title">Orders</h1>
+               <img src={OrdersLogo} className="admin-view-title"></img>
+               <div className="button-wrapper">
+                <button onClick={showFinished}>Show Finished</button>
+                <button onClick={showOrdered}>Show Ordered</button>
+                <button onClick={showStarted}>Show Started</button>
+                <button onClick={showAll}>Show All</button>
+               </div>
                <div className="admin-order-items-wrapper">
                 {allOrders ? (
                     allOrders.map(order => (
