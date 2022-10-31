@@ -8,11 +8,15 @@ import UserHome from './Views/User/UserHome';
 import UserOrders from './Views/User/UserOrders';
 import AdminHome from './Views/Admin/AdminHome';
 import { useState } from 'react';
-import { User } from './models/models';
+import { User, Menu } from './models/models';
 import data from '../backend/dist/data.json';
 import { ShoppingCartProvider } from "./components/MenuItem" 
 
-function App() {
+interface Props {
+  activeUser: string;
+  menuItem: Menu;
+}
+function App({ menuItem}: Props) {
   const [activeUser, setActiveUser] = useState<string>("");
 
   return (
@@ -20,9 +24,9 @@ function App() {
       <ShoppingCartProvider>
         <Routes>
           <Route element={ <Landing activeUser={activeUser} setActiveUser={setActiveUser} /> } path='/' />
-          <Route element={ <About /> } path='/about' />
-          <Route element={ <UserHome activeUser={activeUser} /> } path='/menu' />
-          <Route element={ <UserOrders activeUser={activeUser} /> } path='/orders' />
+          <Route element={ <About activeUser={activeUser} menuItem={menuItem} /> } path='/about' />
+          <Route element={ <UserHome activeUser={activeUser} menuItem={menuItem} /> } path='/menu' />
+          <Route element={ <UserOrders activeUser={activeUser} menuItem={menuItem} /> } path='/orders' />
           <Route element={ <AdminHome activeUser={activeUser} /> } path='/admin' />
         </Routes>
       </ShoppingCartProvider>

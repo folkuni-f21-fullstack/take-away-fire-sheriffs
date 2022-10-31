@@ -30,7 +30,7 @@ function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
 
   let totalPrice = 0;
   for (let item of orderItem.items) {
-    totalPrice = totalPrice + item.price;
+      totalPrice = totalPrice + (item.price * item.quantity);
   } 
 
   const changeOrderStatus = () => {

@@ -29,7 +29,7 @@ function DishInfo({menuItem, setOpenInfo}: Props) {
                 <section className="dishInfo-info-container">
                     <p>Ingredients: {menuItem.ingredients}</p>
                     <p>May contain: {menuItem.allergies}</p>
-                    <button onClick={() => increaseCartQuantity(menuItem.id, menuItem.title,menuItem.price)}>Add to cart</button>
+                    <button onClick={() => increaseCartQuantity(menuItem.id, menuItem.title,menuItem.price, menuItem.quantity)}>Add to cart</button>
                 </section>
             </div>
         </div>

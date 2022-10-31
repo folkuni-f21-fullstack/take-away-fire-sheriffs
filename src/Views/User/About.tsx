@@ -3,14 +3,21 @@ import aboutpic  from '../../assets/about-title.svg'
 import history  from '../../assets/history.svg'
 import employees  from '../../assets/employees.svg'
 import contact  from '../../assets/contact.svg'
+import { Menu, User } from '../../models/models';
+
 import './About.scss'
 
-const About = () => {
+interface Props {
+    activeUser: string;
+    menuItem: Menu;
+}
+
+const About = ({activeUser, menuItem}: Props) => {
 
 
     return (
         <>
-            <Header />
+            <Header activeUser={activeUser} menuItem={menuItem} />
                 <article className="about-headline">
                     <img src={aboutpic} alt="about us" />
                 </article>

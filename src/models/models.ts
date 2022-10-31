@@ -1,4 +1,5 @@
 export type Menu = {
+    quantity: number;
     title: string;
     price: number;
     ingredients: string;

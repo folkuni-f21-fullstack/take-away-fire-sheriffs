@@ -1,7 +1,7 @@
 import './AdminOrderItem.scss';
 import AdminEditOverlay from './overlays/AdminEditOrder'
 import { Key, useEffect, useState } from 'react'
-import {  Orders } from "../models/models";
+import {  Orders,  } from "../models/models";
 
 
 interface Props {
@@ -14,20 +14,23 @@ function AdminOrderItem({orderItem, fetchOrders}: Props) {
     const [orderStatus, setOrderStatus] = useState(orderItem.status);
     const [orderBtn, setOrderBtn] = useState(orderItem.status);
 
-    const orderItems = orderItem.items.map((item: { title: string; price: number; }, index: Key) => {
+    const orderItems = orderItem.items.map((item: { title: string; price: number; quantity: number; }, index: Key) => {
+
+        
         return (
           <section key={index} className="card-order">
-            <p className="card-text">{item.title}</p>
-            <p className="card-text">{item.price}:-</p>
+            <p className="card-text">{item.title}</p><p>{'x' + item.quantity}</p>
+            <p className="card-text">{item.price}:-</p> 
           </section>
         );
     });
 
     let totalPrice = 0;
     for (let item of orderItem.items) {
-        totalPrice = totalPrice + item.price;
+        totalPrice = totalPrice + (item.price * item.quantity);
     } 
-
+    console.log(totalPrice);
+    
     const editPressed = () => {
         {setOpenEdit(true)}
     }
