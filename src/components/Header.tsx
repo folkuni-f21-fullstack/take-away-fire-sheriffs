@@ -3,8 +3,14 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import CartOverlay from './overlays/Cart'
 import { useShoppingCart } from './MenuItem';
+import { Menu } from "../models/models";
 
-function Header() {
+
+interface Props {
+    activeUser: string;
+    menuItem: Menu;
+}
+function Header({activeUser, menuItem}: Props) {
     const navigate = useNavigate();
     const [openCart, setOpenCart] = useState(false);
     const { cartQuantity } = useShoppingCart()
@@ -31,11 +37,12 @@ function Header() {
           
         </ul>
         <section className='cart-container' onClick={openCartBtn}>
-            <div className='cart-number'><p>{cartQuantity}</p></div>
+            {cartQuantity>0? <div className='cart-number'><> {cartQuantity} </></div> : null }
+            
             <img className='menu-cart-logo' src="src\assets\cart-logo.svg" alt="" />
             
         </section>
-        {openCart && <CartOverlay closeOverlay={setOpenCart} />}
+        {openCart && <CartOverlay activeUser={activeUser} closeOverlay={setOpenCart} menuItem={menuItem} />}
       </nav>
     )
 }
