@@ -4,6 +4,7 @@ export type Menu = {
     ingredients: string;
     allergies: string;
     imgUrl: string;
+    quantity: number;
     id: number;
 }
 

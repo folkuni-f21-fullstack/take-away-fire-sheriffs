@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Key } from "react";
 import "./UserOrderItem.scss";
 import EditOrder from "./overlays/UserEditOrder";
 import { Menu, Orders } from "../models/models";
@@ -19,10 +19,10 @@ function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
     setOpenEdit(true);
   }
 
-  const orderItems = orderItem.items.map((item, index) => {
+  const orderItems = orderItem.items.map((item: { title: string; price: number; quantity: number; }, index: Key) => {
     return (
       <section key={index} className="card-order">
-        <p className="card-text">{item.title}</p>
+        <p className="card-text">{item.title}</p><p>{'x' + item.quantity}</p>
         <p className="card-text">{item.price}:-</p>
       </section>
     );

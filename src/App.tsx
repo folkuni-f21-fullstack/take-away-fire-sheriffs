@@ -1,15 +1,12 @@
 import './App.scss';
-
 import { Route, Routes } from 'react-router-dom';
-
 import Landing from './Views/Landing';
 import About from './Views/User/About';
 import UserHome from './Views/User/UserHome';
 import UserOrders from './Views/User/UserOrders';
 import AdminHome from './Views/Admin/AdminHome';
 import { useState } from 'react';
-import { User, Menu } from './models/models';
-import data from '../backend/dist/data.json';
+import { Menu } from './models/models';
 import { ShoppingCartProvider } from "./components/MenuItem" 
 
 interface Props {
