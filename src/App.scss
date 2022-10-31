@@ -48,3 +48,14 @@ h3 {
 button {
   @include base.button;
 }
+
+.feedback {
+  margin: 5px;
+  opacity: 0;
+  transition: 0.5s;
+  height: 0em;
+}
+.displayFeedback {
+  opacity: 1;
+  height: 1em;
+}

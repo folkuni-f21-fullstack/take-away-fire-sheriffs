@@ -23,6 +23,7 @@ function UserHome({activeUser, menuItem}: Props) {
     const fetchMenu = async () => {
         const response = await fetch('/api/menu', { mode: 'cors' });
         const data: Menu[] = await response.json();
+        
         setMenu(data);
     }
 
@@ -35,10 +36,12 @@ function UserHome({activeUser, menuItem}: Props) {
             <Header activeUser={activeUser} menuItem={menuItem} />
             <div className='userHomeWrapper content-wrapper'>
                 <img className='menuTitle' src={ MenuTitle } alt="title-logo" />
-                { menu ? (
-                    menu.map(item => (
-                        <MenuItem key={item.id} menuItem={item} />
-                    ))) : 'Couldnt find any menu' }        
+                    <div className="menu-items-wrapper">
+                    { menu ? (
+                        menu.map(item => (
+                            <MenuItem key={item.id} menuItem={item} />
+                        ))) : 'Couldnt find any menu' }   
+                    </div>     
             </div>
         </>
     )

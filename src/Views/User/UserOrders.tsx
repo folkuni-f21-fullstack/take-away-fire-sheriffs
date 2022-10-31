@@ -29,7 +29,17 @@ const UserOrders = ({activeUser}: Props) => {
 
   const loggedInUser = users?.find(user => user.username === activeUser);
 
-  console.log(loggedInUser);
+  if (loggedInUser) {
+    loggedInUser.orders.sort((a, b) => {
+      if (a.date < b.date) {
+          return 1;
+      } else if (a.date > b.date) {
+          return -1;
+      } else {
+          return 0;
+      }
+    });
+  }
   
   return (
     <>
@@ -37,11 +47,11 @@ const UserOrders = ({activeUser}: Props) => {
       <section className="order-title content-wrapper">
         <img src="../src/assets/orders-title.svg" alt="My Order" />
   
-        <section className="wrapper">
+        <section className="user-orders-wrapper">
           { loggedInUser ? (
               loggedInUser.orders.map(item => (
                   <OrderItem key={item.id} orderItem={item} activeUser={activeUser} getUsers={getUsers}/>
-              ))) : 'Couldnt find any orders' }        
+              ))) : 'Couldnt find any orders' }       
         </section>
       </section>
     </>

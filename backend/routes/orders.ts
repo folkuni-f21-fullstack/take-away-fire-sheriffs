@@ -7,6 +7,7 @@ type Query = {
     username: string;
     order: Orders;
     comment: string;
+    from: string;
   }
 
   function orderIdGenerator() {
@@ -133,14 +134,14 @@ router.delete('/deleteorder', async (req, res) => {
                     db.write();
                     return;
                 } else {
-                    // statuscode
+                    // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
                 }
             });
         } else {
-            // statuscode
+            // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
         }
     } else {
-        // statuscode
+        // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
     } 
 });
 
@@ -165,16 +166,16 @@ router.delete('/deleteitem', async (req, res) => {
                 res.send(itemsAfter);
                 db.write();
             } else {
-                res.sendStatus(404);
+                // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
             }  
         } else {
-            // statuscode
+            // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
         } 
     });
     
 });
 
-router.post('/usercomment', (req, res) => {
+router.post('/comment', (req, res) => {
     if (!db.data) {
         res.sendStatus(404);
         return;
@@ -182,23 +183,42 @@ router.post('/usercomment', (req, res) => {
 
     const query: Query = req.body;
     
-    const user = db.data.users.find(user => user.username === query.username);
+    db.data.users.map(user => {
+        if (user.username === query.username) {
+            user.orders.map(order => {
+                if (order.id === query.order.id) {
+                    if(query.from == "user") {
+                        order.userComment = query.comment;
+                        res.json(order.userComment);
+                    } else if(query.from == "admin") {
+                        order.adminComment = query.comment;
+                        res.json(order.adminComment);
+                    }
+                    db.write();  
+                } else {
+                    res.sendStatus(404);
+                }
+            })
+        }
+    });
+});
 
-    if (user) {
-        user.orders.map(order => {
-            if (order.id === query.order.id) {
-                order.userComment = query.comment;
-                console.log(order.userComment);
-                res.json(order.userComment);
-                db.write();  
-            } else {
-                res.sendStatus(404);
-            }
-        })
-    } else {
+router.post('/finduser', (req, res) => {
+    if (!db.data) {
         res.sendStatus(404);
+        return;
     }
+
+    const orderToFind = req.body;
     
+    db.data.users.map(user => {
+        user.orders.map(order => {
+            if(order.orderId == orderToFind.orderId) {
+                res.json(user.username);
+                return;
+            }
+        });
+    });
 });
 
 export default router;

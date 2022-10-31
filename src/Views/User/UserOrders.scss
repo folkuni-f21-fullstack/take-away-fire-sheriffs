@@ -1,13 +1,17 @@
 /* My orders top logo */
 .order-title {
-  text-align: center;
-  padding: 1rem;
-  align-items: center;
-}
-
-.wrapper {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  // justify-content: center;
   align-items: center;
+  // gap: 2em;
+
+  .user-orders-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
 }
+
+

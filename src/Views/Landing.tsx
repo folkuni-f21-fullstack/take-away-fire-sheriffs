@@ -17,9 +17,9 @@ function Landing({activeUser, setActiveUser}: Props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-    console.log("Landing - activeUser: ", activeUser);
-    console.log("Landing - setActiveUser: ", setActiveUser);
-
+    
+  
+        
     const signupClick = () => {
         {setOpenSignup(true)}
     }
@@ -49,14 +49,16 @@ function Landing({activeUser, setActiveUser}: Props) {
             setFeedback("The database seems to be on vacation");
         } 
         else {
+            
             setActiveUser(newData.username);
             navigate('/menu');
             if (newData.customer == false) {
                 navigate('/admin');
             }
         }  
+       
     }
-
+    
     async function userLogin(): Promise<User | number> {
         const credentials: Credentials = {
             username: username,
@@ -74,7 +76,8 @@ function Landing({activeUser, setActiveUser}: Props) {
         // Kontrollera svaret 
         if(response.status == 200) {
             const data: User = await response.json();
-            console.log(data);
+            console.log('Landing - active User: ' , data.username);
+            
             return data; 
         } else {
             return 404;

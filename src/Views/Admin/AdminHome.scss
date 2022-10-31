@@ -1,8 +1,40 @@
-
+@use '../../base';
 
 .admin-view-title{
-    display: flex;
-    justify-content: center;
     margin-bottom: 5vh;
 }
 
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2em;
+    margin-bottom: 2em;
+
+    button {
+        width: 9em;
+    }
+
+    button:nth-child(1) {
+        background-color: base.$status-finished;
+    }
+    button:nth-child(2) {
+        background-color: base.$status-ordered;
+        color: base.$white;
+    }
+    button:nth-child(3) {
+        background-color: base.$status-started;
+        color: base.$white;
+    }
+    button:nth-child(4) {
+        background-color: base.$black;
+        color: base.$white;
+    }
+}
+
+.admin-order-items-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 3rem;
+}
