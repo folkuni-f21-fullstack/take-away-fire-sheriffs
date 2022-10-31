@@ -11,8 +11,7 @@
   background: base.$yellow-bgr;
   border: 5px solid base.$light-yellow-bgr;
   padding: 1rem;
-  gap: 1em;
-  margin: 2rem;
+  // gap: 1em;
   position: relative;
 }
 
@@ -21,8 +20,8 @@
 
 }
 .cart-title {
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 /* Order Details, Dishes and Prices */
 .edit-card-info {
@@ -55,10 +54,8 @@
 
   /* Total cost*/
   .card-cost {
-    padding-bottom: 2em;
+    padding-bottom: 1em;
     font-size: 24px;
-    margin-top: 2rem;
-    // align-self: flex-end;
   }
 
   /* User comment*/
@@ -70,7 +67,6 @@
     border: 1px solid base.$black;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
-    margin-top: 0.5rem;
     padding-left: 1rem;
     padding-right: 1rem;
   }
