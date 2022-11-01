@@ -49,8 +49,14 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
         } else if(menuBtnStatus == 'open') {
             setmenuBtnStatus('closed')
         }
-     }
-
+    }
+    const addItemBtn = (item: any ) => {
+        console.log('pressed add Btn in Menu');
+        console.log( item );
+        
+        
+        
+    }
     const orderItems = orderItem.items.map((item: { title: string; price: number; quantity: number; }, index: Key) => {
         return (
           <div key={index} className="edit-element ">
@@ -70,7 +76,7 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
                 <p>{item.title}</p>
                 <p className='item-price'>{item.price + ':-'}</p>
             </section>
-            <button className="add-btn">Add</button>
+            <button className="add-btn" onClick={(e) => addItemBtn({item})}>Add</button>
           </div>
         );
     });
@@ -89,7 +95,7 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
           comment: comment,
           from: userType
         }
-    
+        
         const requestOptions = {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
