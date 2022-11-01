@@ -46,8 +46,7 @@ function UserOrderItem({order, activeUser, getUsers}: Props) {
 
     const query = {
       username: activeUser, 
-      // itemId: order.id,
-      order: order
+      order: order.orderId
     }
     console.log('deleteOrder 2', order.orderId);
     const requestOptions = {

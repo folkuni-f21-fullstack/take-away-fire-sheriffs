@@ -117,20 +117,19 @@ router.delete('/deleteorder', async (req, res) => {
         res.sendStatus(404);
         return;
     }
-
     const query = req.body;
-    console.log('query:', query);
+    console.log('query order from frontend: ',query.order);
 
-    const maybeUser: Users | undefined = db.data.users.find(user => user.username === query.username);
-
+    const maybeUser: Users | undefined = db.data.users.find(user => user.username == query.username);
     if (maybeUser) {
-        console.log('user:', maybeUser);
-        console.log('userOrders:', maybeUser.orders);
-        
-        const newUserOrders = maybeUser.orders.filter(order => order.id !== query.id); 
-        
-        console.log('newUserOrders:', newUserOrders);
-    } 
+        console.log('maybeuser',maybeUser);
+        const newOrders = maybeUser.orders.filter(item => item.orderId !== query.order);
+        maybeUser.orders = newOrders;
+        console.log('new Order after delete: ' ,newOrders);
+        db.write()
+        res.sendStatus(200);
+    }
+
 });
     
 

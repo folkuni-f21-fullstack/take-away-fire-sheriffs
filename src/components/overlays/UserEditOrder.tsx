@@ -61,10 +61,15 @@ function EditOrder({ closeOverlay, order, activeUser, getUsers, deleteOrder }: P
       <div key={index} className="edit-element ">
         <section className="edit-details">
           <p className="card-text">{item.title}</p>
-          <p className="item-quantity">x{item.quantity}</p>
           <p className="card-text">{item.price}:-</p>
+          <p className="item-quantity">x{item.quantity}</p>
         </section>
-        <button className="card-btn-delete" onClick={deleteItem}>Delete</button>
+        <section className="card-add-remove-btns">
+          
+          <button className="card-btn-delete" onClick={deleteItem}> - </button>
+          <button> + </button>
+        </section>
+        
       </div>
     );
 
