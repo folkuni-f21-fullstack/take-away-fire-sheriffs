@@ -152,27 +152,31 @@ router.delete('/deleteitem', async (req, res) => {
     }
     const query = req.body;
 
-    const orderId = query.order.id;
+    const orderId = query.orderItemId;
     
     db.data.users.map(user => {
-        if(user.username === query.username) {
-            console.log('items before:', user.orders[orderId].items);
 
-            user.orders[orderId].items.splice(query.orderItemIndex, 1 );
-            const itemsAfter = user.orders[orderId].items;
-            console.log(itemsAfter);
-            
-            if (itemsAfter) {
-                res.send(itemsAfter);
-                db.write();
-            } else {
-                // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
-            }  
-        } else {
-            // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
-        } 
-    });
+        if (user.username === query.username) {
     
+            user.orders.map(order => {
+        
+                const clickedItem = order.items.find(item => item.id == orderId);
+                
+                const newItems = order.items.filter(item => clickedItem?.id !== item.id)
+                console.log('filteredItems after click:', newItems);
+                
+                if (order.items > newItems) {
+
+                    order.items = newItems;
+                    res.send(newItems);
+                    
+                    db.write();
+                } else {
+                    res.sendStatus(404);
+                }
+            });     
+        }   
+    }); 
 });
 
 router.post('/comment', (req, res) => {

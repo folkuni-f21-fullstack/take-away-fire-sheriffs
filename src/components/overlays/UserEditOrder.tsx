@@ -56,7 +56,7 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder 
   }
 
 
-  const mappedOrderItems = orderItem.items.map((item: { title: string; price: number; quantity: number; }, index: Key) => {
+  const mappedOrderItems = orderItem.items.map((item: { title: string; price: number; quantity: number; id: number}, index: Key) => {
     return (
       <div key={index} className="edit-element ">
         <section className="edit-details">
@@ -74,7 +74,7 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder 
       const query = {
         username: activeUser,
         order: orderItem,
-        orderItemIndex: index
+        orderItemId: item.id
       }
   
       console.log(query);
