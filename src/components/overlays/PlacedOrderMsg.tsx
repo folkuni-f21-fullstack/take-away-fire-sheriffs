@@ -1,9 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import "./PlacedOrderMsg.scss";
 
-function PlacedOrderMsg() {
+interface Props {
+  setMsg: (msg: boolean) => void;
+}
+
+function PlacedOrderMsg({setMsg}: Props) {
   const navigate = useNavigate();
   const doneBtn = () => {
+    setMsg(false);
     navigate("/orders");
   };
   return (

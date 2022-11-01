@@ -42,7 +42,7 @@ export function Cart({ closeOverlay, activeUser }: Props) {
 
     emptyCart();
     setMsg(true);
-    const response = await fetch("api/orders/saveorder", requestOptions);
+    const response = await fetch("/api/orders/saveorder", requestOptions);
   };
 
   let totalPrice = cartItems.reduce((total, cartItem) => {
@@ -52,7 +52,7 @@ export function Cart({ closeOverlay, activeUser }: Props) {
   return (
     <section className="cart-overlay-container">
       {msg == true ? (
-        <Msg />
+        <Msg setMsg={setMsg}/>
       ) : (
         <div className="cart-container">
           <div className="cart-upper-container">

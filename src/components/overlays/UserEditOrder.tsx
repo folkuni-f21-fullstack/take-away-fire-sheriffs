@@ -5,7 +5,7 @@ import { Orders, User, Menu } from '../../models/models';
 
 interface Props {
   closeOverlay: (close: boolean) => void;
-  orderItem: Orders;
+  order: Orders;
   activeUser: string;
   getUsers: () => void;
   deleteOrder: () => void;
@@ -18,9 +18,9 @@ type Query = {
   from: string;
 }
 
-function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder }: Props) {
+function EditOrder({ closeOverlay, order, activeUser, getUsers, deleteOrder }: Props) {
   const [feedback, setFeedback] = useState<string>('');
-  const [items, setItems] = useState<Menu[] | null>(null);
+  // const [items, setItems] = useState<Menu[] | null>(null);
   const [userComment, setUserComment] = useState<string>('');
 
   const UserCloseBtn = () => {
@@ -35,7 +35,7 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder 
     
     const query: Query = {
       username: activeUser,
-      order: orderItem,
+      order: order,
       comment: userComment,
       from: "user"
     }
@@ -46,7 +46,7 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder 
       body: JSON.stringify(query)
     }
 
-    const response = await fetch('api/orders/comment', requestOptions);
+    const response = await fetch('/api/orders/comment', requestOptions);
 
     console.log('userCommentResponse:', response);
     console.log(userComment);
@@ -56,7 +56,7 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder 
   }
 
 
-  const mappedOrderItems = orderItem.items.map((item: { title: string; price: number; quantity: number; id: number}, index: Key) => {
+  const mappedOrderItems = order.items.map((item: { title: string; price: number; quantity: number; id: number}, index: Key) => {
     return (
       <div key={index} className="edit-element ">
         <section className="edit-details">
@@ -69,15 +69,20 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder 
     );
 
     async function deleteItem() {
-      console.log(orderItem);
+      console.log('userEditOrder, deleteItem');
+      
+      if (!order.items) {
+        return;
+      }
+      console.log(order);
       
       const query = {
         username: activeUser,
-        order: orderItem,
-        orderItemId: item.id
+        orderId: order.id,
+        itemId: item.id
       }
   
-      console.log(query);
+      console.log('userEditOrder, deleteItem, query:', query);
       
   
       const requestOptions = {
@@ -85,18 +90,20 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(query)
       }
-  
-      const response = await fetch('api/orders/deleteitem', requestOptions);
+      console.log('userEditOrder, click');
+      
+      const response = await fetch('/api/orders/deleteitem', requestOptions);
   
       if (response.status == 200) {
-        const data: Menu[] | null = await response.json();
-
-        if (data && data.length == 0) {
+        // const data: Menu[] | null = await response.json();
+      
+        const newItems = order.items.filter(item => item.id !== query.itemId);
+        if (newItems.length == 0) {
           deleteOrder();
         } else {
-          setItems(data);
+          // setItems(newItems);
           getUsers();
-          console.log(data);
+          console.log(newItems);
         }
         
       } else {
@@ -106,7 +113,7 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder 
   });
 
   let totalPrice = 0;
-  for (let item of orderItem.items) {
+  for (let item of order.items) {
     totalPrice = totalPrice + item.price;
   }  
 
@@ -120,14 +127,14 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder 
           alt=""
         />
 
-        <h2 className="cart-title">Ordernr: {orderItem.orderId}</h2>
+        <h2 className="cart-title">Ordernr: {order.orderId}</h2>
         <section className="edit-card-info">
           { mappedOrderItems }
         </section>
         <section className="edit-card-footer">
           <h2 className="card-cost">Totalt: {totalPrice}:-</h2>
           <p className="comment-title">Any extra info about the order?</p>
-          <input className="cart-comment" type="text" defaultValue={orderItem.userComment} onChange={(event) => setUserComment(event.target.value)} />
+          <input className="cart-comment" type="text" defaultValue={order.userComment} onChange={(event) => setUserComment(event.target.value)} />
           <p className={"feedback " + feedback}>Your comment is saved.</p>
           <button className="popup-btn-save" onClick={saveComment}>
             Save comment

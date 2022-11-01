@@ -10,6 +10,12 @@ type Query = {
     from: string;
   }
 
+type OrderBody = {
+    username: string;
+    orderId: number;
+    itemId: number
+}
+
   function orderIdGenerator() {
     if (!db.data) {
         
@@ -132,6 +138,7 @@ router.delete('/deleteorder', async (req, res) => {
                     user.orders = newUserOrders;
                     res.json(newUserOrders);
                     db.write();
+                    res.sendStatus(200);
                     return;
                 } else {
                     // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
@@ -143,40 +150,61 @@ router.delete('/deleteorder', async (req, res) => {
     } else {
         // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
     } 
+    res.sendStatus(400);
 });
 
 router.delete('/deleteitem', async (req, res) => {
     if (!db.data) {
+        console.log('deleteItem 1');
         res.sendStatus(404);
         return;
     }
-    const query = req.body;
+    const query: OrderBody = req.body;
 
-    const orderId = query.orderItemId;
+    const maybeUser: Users | undefined = db.data.users.find(user => user.username == query.username);
+    console.log('deleteItem, orderId:', query.orderId);
     
-    db.data.users.map(user => {
+    if (maybeUser) {
+        const maybeOrder = maybeUser.orders.find(order => order.id == query.orderId);
 
-        if (user.username === query.username) {
+        if (maybeOrder) {
+            const newItems = maybeOrder.items.filter(item => item.id !== query.itemId);
+            maybeOrder.items = newItems;
+            db.write();
+            console.log('deleteItem 2');
+            res.sendStatus(200);
+        } else {
+            console.log('deleteItem 3');
+            res.sendStatus(404);
+        }
+    } else {
+        console.log('deleteItem 4');
+        res.sendStatus(404);
+    }
     
-            user.orders.map(order => { // felmeddelande i backend!
+    // db.data.users.map(user => {
+
+    //     if (user.username === query.username) {
+    
+    //         user.orders.map(order => { // felmeddelande i backend!
         
-                const clickedItem = order.items.find(item => item.id == orderId);
+    //             const clickedItem = order.items.find(item => item.id == orderId);
                 
-                const newItems = order.items.filter(item => clickedItem?.id !== item.id)
-                console.log('filteredItems after click:', newItems);
+    //             const newItems = order.items.filter(item => clickedItem?.id !== item.id)
+    //             console.log('filteredItems after click:', newItems);
                 
-                if (order.items > newItems) {
+    //             if (order.items > newItems) {
 
-                    order.items = newItems;
-                    res.send(newItems); // felmeddelande i backend!
+    //                 order.items = newItems;
+    //                 res.send(newItems); // felmeddelande i backend!
                     
-                    db.write();
-                } else {
-                    res.sendStatus(404);
-                }
-            });     
-        }   
-    }); 
+    //                 db.write();
+    //             } else {
+    //                 res.sendStatus(404);
+    //             }
+    //         });     
+    //     }   
+    // }); 
 });
 
 router.post('/comment', (req, res) => {

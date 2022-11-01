@@ -41,7 +41,7 @@ function Signup( {closeOverlay, setActiveUser}: Prop ) {
             body: JSON.stringify(credentials)
         }
 
-        const response = await fetch('api/users/signup', requestOptions);
+        const response = await fetch('/api/users/signup', requestOptions);
         
         console.log("API response", response);
         checkResponse(response, credentials);
@@ -80,7 +80,7 @@ function Signup( {closeOverlay, setActiveUser}: Prop ) {
             body: JSON.stringify(credentials)
         }
 
-        const response = await fetch('api/users/login', requestOptions);
+        const response = await fetch('/api/users/login', requestOptions);
 
         // Kontrollera svaret 
         if(response.status == 200) {
