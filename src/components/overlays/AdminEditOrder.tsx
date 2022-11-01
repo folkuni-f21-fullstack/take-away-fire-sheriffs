@@ -70,7 +70,7 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
                 <p>{item.title}</p>
                 <p className='item-price'>{item.price + ':-'}</p>
             </section>
-            <button className="" >Add</button>
+            <button className="add-btn">Add</button>
           </div>
         );
     });
