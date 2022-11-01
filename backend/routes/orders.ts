@@ -158,7 +158,7 @@ router.delete('/deleteitem', async (req, res) => {
 
         if (user.username === query.username) {
     
-            user.orders.map(order => {
+            user.orders.map(order => { // felmeddelande i backend!
         
                 const clickedItem = order.items.find(item => item.id == orderId);
                 
@@ -168,7 +168,7 @@ router.delete('/deleteitem', async (req, res) => {
                 if (order.items > newItems) {
 
                     order.items = newItems;
-                    res.send(newItems);
+                    res.send(newItems); // felmeddelande i backend!
                     
                     db.write();
                 } else {
