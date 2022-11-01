@@ -71,7 +71,7 @@ function Landing({activeUser, setActiveUser}: Props) {
             body: JSON.stringify(credentials)
         }
 
-        const response = await fetch('api/users/login', requestOptions);
+        const response = await fetch('/api/users/login', requestOptions);
 
         // Kontrollera svaret 
         if(response.status == 200) {

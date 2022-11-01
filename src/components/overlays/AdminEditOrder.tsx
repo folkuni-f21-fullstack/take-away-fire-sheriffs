@@ -102,7 +102,7 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
           body: JSON.stringify(query)
         }
     
-        const response = await fetch('api/orders/comment', requestOptions);
+        const response = await fetch('/api/orders/comment', requestOptions);
     
         console.log('commentResponse:', response.status);
         console.log(comment);
@@ -117,7 +117,7 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
         body: JSON.stringify(orderItem)
         }
     
-        const response = await fetch('api/orders/finduser', requestOptions);
+        const response = await fetch('/api/orders/finduser', requestOptions);
         const data: string = await response.json();
         console.log("data from api/orders/finduser", data);
         return data;

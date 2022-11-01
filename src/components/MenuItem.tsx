@@ -30,6 +30,7 @@ type ShoppingCartContext = {
   decreaseCartQuantity: (id: number) => void;
   cartQuantity: number;
   cartItems: CartItem[];
+  emptyCart: () => void;
 };
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -79,6 +80,13 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     });
   }
 
+
+
+  function emptyCart() {
+    setCartItems ([])
+    
+  }
+
   function decreaseCartQuantity(id: number) {
     setCartItems((currItems) => {
       if (currItems.find((item) => item.id === id)?.quantity === 1) {
@@ -103,6 +111,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         decreaseCartQuantity,
         cartItems,
         cartQuantity,
+        emptyCart
       }}
     >
       {children}
@@ -115,8 +124,6 @@ export function MenuItem({ menuItem }: Props) {
   const { getItemQuantity, increaseCartQuantity } = useShoppingCart();
   const quantity = getItemQuantity(menuItem.id);
 
-  
-  
 
   function handleClick() {
     console.log(menuItem.title);

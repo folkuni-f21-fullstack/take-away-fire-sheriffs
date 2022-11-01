@@ -1,12 +1,9 @@
 import "./Cart.scss";
-import { useNavigate } from "react-router-dom";
 import CartItem from "../../components/CartItem";
+import Msg from "../../components/overlays/PlacedOrderMsg";
 import { useShoppingCart } from "../MenuItem";
 import { Menu } from "../../models/models";
 import { useState } from "react";
-import e from "cors";
-import { clear } from "console";
-
 
 interface Props {
   menuItem: Menu;
@@ -17,72 +14,88 @@ interface Props {
 }
 
 export function Cart({ closeOverlay, activeUser }: Props) {
-  const [userComment, setUserComment] =  useState<string>('')
+  const [userComment, setUserComment] = useState<string>("");
+  const [msg, setMsg] = useState<boolean>(false);
   const { cartItems } = useShoppingCart();
-  const navigate = useNavigate();
+  const { emptyCart } = useShoppingCart();
 
   const closeBtn = () => {
     closeOverlay(false);
   };
-  console.log('cart User',activeUser);
-  
-  const placeOrderBtn  = async() => {
-    
-    const localOrder = localStorage.getItem('shopping-cart')
-    
+  console.log("cart User", activeUser);
+
+  const placeOrderBtn = async () => {
+    const localOrder = localStorage.getItem("shopping-cart");
+
     const query = {
       username: activeUser,
       neworder: localOrder,
-      usercomment: userComment
-    }
+      usercomment: userComment,
+    };
     const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(query)
-    }
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(query),
+    };
     console.log(localOrder);
     console.log(query);
-    
-    localStorage.clear()
-   const response = await fetch('api/orders/saveorder', requestOptions)
 
-  }
+    emptyCart();
+    setMsg(true);
+    const response = await fetch("/api/orders/saveorder", requestOptions);
+  };
 
-  
+  let totalPrice = cartItems.reduce((total, cartItem) => {
+    return total + (cartItem.price || 0) * cartItem.quantity;
+  }, 0);
+
   return (
     <section className="cart-overlay-container">
-      <div className="cart-container">
-        <div className="cart-upper-container">
-          <h1 className="cart-title">Cart</h1>
-          <img
-            src="src\assets\close-overlay-button.svg"
-            alt=""
-            onClick={closeBtn}
-            className="close-overlay-btn"
-          />
+      {msg == true ? (
+        <Msg setMsg={setMsg}/>
+      ) : (
+        <div className="cart-container">
+          <div className="cart-upper-container">
+            <h1 className="cart-title">Cart</h1>
+            <img
+              src="src\assets\close-overlay-button.svg"
+              alt=""
+              onClick={closeBtn}
+              className="close-overlay-btn"
+            />
+          </div>
+
+          {cartItems.map((item) => (
+            <CartItem key={item.id} menuItem={item} />
+          ))}
+
+          {totalPrice <= 0 ? null : (
+            <h2 className="cart-total">
+              {" "}
+              Total: {""}
+              {totalPrice}:-
+            </h2>
+          )}
+
+          {totalPrice <= 0 ? (
+            <h2 className="cart-total"> Cart is Empty</h2>
+          ) : (
+            <input
+              className="user-comment-input"
+              type="text"
+              placeholder="Any extra info about the order?"
+              value={userComment}
+              onChange={(e) => setUserComment(e.target.value)}
+            />
+          )}
+
+          {totalPrice <= 0 ? null : (
+            <button className="cart-buttons" onClick={placeOrderBtn}>
+              Place Order
+            </button>
+          )}
         </div>
-
-        {cartItems.map((item) => (
-          <CartItem key={item.id} menuItem={item} />
-        ))}
-
-        <h2 className="cart-total">Total: {""}
-          {cartItems.reduce((total, cartItem) => {
-            return total + (cartItem.price || 0) * cartItem.quantity;
-          }, 0)}
-          :-
-        </h2>
-
-        <input
-          className="user-comment-input"
-          type="text"
-          placeholder="Any extra info about the order?"
-          value={userComment}
-          onChange={(e) => setUserComment(e.target.value)}
-        />
-
-        <button className="cart-buttons" onClick={placeOrderBtn}>Place Order</button>
-      </div>
+      )}
     </section>
   );
 }

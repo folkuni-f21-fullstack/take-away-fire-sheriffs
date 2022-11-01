@@ -5,21 +5,21 @@ import { Menu, Orders } from "../models/models";
 
 
 interface Props {
-  orderItem: Orders;
+  order: Orders;
   activeUser: string;
   getUsers: () => void;
 };
 
-function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
+function UserOrderItem({order, activeUser, getUsers}: Props) {
   const [openEdit, setOpenEdit] = useState<boolean>(false);
-  const [orderStatus, setOrderStatus] = useState(orderItem.status);
+  const [orderStatus, setOrderStatus] = useState(order.status);
 
   
   function showOverlay() {
     setOpenEdit(true);
   }
 
-  const orderItems = orderItem.items.map((item: { title: string; price: number; quantity: number; }, index: Key) => {
+  const orderItems = order.items.map((item: { title: string; price: number; quantity: number; }, index: Key) => {
     return (
       <section key={index} className="card-order">
         <p className="card-text">{item.title}</p><p>{'x' + item.quantity}</p>
@@ -29,37 +29,42 @@ function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
   });
 
   let totalPrice = 0;
-  for (let item of orderItem.items) {
+  for (let item of order.items) {
       totalPrice = totalPrice + (item.price * item.quantity);
   } 
 
-  const changeOrderStatus = () => {
-    if (orderItem.status == 'started') {
-      setOrderStatus('started')
-    } else if (orderItem.status == 'finished') {
-      setOrderStatus('finished')
-    }
-  }
+  // const changeOrderStatus = () => {
+  //   if (order.status == 'started') {
+  //     setOrderStatus('started')
+  //   } else if (order.status == 'finished') {
+  //     setOrderStatus('finished')
+  //   }
+  // }
   
   async function deleteOrder() {
-    console.log(orderItem.orderId);
+    console.log('deleteOrder 1', order.orderId);
 
     const query = {
       username: activeUser, 
-      id: orderItem.id
+      order: order.orderId
     }
-
+    console.log('deleteOrder 2', order.orderId);
     const requestOptions = {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(query)
     }
-
-    const response = await fetch('api/orders/deleteorder', requestOptions);
-
-    const data: Orders[] = await response.json();
-
-    console.log(data);
+    console.log('deleteOrder 3', order.orderId);
+    const response = await fetch('/api/orders/deleteorder', requestOptions);
+    console.log('deleteOrder 4', order.orderId);
+    if (response.status == 200) {
+      console.log('deleteOrder, status 200, success!');
+      
+    } else {
+      console.log('deleteOrder', response.status);
+      
+    }
+    // console.log(data);
 
     getUsers(); 
   }
@@ -70,11 +75,11 @@ function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
       <section className="card-header">
         <section className="card-status">
           <div className={'status-color-'+ orderStatus}></div>
-          <p className="status-text">{orderItem.status}</p>
+          <p className="status-text">{order.status}</p>
         </section>
-        <p className="order-number">Ordernr: {orderItem.orderId}</p>
+        <p className="order-number">Ordernr: {order.orderId}</p>
       </section>
-      <p className="card-date">{orderItem.date}</p>
+      <p className="card-date">{order.date}</p>
 
       <section className="card-info">
         { orderItems }
@@ -88,7 +93,7 @@ function UserOrderItem({orderItem, activeUser, getUsers}: Props) {
         </button>
         <button className="card-btn-delete" onClick={ deleteOrder }>Delete</button>
       </section>
-      {openEdit && <EditOrder closeOverlay={setOpenEdit} orderItem={orderItem} activeUser={activeUser} getUsers={getUsers} deleteOrder={deleteOrder}/>}
+      {openEdit && <EditOrder closeOverlay={setOpenEdit} order={order} activeUser={activeUser} getUsers={getUsers} deleteOrder={deleteOrder}/>}
     </section>
   );
 }

@@ -1,10 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import "./PlacedOrderMsg.scss";
 
-function PlacedOrderMsg() {
+interface Props {
+  setMsg: (msg: boolean) => void;
+}
+
+function PlacedOrderMsg({setMsg}: Props) {
   const navigate = useNavigate();
   const doneBtn = () => {
-    navigate("/menu");
+    setMsg(false);
+    navigate("/orders");
   };
   return (
     <div className="dark-msg-bg">
@@ -17,7 +22,7 @@ function PlacedOrderMsg() {
         <p className="msg-text">Thank you for your order</p>
 
         <button className="msg-btn-orders" onClick={doneBtn}>
-          Back to menu
+          Back to my orders
         </button>
       </section>
     </div>

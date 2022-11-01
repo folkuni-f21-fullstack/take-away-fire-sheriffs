@@ -70,7 +70,7 @@ function AdminOrderItem({orderItem, fetchOrders}: Props) {
             body: JSON.stringify(query)
         }
 
-        const response = await fetch('api/orders/changestatus', requestOptions);
+        const response = await fetch('/api/orders/changestatus', requestOptions);
         console.log(response);
         
     }
@@ -84,7 +84,7 @@ function AdminOrderItem({orderItem, fetchOrders}: Props) {
         body: JSON.stringify(orderItem)
         }
     
-        const response = await fetch('api/orders/finduser', requestOptions);
+        const response = await fetch('/api/orders/finduser', requestOptions);
         const data: string = await response.json();
         console.log("data from api/orders/finduser", data);
         return data;
@@ -104,7 +104,7 @@ function AdminOrderItem({orderItem, fetchOrders}: Props) {
           body: JSON.stringify(query)
         }
     
-        const response = await fetch('api/orders/deleteorder', requestOptions);
+        const response = await fetch('/api/orders/deleteorder', requestOptions);
         // const data: Orders[] = await response.json();
         fetchOrders();
     }

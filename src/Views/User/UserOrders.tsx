@@ -7,10 +7,7 @@ import { useState, useEffect } from "react";
 interface Props {
   activeUser: string;
   menuItem: Menu;
-
 }
-
-
 
 const UserOrders = ({activeUser, menuItem}: Props) => {
   console.log("UserOrders - activeUser: ", activeUser);
@@ -44,6 +41,10 @@ const UserOrders = ({activeUser, menuItem}: Props) => {
       }
     });
   }
+
+  if (loggedInUser) {
+    console.log(loggedInUser.orders);
+  }
   
   return (
     <>
@@ -53,8 +54,8 @@ const UserOrders = ({activeUser, menuItem}: Props) => {
   
         <section className="user-orders-wrapper">
           { loggedInUser ? (
-              loggedInUser.orders.map(item => (
-                  <OrderItem key={item.id} orderItem={item} activeUser={activeUser} getUsers={getUsers}/>
+              loggedInUser.orders.map((order) => (
+                  <OrderItem key={order.id} order={order} activeUser={activeUser} getUsers={getUsers} />
               ))) : 'Couldnt find any orders' }       
         </section>
       </section>

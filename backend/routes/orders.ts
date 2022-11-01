@@ -10,6 +10,12 @@ type Query = {
     from: string;
   }
 
+type OrderBody = {
+    username: string;
+    orderId: number;
+    itemId: number
+}
+
   function orderIdGenerator() {
     if (!db.data) {
         
@@ -111,68 +117,51 @@ router.delete('/deleteorder', async (req, res) => {
         res.sendStatus(404);
         return;
     }
-
     const query = req.body;
-    console.log('query:', query);
+    console.log('query order from frontend: ',query.order);
 
-    const user = db.data.users.find(user => user.username === query.username);
+    const maybeUser: Users | undefined = db.data.users.find(user => user.username == query.username);
+    if (maybeUser) {
+        console.log('maybeuser',maybeUser);
+        const newOrders = maybeUser.orders.filter(item => item.orderId !== query.order);
+        maybeUser.orders = newOrders;
+        console.log('new Order after delete: ' ,newOrders);
+        db.write()
+        res.sendStatus(200);
+    }
 
-    if (user) {
-        console.log('user:', user);
-        console.log('userOrders:', user.orders);
-        
-        const newUserOrders = user.orders.filter(order => order.id !== query.id); 
-        
-        console.log('newUserOrders:', newUserOrders);
-
-        if (newUserOrders.length < user.orders.length) {
-            
-            db.data.users.map(user => {
-                if (user.username === query.username) {
-                    user.orders = newUserOrders;
-                    res.json(newUserOrders);
-                    db.write();
-                    return;
-                } else {
-                    // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
-                }
-            });
-        } else {
-            // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
-        }
-    } else {
-        // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
-    } 
 });
+    
+
 
 router.delete('/deleteitem', async (req, res) => {
     if (!db.data) {
+        console.log('deleteItem 1');
         res.sendStatus(404);
         return;
     }
-    const query = req.body;
+    const query: OrderBody = req.body;
 
-    const orderId = query.order.id;
+    const maybeUser: Users | undefined = db.data.users.find(user => user.username == query.username);
+    console.log('deleteItem, orderId:', query.orderId);
     
-    db.data.users.map(user => {
-        if(user.username === query.username) {
-            console.log('items before:', user.orders[orderId].items);
+    if (maybeUser) {
+        const maybeOrder = maybeUser.orders.find(order => order.id == query.orderId);
 
-            user.orders[orderId].items.splice(query.orderItemIndex, 1 );
-            const itemsAfter = user.orders[orderId].items;
-            console.log(itemsAfter);
-            
-            if (itemsAfter) {
-                res.send(itemsAfter);
-                db.write();
-            } else {
-                // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
-            }  
+        if (maybeOrder) {
+            const newItems = maybeOrder.items.filter(item => item.id !== query.itemId);
+            maybeOrder.items = newItems;
+            db.write();
+            console.log('deleteItem 2');
+            res.sendStatus(200);
         } else {
-            // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
-        } 
-    });
-    
+            console.log('deleteItem 3');
+            res.sendStatus(404);
+        }
+    } else {
+        console.log('deleteItem 4');
+        res.sendStatus(404);
+    }
 });
 
 router.post('/comment', (req, res) => {
