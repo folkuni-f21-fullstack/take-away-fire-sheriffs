@@ -1,19 +1,34 @@
 import './AdminEditOrder.scss'
 import { useNavigate } from 'react-router-dom'
-import { Orders  } from '../../models/models';
+import { Orders, Menu } from '../../models/models';
 import { Key, useEffect, useState } from 'react';
 
 interface Prop {
     fetchOrders: () => void;
     closeOverlay: (close: boolean) => void;
     orderItem: Orders;
+    
 }
 
 function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
     const [feedback, setFeedback] = useState<string>('');
     const [userComment, setUserComment] = useState<string>('');
     const [adminComment, setAdminComment] = useState<string>('');
+    const [menuBtnStatus, setmenuBtnStatus] = useState('closed');
     
+    const [menu, setMenu] = useState<Menu[] | null>(null);
+
+    const fetchMenu = async () => {
+        const response = await fetch('/api/menu', { mode: 'cors' });
+        const data: Menu[] = await response.json();
+        
+        setMenu(data);
+    }
+
+    useEffect(() => {
+        fetchMenu()
+    }, []);
+
     const closeBtn = () => {
         closeOverlay(false)
         fetchOrders();
@@ -28,6 +43,14 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
         // fetchOrders();
     }
 
+     const openMenuBtn = () => {
+        if (menuBtnStatus == 'closed') {
+            setmenuBtnStatus('open')
+        } else if(menuBtnStatus == 'open') {
+            setmenuBtnStatus('closed')
+        }
+     }
+
     const orderItems = orderItem.items.map((item: { title: string; price: number; quantity: number; }, index: Key) => {
         return (
           <div key={index} className="edit-element ">
@@ -37,6 +60,17 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
               
             </section>
             <button className="card-btn-delete" >Delete</button>
+          </div>
+        );
+    });
+    const menuItems = menu?.map((item: { title: string; price: number;}, index: Key) => {
+        return (
+          <div key={index} className="menu-map-container ">
+            <section className="menu-map-wrapper">
+                <p>{item.title}</p>
+                <p className='item-price'>{item.price + ':-'}</p>
+            </section>
+            <button className="" >Add</button>
           </div>
         );
     });
@@ -103,7 +137,13 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
                 </section>
                 
                 <h2 className='admin-edit-total'>{'Total: ' + totalPrice + ':-'}</h2>
-
+                <section className='order-menu-container'>
+                    <div className={'display-menu-' + menuBtnStatus}>
+                        {menuItems}
+                    </div>
+                    <button className='menu-btn' onClick={openMenuBtn}>Menu<i className={'arrow ' + menuBtnStatus}></i> </button>
+                    
+                </section>
                 <div className='admin-edit-inputs'>
                     <input className='user-comment comment-input' defaultValue={orderItem.userComment} type="text" placeholder='Customer comment field' onChange={(event) => setUserComment(event.target.value)} />
                     <input className='admin-comment comment-input' defaultValue={orderItem.adminComment} type="text" placeholder='Worker comment field' onChange={(event) => setAdminComment(event.target.value)} />
