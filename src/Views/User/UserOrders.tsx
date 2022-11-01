@@ -1,14 +1,18 @@
 import OrderItem from "../../components/UserOrderItem";
 import "./UserOrders.scss";
 import Header from "../../components/Header";
-import { User } from "../../models/models";
+import { User, Menu } from "../../models/models";
 import { useState, useEffect } from "react";
 
 interface Props {
   activeUser: string;
+  menuItem: Menu;
+
 }
 
-const UserOrders = ({activeUser}: Props) => {
+
+
+const UserOrders = ({activeUser, menuItem}: Props) => {
   console.log("UserOrders - activeUser: ", activeUser);
 
   const [users, setUsers] = useState<User[] | null>(null);
@@ -43,7 +47,7 @@ const UserOrders = ({activeUser}: Props) => {
   
   return (
     <>
-      <Header />
+      <Header activeUser={activeUser} menuItem={menuItem} />
       <section className="order-title content-wrapper">
         <img src="../src/assets/orders-title.svg" alt="My Order" />
   

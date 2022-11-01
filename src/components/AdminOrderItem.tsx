@@ -1,7 +1,7 @@
 import './AdminOrderItem.scss';
 import AdminEditOverlay from './overlays/AdminEditOrder'
-import { Key, useState } from 'react'
-import {  Orders } from "../models/models";
+import { Key, useEffect, useState } from 'react'
+import {  Orders,  } from "../models/models";
 
 
 interface Props {
@@ -12,25 +12,40 @@ interface Props {
 function AdminOrderItem({orderItem, fetchOrders}: Props) {
     const [openEdit, setOpenEdit] = useState(false);
     const [orderStatus, setOrderStatus] = useState(orderItem.status);
-    const [orderBtn, setOrderBtn] = useState('Start Order');
+    const [orderBtn, setOrderBtn] = useState(orderItem.status);
 
-    const orderItems = orderItem.items.map((item: { title: string; price: number; }, index: Key) => {
+    const orderItems = orderItem.items.map((item: { title: string; price: number; quantity: number; }, index: Key) => {
+
+        
         return (
           <section key={index} className="card-order">
-            <p className="card-text">{item.title}</p>
-            <p className="card-text">{item.price}:-</p>
+            <p className="card-text">{item.title}</p><p>{'x' + item.quantity}</p>
+            <p className="card-text">{item.price}:-</p> 
           </section>
         );
     });
 
     let totalPrice = 0;
     for (let item of orderItem.items) {
-        totalPrice = totalPrice + item.price;
+        totalPrice = totalPrice + (item.price * item.quantity);
     } 
-
+    console.log(totalPrice);
+    
     const editPressed = () => {
         {setOpenEdit(true)}
     }
+    console.log(orderStatus);
+    
+    const renderBtn = () => {
+        if (orderStatus == 'ordered') {
+            setOrderBtn('Start Order')
+        } else if (orderStatus == 'started') {
+            setOrderBtn('Finish Order')
+        }  
+        
+    }
+    
+    
 
     const StartOrderBtn = () => {
         if (orderStatus == 'ordered') {
@@ -57,6 +72,7 @@ function AdminOrderItem({orderItem, fetchOrders}: Props) {
 
         const response = await fetch('api/orders/changestatus', requestOptions);
         console.log(response);
+        
     }
     
     async function findOrderOwner(orderItem: Orders) {
@@ -72,6 +88,7 @@ function AdminOrderItem({orderItem, fetchOrders}: Props) {
         const data: string = await response.json();
         console.log("data from api/orders/finduser", data);
         return data;
+        
     }
 
     async function deleteOrder() {
@@ -92,7 +109,9 @@ function AdminOrderItem({orderItem, fetchOrders}: Props) {
         fetchOrders();
     }
 
-
+    useEffect(() => {
+        renderBtn()
+    }, []);
     return (
         <div className="admin-order-item">
             <div className='admin-order-card'>

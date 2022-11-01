@@ -1,5 +1,5 @@
 import "./UserEditOrder.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Key } from "react";
 import closeBtn from "../../assets/close-overlay-button.svg";
 import { Orders, User, Menu } from '../../models/models';
 
@@ -56,11 +56,12 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder 
   }
 
 
-  const mappedOrderItems = orderItem.items.map((item, index) => {
+  const mappedOrderItems = orderItem.items.map((item: { title: string; price: number; quantity: number; }, index: Key) => {
     return (
       <div key={index} className="edit-element ">
         <section className="edit-details">
           <p className="card-text">{item.title}</p>
+          <p className="item-quantity">x{item.quantity}</p>
           <p className="card-text">{item.price}:-</p>
         </section>
         <button className="card-btn-delete" onClick={deleteItem}>Delete</button>
@@ -119,7 +120,7 @@ function EditOrder({ closeOverlay, orderItem, activeUser, getUsers, deleteOrder 
           alt=""
         />
 
-        <h2 className="cart-title">Ordernr: </h2>
+        <h2 className="cart-title">Ordernr: {orderItem.orderId}</h2>
         <section className="edit-card-info">
           { mappedOrderItems }
         </section>

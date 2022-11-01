@@ -1,6 +1,6 @@
 import './AdminEditOrder.scss'
 import { useNavigate } from 'react-router-dom'
-import { Orders } from '../../models/models';
+import { Orders  } from '../../models/models';
 import { Key, useEffect, useState } from 'react';
 
 interface Prop {
@@ -28,12 +28,13 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
         // fetchOrders();
     }
 
-    const orderItems = orderItem.items.map((item: { title: string; price: number; }, index: Key) => {
+    const orderItems = orderItem.items.map((item: { title: string; price: number; quantity: number; }, index: Key) => {
         return (
           <div key={index} className="edit-element ">
             <section className="edit-details">
-              <p className="card-text">{item.title}</p>
-              <p className="card-text">{item.price}:-</p>
+              <p className="card-text">{item.title}</p><p>{'x' + item.quantity}</p>
+              <p className="card-text">{item.price}:-</p> 
+              
             </section>
             <button className="card-btn-delete" >Delete</button>
           </div>
