@@ -4,7 +4,7 @@ import "./PlacedOrderMsg.scss";
 function PlacedOrderMsg() {
   const navigate = useNavigate();
   const doneBtn = () => {
-    navigate("/menu");
+    navigate("/orders");
   };
   return (
     <div className="dark-msg-bg">
@@ -17,7 +17,7 @@ function PlacedOrderMsg() {
         <p className="msg-text">Thank you for your order</p>
 
         <button className="msg-btn-orders" onClick={doneBtn}>
-          Back to menu
+          Back to my orders
         </button>
       </section>
     </div>
