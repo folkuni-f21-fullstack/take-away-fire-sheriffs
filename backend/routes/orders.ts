@@ -121,37 +121,19 @@ router.delete('/deleteorder', async (req, res) => {
     const query = req.body;
     console.log('query:', query);
 
-    const user = db.data.users.find(user => user.username === query.username);
+    const maybeUser: Users | undefined = db.data.users.find(user => user.username === query.username);
 
-    if (user) {
-        console.log('user:', user);
-        console.log('userOrders:', user.orders);
+    if (maybeUser) {
+        console.log('user:', maybeUser);
+        console.log('userOrders:', maybeUser.orders);
         
-        const newUserOrders = user.orders.filter(order => order.id !== query.id); 
+        const newUserOrders = maybeUser.orders.filter(order => order.id !== query.id); 
         
         console.log('newUserOrders:', newUserOrders);
-
-        if (newUserOrders.length < user.orders.length) {
-            
-            db.data.users.map(user => {
-                if (user.username === query.username) {
-                    user.orders = newUserOrders;
-                    res.json(newUserOrders);
-                    db.write();
-                    res.sendStatus(200);
-                    return;
-                } else {
-                    // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
-                }
-            });
-        } else {
-            // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
-        }
-    } else {
-        // res.sendStatus(404); // Behöver gå igenom detta med Monica! /HE
     } 
-    res.sendStatus(400);
 });
+    
+
 
 router.delete('/deleteitem', async (req, res) => {
     if (!db.data) {
@@ -181,30 +163,6 @@ router.delete('/deleteitem', async (req, res) => {
         console.log('deleteItem 4');
         res.sendStatus(404);
     }
-    
-    // db.data.users.map(user => {
-
-    //     if (user.username === query.username) {
-    
-    //         user.orders.map(order => { // felmeddelande i backend!
-        
-    //             const clickedItem = order.items.find(item => item.id == orderId);
-                
-    //             const newItems = order.items.filter(item => clickedItem?.id !== item.id)
-    //             console.log('filteredItems after click:', newItems);
-                
-    //             if (order.items > newItems) {
-
-    //                 order.items = newItems;
-    //                 res.send(newItems); // felmeddelande i backend!
-                    
-    //                 db.write();
-    //             } else {
-    //                 res.sendStatus(404);
-    //             }
-    //         });     
-    //     }   
-    // }); 
 });
 
 router.post('/comment', (req, res) => {
