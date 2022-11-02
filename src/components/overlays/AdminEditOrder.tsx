@@ -15,6 +15,7 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
     const [userComment, setUserComment] = useState<string>('');
     const [adminComment, setAdminComment] = useState<string>('');
     const [menuBtnStatus, setmenuBtnStatus] = useState('closed');
+
     
     const [menu, setMenu] = useState<Menu[] | null>(null);
 
@@ -51,6 +52,7 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
         }
     }
     async function addItemBtn  (item:any )  {
+        
         const username = await findOrderOwner(orderItem);
         
         console.log('clicked item: ',item);

@@ -133,11 +133,9 @@ router.post('/additem', async (req, res) => {
                 db.write();
                 res.sendStatus(200)
             } else if (!checkIfExist){
-                console.log('before push: ', maybeOrder.items);
                 
                 maybeOrder.items.push(query.newItem)
                 res.sendStatus(200)
-                console.log('after push: ', maybeOrder.items);
             }
 
         }
