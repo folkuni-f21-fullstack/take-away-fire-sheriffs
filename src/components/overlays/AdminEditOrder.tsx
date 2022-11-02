@@ -228,7 +228,7 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
 
     let totalPrice = 0;
     for (let item of orderItem.items) {
-        totalPrice = totalPrice + item.price;
+        totalPrice = totalPrice + (item.price * item.quantity);
     } 
 
     return (
