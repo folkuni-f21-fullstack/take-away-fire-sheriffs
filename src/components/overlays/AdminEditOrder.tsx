@@ -50,14 +50,27 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
             setmenuBtnStatus('closed')
         }
     }
-    const addItemBtn = (item: any ) => {
+    async function addItemBtn  (item:any )  {
+        const username = await findOrderOwner(orderItem);
+        
+        console.log('clicked item: ',item);
+        
         const query = {
-            orderId: orderItem.id,
-            itemId: item.id
-          }
+            username: username,
+            orderId: orderItem.orderId,
+            itemId: item.id,
+            newItem: item
+        }
         
+        console.log('userEditOrder, addItem, query:', query);
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(query)
+        }
         
-        
+        const response = await fetch('/api/orders/additem', requestOptions);
     }
     const orderItems = orderItem.items.map((item: { title: string; price: number; quantity: number; }, index: Key) => {
         return (
@@ -78,7 +91,7 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
                 <p>{item.title}</p>
                 <p className='item-price'>{item.price + ':-'}</p>
             </section>
-            <button className="add-btn" onClick={(e) => addItemBtn({item})}>Add</button>
+            <button className="add-btn" onClick={() => addItemBtn(item)}>Add</button>
           </div>
         );
     });
