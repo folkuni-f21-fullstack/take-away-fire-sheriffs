@@ -128,6 +128,8 @@ router.delete('/deleteorder', async (req, res) => {
         console.log('new Order after delete: ' ,newOrders);
         db.write()
         res.sendStatus(200);
+    } else {
+        res.sendStatus(404);
     }
 
 });
