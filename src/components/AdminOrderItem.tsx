@@ -96,7 +96,7 @@ function AdminOrderItem({orderItem, fetchOrders}: Props) {
         console.log("username", username);
         const query = {
           username: username, 
-          id: orderItem.id
+          order: orderItem.orderId
         }
         const requestOptions = {
           method: 'DELETE',
