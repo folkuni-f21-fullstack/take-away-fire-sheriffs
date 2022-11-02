@@ -52,7 +52,7 @@ export function Cart({ closeOverlay, activeUser }: Props) {
   return (
     <section className="cart-overlay-container">
       {msg == true ? (
-        <Msg setMsg={setMsg}/>
+        <Msg setMsg={setMsg} />
       ) : (
         <div className="cart-container">
           <div className="cart-upper-container">
