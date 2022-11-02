@@ -42,29 +42,23 @@ function UserOrderItem({order, activeUser, getUsers}: Props) {
   // }
   
   async function deleteOrder() {
-    console.log('deleteOrder 1', order.orderId);
 
     const query = {
       username: activeUser, 
       order: order.orderId
     }
-    console.log('deleteOrder 2', order.orderId);
     const requestOptions = {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(query)
     }
-    console.log('deleteOrder 3', order.orderId);
     const response = await fetch('/api/orders/deleteorder', requestOptions);
-    console.log('deleteOrder 4', order.orderId);
     if (response.status == 200) {
       console.log('deleteOrder, status 200, success!');
       
     } else {
       console.log('deleteOrder', response.status);
-      
     }
-    // console.log(data);
 
     getUsers(); 
   }

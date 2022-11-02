@@ -16,26 +16,28 @@ type OrderBody = {
     itemId: number
 }
 
-  function orderIdGenerator() {
+let newOrderNumber = 1003;
+
+function orderIdGenerator() {
     if (!db.data) {
-        
-        return;
+        return 0;
     }
-    const allUsers = db.data.users
+    const allUsers = db.data.users;
 
-        let allUsersArray: any = [];
-        
-        allUsers.map( user => {
-            user.orders.map(order => {
-               allUsersArray.push(order) 
+    newOrderNumber++;
 
-            })
-             
-        })
-        let startingOrder = 1000 ;
-        console.log('alluserArray length:',allUsersArray.length);
-        return allUsersArray.length + startingOrder + 1
-  }
+    allUsers.map( user => {
+        user.orders.find(order => {
+            if (order.orderId == newOrderNumber) {
+                newOrderNumber++;
+            } else {
+                return newOrderNumber;
+            }
+        });
+    });
+    return newOrderNumber;
+}
+
 router.get('/', (req, res) => {
     if (db.data) {
         const allUsers = db.data.users

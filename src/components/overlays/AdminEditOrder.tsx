@@ -7,9 +7,10 @@ interface Prop {
     fetchOrders: () => void;
     closeOverlay: (close: boolean) => void;
     orderItem: Orders;
+    setAllOrders: (allOrders: Orders[]) => void;
 }
 
-function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
+function AdminEditOrder( {closeOverlay, orderItem, fetchOrders, setAllOrders}: Prop) {
     const [feedback, setFeedback] = useState<string>('');
     const [userComment, setUserComment] = useState<string>('');
     const [adminComment, setAdminComment] = useState<string>('');
@@ -28,17 +29,124 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
         // fetchOrders();
     }
 
-    const orderItems = orderItem.items.map((item: { title: string; price: number; quantity: number; }, index: Key) => {
+    // const fetchOrdersTest = async () => {
+    //     const response = await fetch('/api/orders', { mode: 'cors' });
+    //     const data: Orders[] | null  = await response.json();
+        
+    //     if (data) {
+    //         setAllOrders(data);
+    //     }  
+    // }
+
+    const orderItems = orderItem.items.map((item: { title: string; price: number; quantity: number; id: number }, index: Key) => {
         return (
           <div key={index} className="edit-element ">
             <section className="edit-details">
               <p className="card-text">{item.title}</p><p>{'x' + item.quantity}</p>
               <p className="card-text">{item.price}:-</p> 
-              
             </section>
-            <button className="card-btn-delete" >Delete</button>
+            <section className="card-add-remove-btns">
+                <button className="card-btn-decrease" onClick={decreaseItem}> - </button>
+                <button className="card-btn-increase" onClick={increaseItem}> + </button>
+            </section>
           </div>
         );
+
+        async function decreaseItem() {
+
+            const username = await findOrderOwner(orderItem);
+      
+            if (!orderItem.items) {
+              return;
+            }
+            console.log(orderItem);
+            
+            const query = {
+              username: username,
+              orderId: orderItem.id,
+              itemId: item.id
+            }
+            
+            const requestOptions = {
+              method: 'DELETE',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(query)
+            }
+            
+            const response = await fetch('/api/orders/decreaseitem', requestOptions);
+        
+            if (response.status == 200) {
+            
+              const newItems = orderItem.items.filter(item => item.id !== query.itemId);
+              console.log('newItems:', newItems);
+              
+              if (newItems.length == 0 && orderItem.items[0].quantity == 1) {
+                deleteOrder();
+              } else {
+                fetchOrders();
+                console.log(newItems);
+              }
+              
+            } else {
+              return 404;
+            }  
+          }
+      
+          async function increaseItem() {
+
+            const username = await findOrderOwner(orderItem);
+            
+            if (!orderItem.items) {
+              return;
+            }
+            console.log(orderItem);
+            
+            const query = {
+              username: username,
+              orderId: orderItem.id,
+              itemId: item.id
+            }
+            
+            const requestOptions = {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(query)
+            }
+            
+            const response = await fetch('/api/orders/increaseitem', requestOptions);
+        
+            if (response.status == 200) {
+                fetchOrders();
+      
+            } else {
+              return 404;
+            }  
+          }
+
+          async function deleteOrder() {
+
+            const username = await findOrderOwner(orderItem);
+
+            const query = {
+              username: username, 
+              order: orderItem.orderId
+            }
+            const requestOptions = {
+              method: 'DELETE',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(query)
+            }
+            const response = await fetch('/api/orders/deleteorder', requestOptions);
+            if (response.status == 200) {
+              console.log('deleteOrder, status 200, success!');
+              
+            } else {
+              console.log('deleteOrder', response.status);
+            }
+        
+            fetchOrders(); 
+          }
+
     });
 
     async function saveComments(comment: string, userType: string) {
