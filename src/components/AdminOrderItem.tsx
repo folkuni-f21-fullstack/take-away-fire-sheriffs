@@ -7,10 +7,9 @@ import {  Orders,  } from "../models/models";
 interface Props {
     fetchOrders: () => void;
     orderItem: Orders;
-    setAllOrders: (allOrders: Orders[]) => void;
 }
 
-function AdminOrderItem({orderItem, fetchOrders, setAllOrders}: Props) {
+function AdminOrderItem({orderItem, fetchOrders}: Props) {
     const [openEdit, setOpenEdit] = useState(false);
     const [orderStatus, setOrderStatus] = useState(orderItem.status);
     const [orderBtn, setOrderBtn] = useState(orderItem.status);
@@ -133,7 +132,7 @@ function AdminOrderItem({orderItem, fetchOrders, setAllOrders}: Props) {
                     <button className='status-btn' onClick={StartOrderBtn}>{orderBtn}</button>
                     <button className='delete-btn' onClick={deleteOrder}>Delete</button>
                 </div>
-                {openEdit && <AdminEditOverlay closeOverlay={setOpenEdit}  orderItem={orderItem} fetchOrders={fetchOrders} setAllOrders={setAllOrders} />}
+                {openEdit && <AdminEditOverlay closeOverlay={setOpenEdit}  orderItem={orderItem} fetchOrders={fetchOrders}  />}
             </div>
         </div>
         
