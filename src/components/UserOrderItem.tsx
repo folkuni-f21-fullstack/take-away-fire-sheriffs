@@ -1,7 +1,7 @@
-import { useState, useEffect, Key } from "react";
+import { useState, Key } from "react";
 import "./UserOrderItem.scss";
 import EditOrder from "./overlays/UserEditOrder";
-import { Menu, Orders } from "../models/models";
+import { Orders } from "../models/models";
 
 
 interface Props {
