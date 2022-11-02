@@ -20,7 +20,6 @@ type Query = {
 
 function EditOrder({ closeOverlay, order, activeUser, getUsers, deleteOrder }: Props) {
   const [feedback, setFeedback] = useState<string>('');
-  // const [items, setItems] = useState<Menu[] | null>(null);
   const [userComment, setUserComment] = useState<string>('');
 
   const UserCloseBtn = () => {
@@ -65,16 +64,13 @@ function EditOrder({ closeOverlay, order, activeUser, getUsers, deleteOrder }: P
           <p className="item-quantity">x{item.quantity}</p>
         </section>
         <section className="card-add-remove-btns">
-          
-          <button className="card-btn-delete" onClick={deleteItem}> - </button>
-          <button> + </button>
+          <button className="card-btn-decrease" onClick={decreaseItem}> - </button>
+          <button className="card-btn-increase" onClick={increaseItem}> + </button>
         </section>
-        
       </div>
     );
 
-    async function deleteItem() {
-      console.log('userEditOrder, deleteItem');
+    async function decreaseItem() {
       
       if (!order.items) {
         return;
@@ -86,27 +82,23 @@ function EditOrder({ closeOverlay, order, activeUser, getUsers, deleteOrder }: P
         orderId: order.id,
         itemId: item.id
       }
-  
-      console.log('userEditOrder, deleteItem, query:', query);
       
-  
       const requestOptions = {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(query)
       }
-      console.log('userEditOrder, click');
       
-      const response = await fetch('/api/orders/deleteitem', requestOptions);
+      const response = await fetch('/api/orders/decreaseitem', requestOptions);
   
       if (response.status == 200) {
-        // const data: Menu[] | null = await response.json();
       
         const newItems = order.items.filter(item => item.id !== query.itemId);
-        if (newItems.length == 0) {
+        console.log('newItems:', newItems);
+        
+        if (newItems.length == 0 && order.items[0].quantity == 1) {
           deleteOrder();
         } else {
-          // setItems(newItems);
           getUsers();
           console.log(newItems);
         }
@@ -115,12 +107,42 @@ function EditOrder({ closeOverlay, order, activeUser, getUsers, deleteOrder }: P
         return 404;
       }  
     }
+
+    async function increaseItem() {
+      
+      if (!order.items) {
+        return;
+      }
+      console.log(order);
+      
+      const query = {
+        username: activeUser,
+        orderId: order.id,
+        itemId: item.id
+      }
+      
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(query)
+      }
+      
+      const response = await fetch('/api/orders/increaseitem', requestOptions);
+  
+      if (response.status == 200) {
+        getUsers();
+
+      } else {
+        return 404;
+      }  
+    }
+
   });
 
   let totalPrice = 0;
   for (let item of order.items) {
-    totalPrice = totalPrice + item.price;
-  }  
+      totalPrice = totalPrice + (item.price * item.quantity);
+  } 
 
   return (
     <div className="dark-bg">

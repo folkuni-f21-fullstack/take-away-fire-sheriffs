@@ -136,32 +136,69 @@ router.delete('/deleteorder', async (req, res) => {
     
 
 
-router.delete('/deleteitem', async (req, res) => {
+router.delete('/decreaseitem', async (req, res) => {
     if (!db.data) {
-        console.log('deleteItem 1');
         res.sendStatus(404);
         return;
     }
     const query: OrderBody = req.body;
 
     const maybeUser: Users | undefined = db.data.users.find(user => user.username == query.username);
-    console.log('deleteItem, orderId:', query.orderId);
     
     if (maybeUser) {
         const maybeOrder = maybeUser.orders.find(order => order.id == query.orderId);
 
         if (maybeOrder) {
-            const newItems = maybeOrder.items.filter(item => item.id !== query.itemId);
-            maybeOrder.items = newItems;
-            db.write();
-            console.log('deleteItem 2');
-            res.sendStatus(200);
+            const foundItem = maybeOrder.items.find(item => item.id == query.itemId);
+            console.log('foundItem', foundItem);
+            
+            if (foundItem && foundItem.quantity > 1) {
+                console.log('foundItem quant before decrease:', foundItem.quantity);
+                foundItem.quantity--
+                console.log('foundItem quant after decrease:', foundItem.quantity);
+                db.write();
+                res.sendStatus(200);
+            } else {
+                const newItems = maybeOrder.items.filter(item => item.id !== query.itemId);
+                maybeOrder.items = newItems;
+                db.write();
+                res.sendStatus(200);
+            }
+            
         } else {
-            console.log('deleteItem 3');
             res.sendStatus(404);
         }
     } else {
-        console.log('deleteItem 4');
+        res.sendStatus(404);
+    }
+});
+
+router.post('/increaseitem', async (req, res) => {
+    if (!db.data) {
+        res.sendStatus(404);
+        return;
+    }
+    const query: OrderBody = req.body;
+
+    const maybeUser: Users | undefined = db.data.users.find(user => user.username == query.username);
+    
+    if (maybeUser) {
+        const maybeOrder = maybeUser.orders.find(order => order.id == query.orderId);
+
+        if (maybeOrder) {
+            const foundItem = maybeOrder.items.find(item => item.id == query.itemId);
+            if (foundItem) {
+                console.log('foundItem quant before increase:', foundItem.quantity);
+                foundItem.quantity++
+                console.log('foundItem quant after increase:', foundItem.quantity);
+                db.write();
+                res.sendStatus(200);
+            }
+
+        } else {
+            res.sendStatus(404);
+        }
+    } else {
         res.sendStatus(404);
     }
 });

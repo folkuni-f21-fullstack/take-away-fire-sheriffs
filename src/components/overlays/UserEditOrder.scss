@@ -17,8 +17,8 @@
 
 .user-close-btn {
   @include base.close-button;
-
 }
+
 .cart-title {
   margin-bottom: 1rem;
   margin-top: 1rem;
@@ -41,6 +41,16 @@
 
       .card-text {
         font-size: 20px;
+      }
+    }
+
+    .card-add-remove-btns {
+      display: flex;
+      gap: 0.5em;
+
+      .card-btn-decrease {
+        background-color: base.$red-bgr;
+        color: base.$white;
       }
     }
   }
