@@ -51,8 +51,10 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
         }
     }
     const addItemBtn = (item: any ) => {
-        console.log('pressed add Btn in Menu');
-        console.log( item );
+        const query = {
+            orderId: orderItem.id,
+            itemId: item.id
+          }
         
         
         

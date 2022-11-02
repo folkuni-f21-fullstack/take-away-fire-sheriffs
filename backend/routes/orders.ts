@@ -164,6 +164,14 @@ router.delete('/deleteitem', async (req, res) => {
     }
 });
 
+router.post('/additem', async (req, res) => {
+    if (!db.data) {
+        console.log('deleteItem 1');
+        res.sendStatus(404);
+        return;
+    }
+    const query: OrderBody = req.body;
+})
 router.post('/comment', (req, res) => {
     if (!db.data) {
         res.sendStatus(404);
