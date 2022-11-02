@@ -14,9 +14,8 @@ function AdminOrderItem({orderItem, fetchOrders}: Props) {
     const [orderStatus, setOrderStatus] = useState(orderItem.status);
     const [orderBtn, setOrderBtn] = useState(orderItem.status);
 
+    
     const orderItems = orderItem.items.map((item: { title: string; price: number; quantity: number; }, index: Key) => {
-
-        
         return (
           <section key={index} className="card-order">
             <p className="card-text">{item.title}</p><p>{'x' + item.quantity}</p>

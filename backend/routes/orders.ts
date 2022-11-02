@@ -113,7 +113,6 @@ router.post('/saveorder', async (req,res) => {
 
 router.post('/additem', async (req, res) => {
     if (!db.data) {
-        console.log('deleteItem 1');
         res.sendStatus(404);
         return;
     }
@@ -127,21 +126,19 @@ router.post('/additem', async (req, res) => {
             console.log('maybeOrder: ', maybeOrder);
             const checkIfExist = maybeOrder.items.find(item => item.id == query.itemId);
             if (checkIfExist) {
-                console.log('If added item Exist: ', checkIfExist);
                 checkIfExist.quantity = checkIfExist.quantity + 1;
-                console.log('after added quantity: ', checkIfExist);
                 db.write();
                 res.sendStatus(200)
             } else if (!checkIfExist){
-                
                 maybeOrder.items.push(query.newItem)
                 res.sendStatus(200)
             }
-
+        } else {
+            res.sendStatus(404)
         }
+    } else {
         res.sendStatus(404)
     }
-    res.sendStatus(404)
 
 });
 
@@ -164,8 +161,6 @@ router.delete('/deleteorder', async (req, res) => {
     }
 
 });
-    
-
 
 router.delete('/deleteitem', async (req, res) => {
     if (!db.data) {
@@ -197,14 +192,6 @@ router.delete('/deleteitem', async (req, res) => {
     }
 });
 
-router.post('/additem', async (req, res) => {
-    if (!db.data) {
-        console.log('deleteItem 1');
-        res.sendStatus(404);
-        return;
-    }
-    const query: OrderBody = req.body;
-})
 router.post('/comment', (req, res) => {
     if (!db.data) {
         res.sendStatus(404);

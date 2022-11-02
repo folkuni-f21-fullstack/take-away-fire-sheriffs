@@ -32,7 +32,6 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
 
     const closeBtn = () => {
         closeOverlay(false)
-        fetchOrders();
     }
     const saveEdits = () => {
         if(userComment.length > 0) {
@@ -41,7 +40,7 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
         if(adminComment.length > 0) {
             saveComments(adminComment, "admin");
         }
-        // fetchOrders();
+        fetchOrders();
     }
 
      const openMenuBtn = () => {
@@ -73,6 +72,11 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
         }
         
         const response = await fetch('/api/orders/additem', requestOptions);
+        if(response.status == 200) {
+            fetchOrders();
+        } else {
+            console.log("failed to update order");
+        }
     }
     const orderItems = orderItem.items.map((item: { title: string; price: number; quantity: number; }, index: Key) => {
         return (
