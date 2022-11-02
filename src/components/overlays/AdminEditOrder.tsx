@@ -1,23 +1,33 @@
 import './AdminEditOrder.scss'
-import { useNavigate } from 'react-router-dom'
-import { Orders  } from '../../models/models';
+import { Orders, Menu } from '../../models/models';
 import { Key, useEffect, useState } from 'react';
 
 interface Prop {
     fetchOrders: () => void;
     closeOverlay: (close: boolean) => void;
     orderItem: Orders;
-    setAllOrders: (allOrders: Orders[]) => void;
 }
 
-function AdminEditOrder( {closeOverlay, orderItem, fetchOrders, setAllOrders}: Prop) {
+function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
     const [feedback, setFeedback] = useState<string>('');
     const [userComment, setUserComment] = useState<string>('');
     const [adminComment, setAdminComment] = useState<string>('');
-    
+    const [menuBtnStatus, setmenuBtnStatus] = useState('closed');
+    const [menu, setMenu] = useState<Menu[] | null>(null);
+
+    const fetchMenu = async () => {
+        const response = await fetch('/api/menu', { mode: 'cors' });
+        const data: Menu[] = await response.json();
+        
+        setMenu(data);
+    }
+
+    useEffect(() => {
+        fetchMenu()
+    }, []);
+
     const closeBtn = () => {
         closeOverlay(false)
-        fetchOrders();
     }
     const saveEdits = () => {
         if(userComment.length > 0) {
@@ -26,19 +36,43 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders, setAllOrders}: P
         if(adminComment.length > 0) {
             saveComments(adminComment, "admin");
         }
-        // fetchOrders();
+        fetchOrders();
+    }
+    const openMenuBtn = () => {
+        if (menuBtnStatus == 'closed') {
+            setmenuBtnStatus('open')
+        } else if(menuBtnStatus == 'open') {
+            setmenuBtnStatus('closed')
+        }
     }
 
-    // const fetchOrdersTest = async () => {
-    //     const response = await fetch('/api/orders', { mode: 'cors' });
-    //     const data: Orders[] | null  = await response.json();
-        
-    //     if (data) {
-    //         setAllOrders(data);
-    //     }  
-    // }
+    async function addItemBtn  (item:any )  {
+        const username = await findOrderOwner(orderItem);
 
-    const orderItems = orderItem.items.map((item: { title: string; price: number; quantity: number; id: number }, index: Key) => {
+        const query = {
+            username: username,
+            orderId: orderItem.orderId,
+            itemId: item.id,
+            newItem: item
+        }
+        
+        console.log('userEditOrder, addItem, query:', query);
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(query)
+        }
+        
+        const response = await fetch('/api/orders/additem', requestOptions);
+        if(response.status == 200) {
+            fetchOrders();
+        } else {
+            console.log("failed to update order");
+        }
+    }
+
+    const orderItems = orderItem.items.map((item: { title: string; price: number; quantity: number; id: number;}, index: Key) => {
         return (
           <div key={index} className="edit-element ">
             <section className="edit-details">
@@ -53,7 +87,6 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders, setAllOrders}: P
         );
 
         async function decreaseItem() {
-
             const username = await findOrderOwner(orderItem);
       
             if (!orderItem.items) {
@@ -74,9 +107,7 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders, setAllOrders}: P
             }
             
             const response = await fetch('/api/orders/decreaseitem', requestOptions);
-        
             if (response.status == 200) {
-            
               const newItems = orderItem.items.filter(item => item.id !== query.itemId);
               console.log('newItems:', newItems);
               
@@ -86,14 +117,12 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders, setAllOrders}: P
                 fetchOrders();
                 console.log(newItems);
               }
-              
             } else {
               return 404;
             }  
           }
       
           async function increaseItem() {
-
             const username = await findOrderOwner(orderItem);
             
             if (!orderItem.items) {
@@ -106,7 +135,6 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders, setAllOrders}: P
               orderId: orderItem.id,
               itemId: item.id
             }
-            
             const requestOptions = {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -124,7 +152,6 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders, setAllOrders}: P
           }
 
           async function deleteOrder() {
-
             const username = await findOrderOwner(orderItem);
 
             const query = {
@@ -143,10 +170,21 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders, setAllOrders}: P
             } else {
               console.log('deleteOrder', response.status);
             }
-        
             fetchOrders(); 
           }
 
+    });
+
+    const menuItems = menu?.map((item: { title: string; price: number;}, index: Key) => {
+        return (
+          <div key={index} className="menu-map-container ">
+            <section className="menu-map-wrapper">
+                <p>{item.title}</p>
+                <p className='item-price'>{item.price + ':-'}</p>
+            </section>
+            <button className="add-btn" onClick={() => addItemBtn(item)}>Add</button>
+          </div>
+        );
     });
 
     async function saveComments(comment: string, userType: string) {
@@ -163,7 +201,6 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders, setAllOrders}: P
           comment: comment,
           from: userType
         }
-    
         const requestOptions = {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -171,9 +208,6 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders, setAllOrders}: P
         }
     
         const response = await fetch('/api/orders/comment', requestOptions);
-    
-        console.log('commentResponse:', response.status);
-        console.log(comment);
     }
 
     async function findOrderOwner(orderItem: Orders) {
@@ -196,6 +230,7 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders, setAllOrders}: P
     for (let item of orderItem.items) {
         totalPrice = totalPrice + item.price;
     } 
+
     return (
         <section className="admin-edit-overlay-container">
             <div className='admin-edit-overlay'>
@@ -204,28 +239,28 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders, setAllOrders}: P
                     <h2 className='edit-order-title'> {orderItem.orderId}</h2>
                     <img src="src\assets\close-overlay-button.svg" alt="" onClick={closeBtn} className='admin-close-edit-overlay-btn'/>
                 </div>
-                
-                
                 <section className='edit-card-info'>
                     {orderItems}
                 </section>
-                
                 <h2 className='admin-edit-total'>{'Total: ' + totalPrice + ':-'}</h2>
+
+                <section className='order-menu-container'>
+                    <div className={'display-menu-' + menuBtnStatus}>
+                        {menuItems}
+                    </div>
+                    <button className='menu-btn' onClick={openMenuBtn}>Menu<i className={'arrow ' + menuBtnStatus}></i> </button>
+                </section>
 
                 <div className='admin-edit-inputs'>
                     <input className='user-comment comment-input' defaultValue={orderItem.userComment} type="text" placeholder='Customer comment field' onChange={(event) => setUserComment(event.target.value)} />
                     <input className='admin-comment comment-input' defaultValue={orderItem.adminComment} type="text" placeholder='Worker comment field' onChange={(event) => setAdminComment(event.target.value)} />
                 </div>
-                
+
                 <p className={"feedback " + feedback}>Your comment was saved.</p>
                 <div className='admin-edit-buttons'>
                    <button className='admin-change-order-btn' onClick={saveEdits}>Change Order</button>
                 </div>
-                
-                
             </div>
-            
-
         </section>
     )
 }

@@ -113,6 +113,36 @@ router.post('/saveorder', async (req,res) => {
     }
 })
 
+router.post('/additem', async (req, res) => {
+    if (!db.data) {
+        res.sendStatus(404);
+        return;
+    }
+    const query = req.body;
+    console.log('query info from frontend: ', query);
+    const maybeUser = db.data.users.find(user => user.username == query.username);
+    console.log('maybeUser: ', maybeUser);
+    if (maybeUser) {
+        const maybeOrder = maybeUser.orders.find(order => order.orderId == query.orderId);
+        if (maybeOrder) {
+            console.log('maybeOrder: ', maybeOrder);
+            const checkIfExist = maybeOrder.items.find(item => item.id == query.itemId);
+            if (checkIfExist) {
+                checkIfExist.quantity = checkIfExist.quantity + 1;
+                db.write();
+                res.sendStatus(200)
+            } else if (!checkIfExist){
+                maybeOrder.items.push(query.newItem)
+                res.sendStatus(200)
+            }
+        } else {
+            res.sendStatus(404)
+        }
+    } else {
+        res.sendStatus(404)
+    }
+
+});
 
 router.delete('/deleteorder', async (req, res) => {
     if (!db.data) {
@@ -135,8 +165,6 @@ router.delete('/deleteorder', async (req, res) => {
     }
 
 });
-    
-
 
 router.delete('/decreaseitem', async (req, res) => {
     if (!db.data) {
