@@ -23,20 +23,22 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
     }
 
     useEffect(() => {
-        fetchMenu()
+        fetchMenu();
     }, []);
 
     const closeBtn = () => {
         closeOverlay(false)
+        fetchOrders();
     }
     const saveEdits = () => {
         if(userComment.length > 0) {
+            console.log("save user comment");
             saveComments(userComment, "user");
-        }
-        if(adminComment.length > 0) {
+          }
+          if(adminComment.length > 0) {
+            console.log("save admin comment");
             saveComments(adminComment, "admin");
         }
-        fetchOrders();
     }
     const openMenuBtn = () => {
         if (menuBtnStatus == 'closed') {
