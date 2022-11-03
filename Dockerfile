@@ -1,6 +1,3 @@
-# Lagt in grund från Davids genomgång
-
-
 # Build context. Hämta Linux + Node
 FROM node:lts-alpine
 
@@ -10,7 +7,7 @@ WORKDIR /app
 
 # Installera webbservern vi ska använda i sista steget
 # Man KAN använda CMD ["npm", "run", "dev"] i stället, men den startar den lokala utvecklingsservern. Utvecklingsservern är gjord för att felsöka, inte för att köra "production".
-RUN npm install -g http-server
+# RUN npm install -g http-server
 
 # Kopiera package.json -> in till mappen "app" i image
 #COPY package.json package-lock.json ./
@@ -26,11 +23,13 @@ COPY . .
 # Bygg projektet - kör byggskriptet
 # Statiska filer (HTML, CSS, JS) hamnar i /app/dist
 RUN npm run build
+RUN npm run build-backend
 
 # Gör port 8080 synlig utåt
-EXPOSE 8080
+EXPOSE 1337
 
 # Starta en webbserver som servar de statiska filerna i /app/dist
 # alternativ server: Nginx
 # CMD körs när man startar containern
-CMD ["http-server", "dist", "-p", "8080"]
+# CMD ["http-server", "dist", "-p", "1337"]
+CMD ["npm" "run" "start-backend"]
