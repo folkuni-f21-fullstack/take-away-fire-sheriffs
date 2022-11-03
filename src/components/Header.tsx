@@ -21,6 +21,7 @@ function Header({menuItem}: Props) {
     const logOutBtn = () => {
         emptyCart();
         navigate('/');
+        localStorage.clear();
     };
 
     return (
