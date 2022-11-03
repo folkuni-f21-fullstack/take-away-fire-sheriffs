@@ -6,11 +6,11 @@ import { Orders } from "../models/models";
 
 interface Props {
   order: Orders;
-  activeUser: string;
+  // activeUser: string;
   getUsers: () => void;
 };
 
-function UserOrderItem({order, activeUser, getUsers}: Props) {
+function UserOrderItem({order, getUsers}: Props) {
   const [openEdit, setOpenEdit] = useState<boolean>(false);
   const [orderStatus, setOrderStatus] = useState(order.status);
 
@@ -44,7 +44,7 @@ function UserOrderItem({order, activeUser, getUsers}: Props) {
   async function deleteOrder() {
 
     const query = {
-      username: activeUser, 
+      username: localStorage.getItem('activeUser'), 
       order: order.orderId
     }
     const requestOptions = {
@@ -87,7 +87,7 @@ function UserOrderItem({order, activeUser, getUsers}: Props) {
         </button>
         <button className="card-btn-delete" onClick={ deleteOrder }>Delete</button>
       </section>
-      {openEdit && <EditOrder closeOverlay={setOpenEdit} order={order} activeUser={activeUser} getUsers={getUsers} deleteOrder={deleteOrder}/>}
+      {openEdit && <EditOrder closeOverlay={setOpenEdit} order={order} getUsers={getUsers} deleteOrder={deleteOrder}/>}
     </section>
   );
 }

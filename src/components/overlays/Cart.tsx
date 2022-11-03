@@ -7,13 +7,13 @@ import { useState } from "react";
 
 interface Props {
   menuItem: Menu;
-  activeUser: string;
+  // activeUser: string;
 }
 interface Props {
   closeOverlay: (close: boolean) => void;
 }
 
-export function Cart({ closeOverlay, activeUser }: Props) {
+export function Cart({ closeOverlay }: Props) {
   const [userComment, setUserComment] = useState<string>("");
   const [msg, setMsg] = useState<boolean>(false);
   const { cartItems } = useShoppingCart();
@@ -22,13 +22,13 @@ export function Cart({ closeOverlay, activeUser }: Props) {
   const closeBtn = () => {
     closeOverlay(false);
   };
-  console.log("cart User", activeUser);
+  // console.log("cart User", activeUser);
 
   const placeOrderBtn = async () => {
     const localOrder = localStorage.getItem("shopping-cart");
 
     const query = {
-      username: activeUser,
+      username: localStorage.getItem('activeUser'),
       neworder: localOrder,
       usercomment: userComment,
     };

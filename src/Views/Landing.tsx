@@ -5,13 +5,14 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { User, Credentials } from '../models/models';
 
-interface Props {
-    setActiveUser: (activeUser: string) => void;
-    activeUser: string;
-}
+// interface Props {
+//     setActiveUser: (activeUser: string) => void;
+//     activeUser: string;
+// }
 
 
-function Landing({activeUser, setActiveUser}: Props) {  
+function Landing() { 
+    // const [activeUser, setActiveUser] = useState<string>(""); 
     const [feedback, setFeedback] = useState<string>('');
     const [openSignup, setOpenSignup] = useState(false);
     const [username, setUsername] = useState('');
@@ -32,11 +33,7 @@ function Landing({activeUser, setActiveUser}: Props) {
     
 
     async function signIn() {
-        let newData: User | any = await userLogin()
-        // userLogin();
-        // navigate('/menu');
-        // fetchUsers();
-        // console.log(newData);
+        let newData: User | any = await userLogin();
         
         if (newData == 404) {
             console.log('wrong username/password');
@@ -49,8 +46,8 @@ function Landing({activeUser, setActiveUser}: Props) {
             setFeedback("The database seems to be on vacation");
         } 
         else {
-            
-            setActiveUser(newData.username);
+            // setActiveUser(newData.username);
+            localStorage.setItem('activeUser', newData.username);
             navigate('/menu');
             if (newData.customer == false) {
                 navigate('/admin');
@@ -95,7 +92,7 @@ function Landing({activeUser, setActiveUser}: Props) {
                 <button onClick={signIn}>Log in</button>
             </section>
             <button className="buttonMember" onClick={signupClick}>Become a Member</button>
-            {openSignup && <Signup closeOverlay={setOpenSignup} setActiveUser={setActiveUser} />}
+            {openSignup && <Signup closeOverlay={setOpenSignup} />}
         </section>
     )
 }

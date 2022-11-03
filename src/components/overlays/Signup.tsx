@@ -6,10 +6,10 @@ import { useNavigate } from 'react-router-dom';
 
 interface Prop {
     closeOverlay: (close: boolean) => void;
-    setActiveUser: (activeUser: string) => void;
+    // setActiveUser: (activeUser: string) => void;
 }
 
-function Signup( {closeOverlay, setActiveUser}: Prop ) {
+function Signup( {closeOverlay}: Prop ) {
     const [feedback, setFeedback] = useState('');
     const [feedbackText, setFeedbackText] = useState('');
     const [username, setUsername] = useState('');
@@ -84,7 +84,8 @@ function Signup( {closeOverlay, setActiveUser}: Prop ) {
 
         // Kontrollera svaret 
         if(response.status == 200) {
-            setActiveUser(credentials.username);
+            // setActiveUser(credentials.username);
+            localStorage.setItem('activeUser', credentials.username)
             navigate('/menu');
         } else {
             return 404;
