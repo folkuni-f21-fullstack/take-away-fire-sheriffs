@@ -257,14 +257,17 @@ router.post('/increaseitem', async (req, res) => {
 router.post('/comment', (req, res) => {
     if (!db.data) {
         res.sendStatus(404);
+        console.log('comment -1');
         return;
     }
 
     const query: Query = req.body;
 
     const maybeUser = db.data.users.find(user => user.username == query.username);
+    console.log('comment 0 - maybeUser', maybeUser, "query.username", query.username);
+    
     if (maybeUser) {
-        console.log('comment 1');
+    console.log('comment 1');
         
         const maybeOrder = maybeUser.orders.find(order => order.orderId == query.order.orderId);
         if (maybeOrder) {
@@ -297,13 +300,14 @@ router.post('/finduser', (req, res) => {
     const orderToFind = req.body;
 
     const result = db.data.users.find(user => {
-        return user.orders.find(order => order.orderId == orderToFind);
+        console.log("/finduser - user", user);
+        return user.orders.find(order => order.orderId == orderToFind.orderId);
     });
-
+    console.log("result", result);
     if (result) {
         res.json(result.username);
     } else {
-        res.json(404);
+        res.sendStatus(404);
     }
     
     // db.data.users.map(user => {

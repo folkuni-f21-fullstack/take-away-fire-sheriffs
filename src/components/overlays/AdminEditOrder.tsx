@@ -207,9 +207,9 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(query)
         }
-    
+        console.log("query", query);
         const response = await fetch('/api/orders/comment', requestOptions);
-
+        
         if (response.status == 200) {
             console.log('deleteOrder, status 200, success!');
             
@@ -229,7 +229,7 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
     
         const response = await fetch('/api/orders/finduser', requestOptions);
         const data: string = await response.json();
-        console.log("data from api/orders/finduser", data);
+        console.log("found user", data);
         return data;
     }
 
