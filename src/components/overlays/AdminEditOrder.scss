@@ -26,6 +26,11 @@
         text-align: center;
     }
         
+    .edit-card-info {
+        display: flex;
+        flex-direction: column;
+        @extend %edit-order-item;
+    }
     
     .card-dish{
         display: flex;
