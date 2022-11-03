@@ -29,6 +29,7 @@ $status-ordered: #cc3232;
     appearance: none;
     border: 1px solid $black;
     box-shadow: 0 4px 4px #00000050;
+    user-select: none;
 
     &:hover {
         cursor: pointer;
@@ -45,6 +46,7 @@ $status-ordered: #cc3232;
     top: 3%;
     right: 3%;
     z-index: 2;
+    user-select: none;
 
     &:hover {
         cursor: pointer;
@@ -78,4 +80,39 @@ $status-ordered: #cc3232;
     border-radius: 15px;
     width: 80%;
     max-width: 30rem;
+}
+
+%edit-order-item {
+    .edit-order-item-element {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+
+        padding-bottom: 0.6em;
+        border-radius: 10%;
+        border-bottom: 3px solid #00000044;
+        margin: 0.8em 0;
+        width: 100%;
+        .item-title {
+            min-width: 50%;
+            margin-right: auto;
+        }
+        .edit-details {
+            margin-left: auto;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        .card-add-remove-btns {
+            display: flex;
+            gap: 0.5em;
+            .card-btn-decrease {
+                background-color: $red-bgr;
+                color: $white;
+            }
+        }
+    }
 }

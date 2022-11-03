@@ -27,33 +27,7 @@
 .edit-card-info {
   display: flex;
   flex-direction: column;
-
-  .edit-element {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1em;
-
-    .edit-details {
-      display: flex;
-      width: 70%;
-      justify-content: space-between;
-
-      .card-text {
-        font-size: 20px;
-      }
-    }
-
-    .card-add-remove-btns {
-      display: flex;
-      gap: 0.5em;
-
-      .card-btn-decrease {
-        background-color: base.$red-bgr;
-        color: base.$white;
-      }
-    }
-  }
+  @extend %edit-order-item;
 }
 
 /* Total price, Place an order btn, Comment field*/

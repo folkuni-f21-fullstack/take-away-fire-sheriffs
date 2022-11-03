@@ -57,15 +57,15 @@ function EditOrder({ closeOverlay, order, activeUser, getUsers, deleteOrder }: P
 
   const mappedOrderItems = order.items.map((item: { title: string; price: number; quantity: number; id: number}, index: Key) => {
     return (
-      <div key={index} className="edit-element ">
+      <div key={index} className="edit-order-item-element">
+        <p className="item-title">{item.title}</p>
         <section className="edit-details">
-          <p className="card-text">{item.title}</p>
-          <p className="card-text">{item.price}:-</p>
-          <p className="item-quantity">x{item.quantity}</p>
-        </section>
-        <section className="card-add-remove-btns">
-          <button className="card-btn-decrease" onClick={decreaseItem}> - </button>
-          <button className="card-btn-increase" onClick={increaseItem}> + </button>
+          <p>{item.price}:-</p>
+          <p>x{item.quantity}</p>
+          <section className="card-add-remove-btns">
+            <button className="card-btn-decrease" onClick={decreaseItem}> - </button>
+            <button className="card-btn-increase" onClick={increaseItem}> + </button>
+          </section>
         </section>
       </div>
     );

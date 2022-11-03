@@ -40,10 +40,7 @@
     margin-bottom: 2.5vh;
 
     .close-overlay-btn {
-      position: absolute;
-      top: 0px;
-      right: 0px;
-      height: 2.5rem;
+      @include base.close-button;
     }
   }
 
@@ -54,8 +51,8 @@
     margin-left: 5rem;
     margin-right: 5rem;
 
-    .cart-edit-overlay-btn {
-      @include base.button($bgr: base.$black, $txt: base.$white);
-    }
+    // .cart-edit-overlay-btn {
+    //   @include base.button($bgr: base.$black, $txt: base.$white);
+    // }
   }
 }
