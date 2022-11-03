@@ -7,10 +7,10 @@ import { Menu } from "../models/models";
 
 
 interface Props {
-    activeUser: string;
+    // activeUser: string;
     menuItem: Menu;
 }
-function Header({activeUser, menuItem}: Props) {
+function Header({menuItem}: Props) {
     const navigate = useNavigate();
     const [openCart, setOpenCart] = useState(false);
     const { cartQuantity } = useShoppingCart()
@@ -33,7 +33,7 @@ function Header({activeUser, menuItem}: Props) {
              <li onClick={() => navigate('/menu')}><a>Menu</a></li>
              <li onClick={() => navigate('/orders')}><a>My orders</a></li>
              <li onClick={() => navigate('/about')}><a>About us</a></li>
-             <li onClick={() => navigate('/')}><a>Log out</a></li>
+             <li onClick={() => {localStorage.clear(), navigate('/')}}><a>Log out</a></li>
           
         </ul>
         <section className='cart-container' onClick={openCartBtn}>
@@ -42,7 +42,7 @@ function Header({activeUser, menuItem}: Props) {
             <img className='menu-cart-logo' src="src\assets\cart-logo.svg" alt="" />
             
         </section>
-        {openCart && <CartOverlay activeUser={activeUser} closeOverlay={setOpenCart} menuItem={menuItem} />}
+        {openCart && <CartOverlay closeOverlay={setOpenCart} menuItem={menuItem} />}
       </nav>
     )
 }

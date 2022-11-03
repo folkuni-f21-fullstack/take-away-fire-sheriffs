@@ -5,13 +5,16 @@ import { User, Menu } from "../../models/models";
 import { useState, useEffect } from "react";
 
 interface Props {
-  activeUser: string;
+  // activeUser: string;
   menuItem: Menu;
 }
 
-const UserOrders = ({activeUser, menuItem}: Props) => {
-  console.log("UserOrders - activeUser: ", activeUser);
+const UserOrders = ({menuItem}: Props) => {
+  // console.log("UserOrders - activeUser: ", activeUser);
 
+////////////////////////////////////////////////////////////
+  // const [activeUser, setActiveUser] = useState<string>(""); 
+////////////////////////////////////////////////////////////
   const [users, setUsers] = useState<User[] | null>(null);
 
   const getUsers = async () => {
@@ -28,7 +31,7 @@ const UserOrders = ({activeUser, menuItem}: Props) => {
 
   console.log(users);
 
-  const loggedInUser = users?.find(user => user.username === activeUser);
+  const loggedInUser = users?.find(user => user.username === localStorage.getItem('activeUser'));
 
   if (loggedInUser) {
     loggedInUser.orders.sort((a, b) => {
@@ -48,14 +51,14 @@ const UserOrders = ({activeUser, menuItem}: Props) => {
   
   return (
     <>
-      <Header activeUser={activeUser} menuItem={menuItem} />
+      <Header menuItem={menuItem} />
       <section className="order-title content-wrapper">
         <img src="../src/assets/orders-title.svg" alt="My Order" />
   
         <section className="user-orders-wrapper">
           { loggedInUser ? (
               loggedInUser.orders.map((order) => (
-                  <OrderItem key={order.id} order={order} activeUser={activeUser} getUsers={getUsers} />
+                  <OrderItem key={order.id} order={order} getUsers={getUsers} />
               ))) : 'Couldnt find any orders' }       
         </section>
       </section>

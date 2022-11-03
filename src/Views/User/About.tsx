@@ -6,18 +6,21 @@ import contact  from '../../assets/contact.svg'
 import { Menu, User } from '../../models/models';
 
 import './About.scss'
+import { useState } from "react";
 
 interface Props {
-    activeUser: string;
     menuItem: Menu;
 }
 
-const About = ({activeUser, menuItem}: Props) => {
+const About = ({menuItem}: Props) => {
 
+    ////////////////////////////////////////////////////////////
+//   const [activeUser, setActiveUser] = useState<string>(""); 
+  ////////////////////////////////////////////////////////////
 
     return (
         <>
-            <Header activeUser={activeUser} menuItem={menuItem} />
+            <Header menuItem={menuItem} />
                 <article className="about-headline">
                     <img src={aboutpic} alt="about us" />
                 </article>

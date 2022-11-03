@@ -10,13 +10,17 @@ import { Menu, User } from '../../models/models';
 import { useState, useEffect } from 'react';
 
 interface Props {
-    activeUser: string;
+    // activeUser: string;
     menuItem: Menu;
 }
 
 
-function UserHome({activeUser, menuItem}: Props) {
-    console.log("UserHome - activeUser: ", activeUser);
+function UserHome({menuItem}: Props) {
+    // console.log("UserHome - activeUser: ", activeUser);
+
+    ////////////////////////////////////////////////////////////
+//   const [activeUser, setActiveUser] = useState<string>(""); 
+  ////////////////////////////////////////////////////////////
 
     const [menu, setMenu] = useState<Menu[] | null>(null);
 
@@ -33,7 +37,7 @@ function UserHome({activeUser, menuItem}: Props) {
 
     return (
         <>
-            <Header activeUser={activeUser} menuItem={menuItem} />
+            <Header menuItem={menuItem} />
             <div className='userHomeWrapper content-wrapper'>
                 <img className='menuTitle' src={ MenuTitle } alt="title-logo" />
                     <div className="menu-items-wrapper">

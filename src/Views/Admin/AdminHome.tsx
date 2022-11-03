@@ -7,11 +7,11 @@ import { useState, useEffect } from 'react';
 
 
 interface Props {
-    activeUser: string;
+    // activeUser: string;
 }
 
-function AdminHome({activeUser}: Props) {
-    console.log("AdminHome - activeUser: ", activeUser);
+function AdminHome() {
+    // console.log("AdminHome - activeUser: ", activeUser);
     const [allOrders, setAllOrders] = useState<Orders[] | null>(null);
     const [finished, setFinished] = useState<boolean>(false);
     const [ordered, setordered] = useState<boolean>(false);

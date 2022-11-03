@@ -6,19 +6,19 @@ import { Orders, User, Menu } from '../../models/models';
 interface Props {
   closeOverlay: (close: boolean) => void;
   order: Orders;
-  activeUser: string;
+  // activeUser: string;
   getUsers: () => void;
   deleteOrder: () => void;
 }
 
 type Query = {
-  username: string;
+  username: string | null;
   order: Orders;
   comment: string;
   from: string;
 }
 
-function EditOrder({ closeOverlay, order, activeUser, getUsers, deleteOrder }: Props) {
+function EditOrder({ closeOverlay, order, getUsers, deleteOrder }: Props) {
   const [feedback, setFeedback] = useState<string>('');
   const [userComment, setUserComment] = useState<string>('');
 
@@ -33,7 +33,7 @@ function EditOrder({ closeOverlay, order, activeUser, getUsers, deleteOrder }: P
     }, 500);
     
     const query: Query = {
-      username: activeUser,
+      username: localStorage.getItem('activeUser'),
       order: order,
       comment: userComment,
       from: "user"
@@ -78,7 +78,7 @@ function EditOrder({ closeOverlay, order, activeUser, getUsers, deleteOrder }: P
       console.log(order);
       
       const query = {
-        username: activeUser,
+        username: localStorage.getItem('activeUser'),
         orderId: order.id,
         itemId: item.id
       }
@@ -116,7 +116,7 @@ function EditOrder({ closeOverlay, order, activeUser, getUsers, deleteOrder }: P
       console.log(order);
       
       const query = {
-        username: activeUser,
+        username: localStorage.getItem('activeUser'),
         orderId: order.id,
         itemId: item.id
       }

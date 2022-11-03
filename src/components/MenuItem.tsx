@@ -84,7 +84,6 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
   function emptyCart() {
     setCartItems ([])
-    
   }
 
   function decreaseCartQuantity(id: number) {
