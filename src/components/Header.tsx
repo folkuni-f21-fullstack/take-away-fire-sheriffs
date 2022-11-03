@@ -13,10 +13,16 @@ interface Props {
 function Header({menuItem}: Props) {
     const navigate = useNavigate();
     const [openCart, setOpenCart] = useState(false);
-    const { cartQuantity } = useShoppingCart()
+    const { emptyCart,cartQuantity } = useShoppingCart()
     const openCartBtn = () => {
         {setOpenCart(true)}
     }
+
+    const logOutBtn = () => {
+        emptyCart();
+        navigate('/');
+    };
+
     return (
         <nav className="nav">
         <input type="checkbox" id="nav__checkbox" className="nav__checkbox"/>
@@ -33,7 +39,7 @@ function Header({menuItem}: Props) {
              <li onClick={() => navigate('/menu')}><a>Menu</a></li>
              <li onClick={() => navigate('/orders')}><a>My orders</a></li>
              <li onClick={() => navigate('/about')}><a>About us</a></li>
-             <li onClick={() => {localStorage.clear(), navigate('/')}}><a>Log out</a></li>
+             <li onClick={logOutBtn}><a>Log out</a></li>
           
         </ul>
         <section className='cart-container' onClick={openCartBtn}>
