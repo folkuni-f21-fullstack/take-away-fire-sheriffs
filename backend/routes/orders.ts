@@ -261,25 +261,31 @@ router.post('/comment', (req, res) => {
     }
 
     const query: Query = req.body;
-    
-    db.data.users.map(user => {
-        if (user.username === query.username) {
-            user.orders.map(order => {
-                if (order.id === query.order.id) {
-                    if(query.from == "user") {
-                        order.userComment = query.comment;
-                        res.json(order.userComment);
-                    } else if(query.from == "admin") {
-                        order.adminComment = query.comment;
-                        res.json(order.adminComment);
-                    }
-                    db.write();  
-                } else {
-                    res.sendStatus(404);
-                }
-            })
+
+    const maybeUser = db.data.users.find(user => user.username == query.username);
+    if (maybeUser) {
+        console.log('comment 1');
+        
+        const maybeOrder = maybeUser.orders.find(order => order.orderId == query.order.orderId);
+        if (maybeOrder) {
+            console.log('comment 2');
+            if (query.from == 'user') {
+                console.log('comment 3');
+                maybeOrder.userComment = query.comment; 
+                res.json(maybeOrder.userComment);
+            } else if (query.from == 'admin') {
+                console.log('comment 4');
+                maybeOrder.adminComment = query.comment;
+                res.json(maybeOrder.adminComment);
+            }
+            db.write();
+            console.log('comment 5', );
+            
+        } else {
+            console.log('comment 6 (error)');
+            res.sendStatus(404);
         }
-    });
+    }
 });
 
 router.post('/finduser', (req, res) => {
@@ -289,15 +295,25 @@ router.post('/finduser', (req, res) => {
     }
 
     const orderToFind = req.body;
-    
-    db.data.users.map(user => {
-        user.orders.map(order => {
-            if(order.orderId == orderToFind.orderId) {
-                res.json(user.username);
-                return;
-            }
-        });
+
+    const result = db.data.users.find(user => {
+        return user.orders.find(order => order.orderId == orderToFind);
     });
+
+    if (result) {
+        res.json(result.username);
+    } else {
+        res.json(404);
+    }
+    
+    // db.data.users.map(user => {
+    //     user.orders.map(order => {
+    //         if(order.orderId == orderToFind.orderId) {
+    //             res.json(user.username);
+    //             return;
+    //         }
+    //     });
+    // });
 });
 
 export default router;

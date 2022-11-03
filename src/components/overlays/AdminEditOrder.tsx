@@ -209,6 +209,13 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
         }
     
         const response = await fetch('/api/orders/comment', requestOptions);
+
+        if (response.status == 200) {
+            console.log('deleteOrder, status 200, success!');
+            
+          } else {
+            console.log('deleteOrder', response.status);
+          }
     }
 
     async function findOrderOwner(orderItem: Orders) {
@@ -259,7 +266,7 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
 
                 <p className={"feedback " + feedback}>Your comment was saved.</p>
                 <div className='admin-edit-buttons'>
-                   <button className='admin-change-order-btn' onClick={saveEdits}>Change Order</button>
+                   <button className='admin-change-order-btn' onClick={saveEdits}>Save comments</button>
                 </div>
             </div>
         </section>
