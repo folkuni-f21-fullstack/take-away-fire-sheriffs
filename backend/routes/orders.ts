@@ -49,7 +49,7 @@ function orderDotIdGenerator() {
 
     allUsers.map( user => {
         user.orders.find(order => {
-            if (order.id == newOrderId) {
+            if (order.orderId == newOrderId) {
                 newOrderId++;
             } else {
                 return newOrderId;
@@ -176,7 +176,7 @@ router.delete('/deleteorder', async (req, res) => {
     const maybeUser: Users | undefined = db.data.users.find(user => user.username == query.username);
     if (maybeUser) {
         console.log('maybeuser',maybeUser);
-        const newOrders = maybeUser.orders.filter(item => item.orderId !== query.order);
+        const newOrders = maybeUser.orders.filter(item => item.orderId !== query.orderId);
         maybeUser.orders = newOrders;
         console.log('new Order after delete: ' ,newOrders);
         db.write()
@@ -197,7 +197,7 @@ router.delete('/decreaseitem', async (req, res) => {
     const maybeUser: Users | undefined = db.data.users.find(user => user.username == query.username);
     
     if (maybeUser) {
-        const maybeOrder = maybeUser.orders.find(order => order.id == query.orderId);
+        const maybeOrder = maybeUser.orders.find(order => order.orderId == query.orderId);
 
         if (maybeOrder) {
             const foundItem = maybeOrder.items.find(item => item.id == query.itemId);
@@ -234,7 +234,7 @@ router.post('/increaseitem', async (req, res) => {
     const maybeUser: Users | undefined = db.data.users.find(user => user.username == query.username);
     
     if (maybeUser) {
-        const maybeOrder = maybeUser.orders.find(order => order.id == query.orderId);
+        const maybeOrder = maybeUser.orders.find(order => order.orderId == query.orderId);
 
         if (maybeOrder) {
             const foundItem = maybeOrder.items.find(item => item.id == query.itemId);
@@ -265,7 +265,7 @@ router.post('/comment', (req, res) => {
     db.data.users.map(user => {
         if (user.username === query.username) {
             user.orders.map(order => {
-                if (order.id === query.order.id) {
+                if (order.orderId === query.order.orderId) {
                     if(query.from == "user") {
                         order.userComment = query.comment;
                         res.json(order.userComment);

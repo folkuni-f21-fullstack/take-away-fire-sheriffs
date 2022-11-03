@@ -55,7 +55,7 @@ const UserOrders = ({activeUser, menuItem}: Props) => {
         <section className="user-orders-wrapper">
           { loggedInUser ? (
               loggedInUser.orders.map((order) => (
-                  <OrderItem key={order.id} order={order} activeUser={activeUser} getUsers={getUsers} />
+                  <OrderItem key={order.orderId} order={order} activeUser={activeUser} getUsers={getUsers} />
               ))) : 'Couldnt find any orders' }       
         </section>
       </section>

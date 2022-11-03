@@ -79,7 +79,7 @@ function EditOrder({ closeOverlay, order, activeUser, getUsers, deleteOrder }: P
       
       const query = {
         username: activeUser,
-        orderId: order.id,
+        orderId: order.orderId,
         itemId: item.id
       }
       
@@ -117,7 +117,7 @@ function EditOrder({ closeOverlay, order, activeUser, getUsers, deleteOrder }: P
       
       const query = {
         username: activeUser,
-        orderId: order.id,
+        orderId: order.orderId,
         itemId: item.id
       }
       
