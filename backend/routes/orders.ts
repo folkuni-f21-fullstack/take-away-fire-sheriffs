@@ -38,6 +38,26 @@ function orderIdGenerator() {
     return newOrderNumber;
 }
 
+let newOrderId = 2
+function orderDotIdGenerator() {
+    if (!db.data) {
+        return 0;
+    }
+    const allUsers = db.data.users;
+
+    newOrderId++;
+
+    allUsers.map( user => {
+        user.orders.find(order => {
+            if (order.id == newOrderId) {
+                newOrderId++;
+            } else {
+                return newOrderId;
+            }
+        });
+    });
+    return newOrderId;
+}
 router.get('/', (req, res) => {
     if (db.data) {
         const allUsers = db.data.users
@@ -105,7 +125,8 @@ router.post('/saveorder', async (req,res) => {
             status: 'ordered',
             userComment: query.usercomment,
             adminComment: '',
-            id: user.orders.length + 1
+            id: orderDotIdGenerator(),
+            // id: user.orders.length + 1
         }
         console.log('newOrderAdded: ', order);
         user.orders.push(order)
