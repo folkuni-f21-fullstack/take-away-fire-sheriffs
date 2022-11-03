@@ -5,7 +5,7 @@ import CartOverlay from './overlays/Cart'
 import { useShoppingCart } from './MenuItem';
 import { Menu } from "../models/models";
 import logo from '../assets/logo.svg';
-import cart from 'src/assets/cart-logo.svg';
+import cart from '../assets/cart-logo.svg';
 
 
 interface Props {

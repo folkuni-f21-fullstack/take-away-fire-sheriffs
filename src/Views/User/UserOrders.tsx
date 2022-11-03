@@ -3,7 +3,7 @@ import "./UserOrders.scss";
 import Header from "../../components/Header";
 import { User, Menu } from "../../models/models";
 import { useState, useEffect } from "react";
-import orderLogo from "../src/assets/orders-title.svg";
+import orderLogo from "../../assets/orders-title.svg";
 
 interface Props {
   // activeUser: string;
