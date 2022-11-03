@@ -26,7 +26,7 @@ RUN npm run build
 RUN npm run build-backend
 
 # Gör port 8080 synlig utåt
-EXPOSE 1234
+EXPOSE 8080
 
 # Starta en webbserver som servar de statiska filerna i /app/dist
 # alternativ server: Nginx
