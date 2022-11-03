@@ -59,7 +59,7 @@ $status-ordered: #cc3232;
 @mixin default-overlay-wrapper($bgr: $overlay-bgr) {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     position: fixed;
     overflow-y: scroll;
     width: 100%;
