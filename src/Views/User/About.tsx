@@ -3,10 +3,9 @@ import aboutpic  from '../../assets/about-title.svg'
 import history  from '../../assets/history.svg'
 import employees  from '../../assets/employees.svg'
 import contact  from '../../assets/contact.svg'
-import { Menu, User } from '../../models/models';
+import { Menu } from '../../models/models';
 
 import './About.scss'
-import { useState } from "react";
 
 interface Props {
     menuItem: Menu;
@@ -14,9 +13,6 @@ interface Props {
 
 const About = ({menuItem}: Props) => {
 
-    ////////////////////////////////////////////////////////////
-//   const [activeUser, setActiveUser] = useState<string>(""); 
-  ////////////////////////////////////////////////////////////
 
     return (
         <>

@@ -3,6 +3,7 @@ import "./UserOrders.scss";
 import Header from "../../components/Header";
 import { User, Menu } from "../../models/models";
 import { useState, useEffect } from "react";
+import orderLogo from "../src/assets/orders-title.svg";
 
 interface Props {
   // activeUser: string;
@@ -53,7 +54,7 @@ const UserOrders = ({menuItem}: Props) => {
     <>
       <Header menuItem={menuItem} />
       <section className="order-title content-wrapper">
-        <img src="../src/assets/orders-title.svg" alt="My Order" />
+        <img src={orderLogo} alt="My Order" />
   
         <section className="user-orders-wrapper">
           { loggedInUser ? (

@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router'
 import CartOverlay from './overlays/Cart'
 import { useShoppingCart } from './MenuItem';
 import { Menu } from "../models/models";
+import logo from '../assets/logo.svg';
+import cart from 'src/assets/cart-logo.svg';
 
 
 interface Props {
@@ -36,7 +38,7 @@ function Header({menuItem}: Props) {
              </svg>
         </label>
         <ul className="nav__menu">
-             <li onClick={() => navigate('/menu')}> <img className='menu-logo' src="src\assets\logo.svg" alt="" /> </li>
+             <li onClick={() => navigate('/menu')}> <img className='menu-logo' src={logo} alt="" /> </li>
              <li onClick={() => navigate('/menu')}><a>Menu</a></li>
              <li onClick={() => navigate('/orders')}><a>My orders</a></li>
              <li onClick={() => navigate('/about')}><a>About us</a></li>
@@ -46,7 +48,7 @@ function Header({menuItem}: Props) {
         <section className='cart-container' onClick={openCartBtn}>
             {cartQuantity>0? <div className='cart-number'><> {cartQuantity} </></div> : null }
             
-            <img className='menu-cart-logo' src="src\assets\cart-logo.svg" alt="" />
+            <img className='menu-cart-logo' src={cart} alt="" />
             
         </section>
         {openCart && <CartOverlay closeOverlay={setOpenCart} menuItem={menuItem} />}
