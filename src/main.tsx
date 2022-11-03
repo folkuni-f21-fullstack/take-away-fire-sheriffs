@@ -8,7 +8,15 @@ import './index.css'
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <App menuItem={{
+        title: '',
+        price: 0,
+        ingredients: '',
+        allergies: '',
+        imgUrl: '',
+        quantity: 0,
+        id: 0
+      }} />
     </BrowserRouter>
   </React.StrictMode>
 )

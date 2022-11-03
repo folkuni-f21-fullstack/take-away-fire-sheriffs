@@ -5,12 +5,10 @@ import About from './Views/User/About';
 import UserHome from './Views/User/UserHome';
 import UserOrders from './Views/User/UserOrders';
 import AdminHome from './Views/Admin/AdminHome';
-import { useState } from 'react';
 import { Menu } from './models/models';
 import { ShoppingCartProvider } from "./components/MenuItem" 
 
 interface Props {
-  activeUser: string;
   menuItem: Menu;
 }
 function App({ menuItem}: Props) {
