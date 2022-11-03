@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express'
 const app = express()
-const PORT = 1337  // TODO: environment variables istället
+const PORT = process.env.PORT || 8080;  // TODO: environment variables istället
 import menuRoute from './routes/menu.js';
 import usersRoute from './routes/users.js';
 import ordersRoute from './routes/orders.js';
