@@ -98,7 +98,7 @@ function Signup( {closeOverlay}: Prop ) {
                 <img src={close} onClick={closeBtn} alt="close" className="closeButton" />
 
                 <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-                <input type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <p className={"feedback " + feedback}>{feedbackText}</p>
                 <button onClick={userSignup} >Sign up</button>
             </section>

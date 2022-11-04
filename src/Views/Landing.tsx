@@ -92,7 +92,7 @@ function Landing() {
             <img className="logo" src={logo} />
             <section className="loginSignup">
                 <input type="text" placeholder="Username" value={username} onKeyDown={(event) => handleKeyPress(event)} onChange={(e) => setUsername(e.target.value)} />
-                <input type="text" placeholder="Password" value={password} onKeyDown={(event) => handleKeyPress(event)} onChange={(e) => setPassword(e.target.value)} />
+                <input type="password" placeholder="Password" value={password} onKeyDown={(event) => handleKeyPress(event)} onChange={(e) => setPassword(e.target.value)} />
                 <p className={"feedback " + feedback}>Wrong username or password.</p>
                 <button onClick={signIn}>Log in</button>
             </section>
