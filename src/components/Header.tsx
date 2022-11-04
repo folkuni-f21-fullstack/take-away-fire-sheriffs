@@ -45,12 +45,13 @@ function Header({menuItem}: Props) {
              <li onClick={logOutBtn}><a>Log out</a></li>
           
         </ul>
-        <section className='cart-container' onClick={openCartBtn}>
-            {cartQuantity>0? <div className='cart-number'><> {cartQuantity} </></div> : null }
-            
-            <img className='menu-cart-logo' src={cart} alt="" />
-            
-        </section>
+        <div className="userNameCart-wrapper">
+            <p>{localStorage.getItem('activeUser')}</p>
+            <section className='cart-container' onClick={openCartBtn}>
+                {cartQuantity>0? <div className='cart-number'><> {cartQuantity} </></div> : null }
+                <img className='menu-cart-logo' src={cart} alt="" />
+            </section>
+        </div>
         {openCart && <CartOverlay closeOverlay={setOpenCart} menuItem={menuItem} />}
       </nav>
     )
