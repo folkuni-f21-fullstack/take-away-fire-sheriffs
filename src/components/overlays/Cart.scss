@@ -4,8 +4,8 @@
   @include base.default-overlay-wrapper;
 
   .cart-container {
-    @extend %cardSize;
     @include base.default-overlay;
+    @extend %cardSize;
     background-color: base.$yellow-bgr;
     border: 5px solid base.$black;
     padding: 2em;
