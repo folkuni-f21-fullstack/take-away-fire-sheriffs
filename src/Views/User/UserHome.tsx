@@ -11,18 +11,19 @@ import { useState, useEffect } from 'react';
 
 interface Props {
     // activeUser: string;
-    menuItem: Menu;
+    menu: Menu[] | null;
+    setMenu: (menu: Menu[] | null) => void;
 }
 
 
-function UserHome({menuItem}: Props) {
+function UserHome({menu, setMenu}: Props) {
     // console.log("UserHome - activeUser: ", activeUser);
 
     ////////////////////////////////////////////////////////////
 //   const [activeUser, setActiveUser] = useState<string>(""); 
   ////////////////////////////////////////////////////////////
 
-    const [menu, setMenu] = useState<Menu[] | null>(null);
+    
 
     const fetchMenu = async () => {
         const response = await fetch('/api/menu', { mode: 'cors' });
@@ -37,7 +38,7 @@ function UserHome({menuItem}: Props) {
 
     return (
         <>
-            <Header menuItem={menuItem} />
+            <Header menuItem={menu} />
             <div className='userHomeWrapper content-wrapper'>
                 <img className='menuTitle' src={ MenuTitle } alt="title-logo" />
                     <div className="menu-items-wrapper">

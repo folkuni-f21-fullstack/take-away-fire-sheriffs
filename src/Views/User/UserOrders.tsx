@@ -7,7 +7,7 @@ import orderLogo from "../../assets/orders-title.svg";
 
 interface Props {
   // activeUser: string;
-  menuItem: Menu;
+  menuItem: Menu[] | null;
 }
 
 const UserOrders = ({menuItem}: Props) => {

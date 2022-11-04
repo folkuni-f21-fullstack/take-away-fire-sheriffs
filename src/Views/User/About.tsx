@@ -8,7 +8,7 @@ import { Menu } from '../../models/models';
 import './About.scss'
 
 interface Props {
-    menuItem: Menu;
+    menuItem: Menu[] | null;
 }
 
 const About = ({menuItem}: Props) => {

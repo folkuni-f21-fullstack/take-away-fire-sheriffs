@@ -6,7 +6,7 @@ import { Menu } from "../../models/models";
 import { useState } from "react";
 
 interface Props {
-  menuItem: Menu;
+  menuItem: Menu[] | null;
   // activeUser: string;
 }
 interface Props {
