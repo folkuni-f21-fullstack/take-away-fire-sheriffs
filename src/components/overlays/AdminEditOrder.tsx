@@ -1,6 +1,7 @@
 import './AdminEditOrder.scss'
 import { Orders, Menu } from '../../models/models';
 import { Key, useEffect, useState } from 'react';
+import closebutton from '../../assets/close-overlay-button.svg';
 
 interface Prop {
     fetchOrders: () => void;
@@ -247,7 +248,7 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
                 <div className='edit-upper-container'>
                     <h1 className='admin-edit-title'>Edit Order</h1>
                     <h2 className='edit-order-title'> {orderItem.orderId}</h2>
-                    <img src="src\assets\close-overlay-button.svg" alt="" onClick={closeBtn} className='admin-close-edit-overlay-btn'/>
+                    <img src={closebutton} alt="" onClick={closeBtn} className='admin-close-edit-overlay-btn'/>
                 </div>
                 <section className='edit-card-info'>
                     {orderItems}

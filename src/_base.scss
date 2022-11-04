@@ -11,12 +11,12 @@ $status-finished: #2dc937;
 $status-ordered: #cc3232;
 
 %cardSize {
-    // width: 80%;
+    width: 100%;
     max-width: 20em;
     min-height: 17em;
 }
 %cardSizeWide {
-    width: 80%;
+    width: 100%;
     min-width: 20em;
     max-width: 30em;
 }

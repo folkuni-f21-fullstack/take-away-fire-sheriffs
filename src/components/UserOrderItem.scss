@@ -71,8 +71,12 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 1rem;
+    gap: 15px;
     .card-text {
       font-size: 20px;
+      &:first-child {
+        margin-right: auto;
+      }
     }
   }
 }

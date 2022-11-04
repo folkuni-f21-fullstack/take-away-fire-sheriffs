@@ -1,6 +1,6 @@
-import React from 'react'
 import './Header.scss';
 import { useNavigate } from 'react-router'
+import logo from '../assets/logo.svg';
 
 function AdminHeader() {
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ function AdminHeader() {
              </svg>
         </label>
         <ul className="nav__menu">
-             <li > <img className='menu-logo' src="src\assets\logo.svg" alt="" /> </li>
+             <li > <img className='menu-logo' src={logo} alt="" /> </li>
              
              
              
