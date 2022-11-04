@@ -2,6 +2,7 @@ import "./Cart.scss";
 import CartItem from "../../components/CartItem";
 import Msg from "../../components/overlays/PlacedOrderMsg";
 import { useShoppingCart } from "../MenuItem";
+import closeBtn from '../../assets/close-overlay-button.svg';
 import { Menu } from "../../models/models";
 import { useState } from "react";
 
@@ -19,7 +20,7 @@ export function Cart({ closeOverlay }: Props) {
   const { cartItems } = useShoppingCart();
   const { emptyCart } = useShoppingCart();
 
-  const closeBtn = () => {
+  const cartCloseBtn = () => {
     closeOverlay(false);
   };
   // console.log("cart User", activeUser);
@@ -58,9 +59,9 @@ export function Cart({ closeOverlay }: Props) {
           <div className="cart-upper-container">
             <h1 className="cart-title">Cart</h1>
             <img
-              src="src\assets\close-overlay-button.svg"
+              src={closeBtn}
               alt=""
-              onClick={closeBtn}
+              onClick={cartCloseBtn}
               className="close-overlay-btn"
             />
           </div>
