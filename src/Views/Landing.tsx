@@ -1,7 +1,7 @@
 import './Landing.scss';
 import Signup from '../components/overlays/Signup';
 import logo from '../assets/logo.svg';
-import { useEffect, useState } from 'react';
+import { KeyboardEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { User, Credentials } from '../models/models';
 
@@ -81,13 +81,18 @@ function Landing() {
         }
     }
 
+    const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            signIn();
+        }
+    }
 
     return (
         <section className="landingPage content-wrapper">
             <img className="logo" src={logo} />
             <section className="loginSignup">
-                <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-                <input type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <input type="text" placeholder="Username" value={username} onKeyDown={(event) => handleKeyPress(event)} onChange={(e) => setUsername(e.target.value)} />
+                <input type="text" placeholder="Password" value={password} onKeyDown={(event) => handleKeyPress(event)} onChange={(e) => setPassword(e.target.value)} />
                 <p className={"feedback " + feedback}>Wrong username or password.</p>
                 <button onClick={signIn}>Log in</button>
             </section>
