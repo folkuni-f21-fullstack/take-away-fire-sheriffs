@@ -3,8 +3,8 @@ import { Schema } from './models.js';
 export const data: Schema = {
     users: [
       {
-        username: "glenn",
-        password: "snygg-glenn",
+        username: "james",
+        password: "snygg-james",
         orders: 
           [
             {
@@ -52,7 +52,7 @@ export const data: Schema = {
         id: 0
       },
       {
-        username: "ada",
+        username: "ulla",
         password: "code4life",
         orders: 
           [
@@ -90,7 +90,7 @@ export const data: Schema = {
         id: 1
       },
       {
-        username: "stina",
+        username: "sheldon",
         password: "work4life",
         orders: [],
         customer: false,
