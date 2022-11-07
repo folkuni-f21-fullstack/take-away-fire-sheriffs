@@ -112,12 +112,15 @@ router.post('/saveorder', async (req,res) => {
     console.log('user from cart: ',query.username);
     console.log('query:', query);
     const user = db.data.users.find(user => user.username === query.username);
-    let today = new Date();
-    let date = today.getFullYear() + "-" + 
-            ('0' + (today.getMonth()+1)).slice(-2) + "-" + 
-            today.getDate() + " " + 
-            ('0' + today.getHours()).slice(-2) + ":" + 
-            ('0' + today.getMinutes()).slice(-2);
+    // let today = new Date();
+    let date = new Date().toLocaleString("sv-SE", {timeZone: "Europe/Stockholm"});
+    console.log(date);
+    
+    // let date = today.getFullYear() + "-" + 
+    //         ('0' + (today.getMonth()+1)).slice(-2) + "-" + 
+    //         today.getDate() + " " + 
+    //         ('0' + today.getHours()).slice(-2) + ":" + 
+    //         ('0' + today.getMinutes()).slice(-2);
     console.log("date ", date);
     
     if (user) {
