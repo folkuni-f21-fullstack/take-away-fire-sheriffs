@@ -247,7 +247,7 @@ function AdminEditOrder( {closeOverlay, orderItem, fetchOrders}: Prop) {
             <div className='admin-edit-overlay'>
                 <div className='edit-upper-container'>
                     <h1 className='admin-edit-title'>Edit Order</h1>
-                    <h2 className='edit-order-title'> {orderItem.orderId}</h2>
+                    <h2 className='edit-order-title'>Ordernr: {orderItem.orderId}</h2>
                     <img src={closebutton} alt="" onClick={closeBtn} className='admin-close-edit-overlay-btn'/>
                 </div>
                 <section className='edit-card-info'>
