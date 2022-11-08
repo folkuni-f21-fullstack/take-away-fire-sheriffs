@@ -55,4 +55,9 @@
     //   @include base.button($bgr: base.$black, $txt: base.$white);
     // }
   }
+
+  .card-info {
+    @extend %edit-order-item;
+  }
 }
+

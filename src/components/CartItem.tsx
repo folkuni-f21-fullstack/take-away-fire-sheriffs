@@ -21,35 +21,33 @@ export function CartItem({ menuItem }:Props) {
   } = useShoppingCart();
 
   return (
-    <section className="card-dish">
-      <section className="card-dish-title">
-        <p> {menuItem.title} </p>
-        <p className="cart-price"> {menuItem.price}:-</p>
-        
-      </section>
-
-      <section className="card-dish-add-remove">
-      <p className="item-quantity"> x{getItemQuantity(menuItem.id)}</p>
-        <button
-          className="remove-dish-btn"
-          onClick={() => decreaseCartQuantity(menuItem.id)}
-        >
-          -
-        </button>
-        
-        <button
-          className="add-dish-btn"
-          onClick={() =>
-            increaseCartQuantity(
-              menuItem.id,
-              menuItem.title,
-              menuItem.price,
-              getItemQuantity(menuItem.id)
-            )
-          }
-        >
-          +
-        </button>
+    <section className="edit-order-item-element">
+        <p className="item-title"> {menuItem.title} </p>
+      <section className="edit-details">
+        <p> {menuItem.price}:-</p>
+        <p> x{getItemQuantity(menuItem.id)}</p>
+        <section className="card-add-remove-btns">
+          <button
+            className="card-btn-decrease"
+            onClick={() => decreaseCartQuantity(menuItem.id)}
+            >
+            -
+          </button>
+          
+          <button
+            className="card-btn-increase"
+            onClick={() =>
+              increaseCartQuantity(
+                menuItem.id,
+                menuItem.title,
+                menuItem.price,
+                getItemQuantity(menuItem.id)
+                )
+              }
+              >
+            +
+          </button>
+        </section>
       </section>
     </section>
   );

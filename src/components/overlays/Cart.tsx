@@ -65,11 +65,11 @@ export function Cart({ closeOverlay }: Props) {
               className="close-overlay-btn"
             />
           </div>
-
-          {cartItems.map((item) => (
-            <CartItem key={item.id} menuItem={item} />
-          ))}
-
+          <div className="card-info">
+            {cartItems.map((item) => (
+              <CartItem key={item.id} menuItem={item} />
+            ))}
+          </div>
           {totalPrice <= 0 ? null : (
             <h2 className="cart-total">
               {" "}
