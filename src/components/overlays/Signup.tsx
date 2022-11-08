@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 interface Prop {
     closeOverlay: (close: boolean) => void;
-    // setActiveUser: (activeUser: string) => void;
 }
 
 function Signup( {closeOverlay}: Prop ) {
@@ -82,9 +81,8 @@ function Signup( {closeOverlay}: Prop ) {
 
         const response = await fetch('/api/users/login', requestOptions);
 
-        // Kontrollera svaret 
+         
         if(response.status == 200) {
-            // setActiveUser(credentials.username);
             localStorage.setItem('activeUser', credentials.username)
             navigate('/menu');
         } else {

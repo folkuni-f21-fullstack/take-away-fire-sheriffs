@@ -5,14 +5,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { User, Credentials } from '../models/models';
 
-// interface Props {
-//     setActiveUser: (activeUser: string) => void;
-//     activeUser: string;
-// }
-
 
 function Landing() { 
-    // const [activeUser, setActiveUser] = useState<string>(""); 
     const [feedback, setFeedback] = useState<string>('');
     const [openSignup, setOpenSignup] = useState(false);
     const [username, setUsername] = useState('');
@@ -24,12 +18,6 @@ function Landing() {
     const signupClick = () => {
         {setOpenSignup(true)}
     }
-
-    function guestUser() {
-        navigate('/menu');
-        // Set user?
-    }
-
     
 
     async function signIn() {
@@ -46,7 +34,6 @@ function Landing() {
             setFeedback("The database seems to be on vacation");
         } 
         else {
-            // setActiveUser(newData.username);
             localStorage.setItem('activeUser', newData.username);
             navigate('/menu');
             if (newData.customer == false) {

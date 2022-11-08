@@ -8,7 +8,6 @@ import { useState } from "react";
 
 interface Props {
   menuItem: Menu[] | null;
-  // activeUser: string;
 }
 interface Props {
   closeOverlay: (close: boolean) => void;
@@ -23,7 +22,7 @@ export function Cart({ closeOverlay }: Props) {
   const cartCloseBtn = () => {
     closeOverlay(false);
   };
-  // console.log("cart User", activeUser);
+  
 
   const placeOrderBtn = async () => {
     const localOrder = localStorage.getItem("shopping-cart");

@@ -57,7 +57,7 @@ $status-ordered: #cc3232;
     }
 }
 
-// default css för wrapper till overlay med position och svart bakgrund
+
 @mixin default-overlay-wrapper($bgr: $overlay-bgr) {
     display: flex;
     justify-content: center;
@@ -72,7 +72,7 @@ $status-ordered: #cc3232;
     z-index: 10;
 }
 
-// default css för en overlay så den är centrerad på sidan
+
 @mixin default-overlay {
     display: flex;
     justify-content: center;

@@ -1,30 +1,18 @@
 import './UserHome.scss';
-
 import MenuTitle from '../../assets/menu-title.svg';
-
 import MenuItem from '../../components/MenuItem';
 import Header from '../../components/Header';
+import { Menu } from '../../models/models';
+import { useEffect } from 'react';
 
-import { Menu, User } from '../../models/models';
-
-import { useState, useEffect } from 'react';
-
-interface Props {
-    // activeUser: string;
+interface Props { 
     menu: Menu[] | null;
     setMenu: (menu: Menu[] | null) => void;
 }
 
 
 function UserHome({menu, setMenu}: Props) {
-    // console.log("UserHome - activeUser: ", activeUser);
-
-    ////////////////////////////////////////////////////////////
-//   const [activeUser, setActiveUser] = useState<string>(""); 
-  ////////////////////////////////////////////////////////////
-
     
-
     const fetchMenu = async () => {
         const response = await fetch('/api/menu', { mode: 'cors' });
         const data: Menu[] = await response.json();
