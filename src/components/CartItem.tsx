@@ -1,4 +1,3 @@
-import "./CartItem.scss";
 import { Menu } from "../models/models";
 import { useShoppingCart } from "./MenuItem";
 
