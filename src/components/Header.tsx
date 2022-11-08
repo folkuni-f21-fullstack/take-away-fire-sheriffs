@@ -9,7 +9,7 @@ import cart from '../assets/cart-logo.svg';
 
 
 interface Props {
-    // activeUser: string;
+    
     menuItem: Menu[] | null;
 }
 function Header({menuItem}: Props) {

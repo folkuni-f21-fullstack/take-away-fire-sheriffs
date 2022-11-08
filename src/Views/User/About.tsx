@@ -13,7 +13,6 @@ interface Props {
 
 const About = ({menuItem}: Props) => {
 
-
     return (
         <>
             <Header menuItem={menuItem} />

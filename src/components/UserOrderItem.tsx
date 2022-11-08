@@ -6,7 +6,6 @@ import { Orders } from "../models/models";
 
 interface Props {
   order: Orders;
-  // activeUser: string;
   getUsers: () => void;
 };
 
@@ -32,14 +31,6 @@ function UserOrderItem({order, getUsers}: Props) {
   for (let item of order.items) {
       totalPrice = totalPrice + (item.price * item.quantity);
   } 
-
-  // const changeOrderStatus = () => {
-  //   if (order.status == 'started') {
-  //     setOrderStatus('started')
-  //   } else if (order.status == 'finished') {
-  //     setOrderStatus('finished')
-  //   }
-  // }
   
   async function deleteOrder() {
 

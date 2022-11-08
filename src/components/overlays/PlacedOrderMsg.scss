@@ -4,7 +4,7 @@
   @include base.default-overlay-wrapper;
 }
 
-/* Card Countiner */
+
 .msg-card {
   @include base.default-overlay;
   @extend %cardSize;
@@ -14,7 +14,7 @@
   align-items: center
 }
 
-/* Ordernumber and Date */
+
 .msg-card-header {
   display: flex;
   flex-direction: row;

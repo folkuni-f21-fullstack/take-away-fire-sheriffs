@@ -1,17 +1,13 @@
 import './AdminHome.scss';
 import AdminOrderItem from "../../components/AdminOrderItem";
 import AdminHeader from '../../components/AdminHeader';
-import { User, Orders } from '../../models/models';
+import { Orders } from '../../models/models';
 import OrdersLogo from '../../assets/orders-title.svg';
 import { useState, useEffect } from 'react';
 
 
-interface Props {
-    // activeUser: string;
-}
 
 function AdminHome() {
-    // console.log("AdminHome - activeUser: ", activeUser);
     const [allOrders, setAllOrders] = useState<Orders[] | null>(null);
     const [finished, setFinished] = useState<boolean>(false);
     const [ordered, setordered] = useState<boolean>(false);
@@ -37,12 +33,6 @@ function AdminHome() {
         }
     }
 
-    // const fetchOrdersTest = async () => {
-    //     const response = await fetch('/api/orders', { mode: 'cors' });
-    //     const data: Orders[] | null  = await response.json();
-
-    //     setAllOrders(data)
-    // }
     
     useEffect(() => {
         fetchOrders()

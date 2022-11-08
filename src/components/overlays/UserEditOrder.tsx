@@ -1,12 +1,11 @@
 import "./UserEditOrder.scss";
 import { useState, useEffect, Key } from "react";
 import closeBtn from "../../assets/close-overlay-button.svg";
-import { Orders, User, Menu } from '../../models/models';
+import { Orders } from '../../models/models';
 
 interface Props {
   closeOverlay: (close: boolean) => void;
   order: Orders;
-  // activeUser: string;
   getUsers: () => void;
   deleteOrder: () => void;
 }

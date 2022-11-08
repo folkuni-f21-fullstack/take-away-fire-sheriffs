@@ -104,7 +104,7 @@ function AdminOrderItem({orderItem, fetchOrders}: Props) {
         }
     
         const response = await fetch('/api/orders/deleteorder', requestOptions);
-        // const data: Orders[] = await response.json();
+        
         fetchOrders();
     }
 

@@ -6,16 +6,11 @@ import { useState, useEffect } from "react";
 import orderLogo from "../../assets/orders-title.svg";
 
 interface Props {
-  // activeUser: string;
   menuItem: Menu[] | null;
 }
 
 const UserOrders = ({menuItem}: Props) => {
-  // console.log("UserOrders - activeUser: ", activeUser);
-
-////////////////////////////////////////////////////////////
-  // const [activeUser, setActiveUser] = useState<string>(""); 
-////////////////////////////////////////////////////////////
+  
   const [users, setUsers] = useState<User[] | null>(null);
 
   const getUsers = async () => {

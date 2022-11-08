@@ -75,18 +75,17 @@
   
       svg {
         width: 1.5rem;
-/*         fill: base.$clr-gray600;
- */      }
+      }
     }
   }
   
-  // Toggle the hamburger menu in mobile view
+  
   #nav__checkbox:checked ~ ul.nav__menu li {
     display: block;
     
   }
   
-  //Change from menu to close icon on tap
+  
   #nav__checkbox:checked ~ label.nav__toggle .close {
     display: block;
   }
@@ -95,7 +94,7 @@
     display: none;
   }
   
-  // Desktop view
+  
   @media only screen and (min-width: 700px) {
     .nav {
       &__toggle {
@@ -125,11 +124,11 @@
   position: absolute;
   right: 20px;
   top: 5px;
-
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 5px;
+  font-weight: bold;
 
   p {
     pointer-events: none;

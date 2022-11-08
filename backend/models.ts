@@ -34,7 +34,4 @@ export type Credentials = {
 export type Schema = {
     users: Users[];
     menu: Menu[];
-    // Lägg till mer data eftersom
-    //users: User[]; exempel på så det skulle kunna se ut för oss!!
-    //menu: Menu[]; exempel på så det skulle kunna se ut för oss!!
 }

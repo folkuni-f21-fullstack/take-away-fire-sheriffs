@@ -4,14 +4,13 @@
   @include base.default-overlay-wrapper;
 }
 
-/* Popup Countiner */
+
 .edit-popup {
   @extend %cardSize;
   @include base.default-overlay;
   background: base.$yellow-bgr;
   border: 5px solid base.$light-yellow-bgr;
   padding: 1rem;
-  // gap: 1em;
   position: relative;
 }
 
@@ -23,26 +22,26 @@
   margin-bottom: 1rem;
   margin-top: 1rem;
 }
-/* Order Details, Dishes and Prices */
+
 .edit-card-info {
   display: flex;
   flex-direction: column;
   @extend %edit-order-item;
 }
 
-/* Total price, Place an order btn, Comment field*/
+
 .edit-card-footer {
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  /* Total cost*/
+  
   .card-cost {
     padding-bottom: 1em;
     font-size: 24px;
   }
 
-  /* User comment*/
+  
   .cart-comment {
     text-align: start;
     width: 80%;
@@ -65,7 +64,7 @@
     height: 1em;
   }
 
-  /* Order btn*/
+  
   .popup-btn-save {
     margin-top: 1rem;
   }

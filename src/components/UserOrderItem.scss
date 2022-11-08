@@ -1,6 +1,6 @@
 @use "../base";
 
-/* Card Countiner */
+
 .card {
   @extend %cardSize;
   background: base.$yellow-bgr;
@@ -13,7 +13,7 @@
   justify-content: space-between;
 }
 
-/* Status color, Status test, Ordernumber */
+
 .card-header {
   display: flex;
   justify-content: space-between;
@@ -32,21 +32,21 @@
     height: 1rem;
     border-radius: 10rem;
     background: #cc3232;
-    // background:base.red-bgr;
+    
   }
   .status-color-started {
     width: 1rem;
     height: 1rem;
     border-radius: 10rem;
     background: #db7b2b;
-    // background:base.red-bgr;
+    
   }
   .status-color-finished {
     width: 1rem;
     height: 1rem;
     border-radius: 10rem;
     background: base.$green-bgr;
-    // background:base.red-bgr;
+    
   }
   .status-text {
     margin-left: 1rem;
@@ -54,12 +54,12 @@
   }
 }
 
-/* Order Date */
+
 .card-date {
   text-align: right;
 }
 
-/* Order Details, Dishes and Prices */
+
 .card-info {
   display: flex;
   flex-direction: column;
@@ -82,7 +82,7 @@
 
 
 
-/* Total cost*/
+
 .card-cost {
   font-size: 20px;
   text-align: right;
@@ -90,7 +90,7 @@
   margin-top: 1rem;
 }
 
-/* Card btns*/
+
 .card-btns-ordered {
   display: flex;
   flex-direction: row;

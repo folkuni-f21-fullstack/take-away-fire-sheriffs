@@ -8,10 +8,10 @@ const file = join(__dirname, 'data.json');
 const adapter = new JSONFile<Schema>(file);
 const db = new Low(adapter);
 
-await db.read() // vänta tills hela filen är inläst
+await db.read() 
 if (!db.data) {
     db.data = defaultData;
-    db.write(); // behöver inte vänta
+    db.write(); 
 }
 
 export default db;
